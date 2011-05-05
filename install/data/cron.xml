@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cron>
+  <entry entry_id="boardTotalsCounter" cron_class="XenForo_CronEntry_Counters" cron_method="rebuildBoardTotals" active="1"><![CDATA[{"day_type":"dom","dom":["-1"],"hours":["-1"],"minutes":["3","13","23","33","43","53"]}]]></entry>
+  <entry entry_id="cleanUpDaily" cron_class="XenForo_CronEntry_CleanUp" cron_method="runDailyCleanUp" active="1"><![CDATA[{"day_type":"dom","dom":["-1"],"hours":["3"],"minutes":["0"]}]]></entry>
+  <entry entry_id="cleanUpHourly" cron_class="XenForo_CronEntry_CleanUp" cron_method="runHourlyCleanUp" active="1"><![CDATA[{"day_type":"dom","dom":["-1"],"hours":["-1"],"minutes":["10"]}]]></entry>
+  <entry entry_id="deleteExpiredBans" cron_class="XenForo_CronEntry_Ban" cron_method="deleteExpiredBans" active="1"><![CDATA[{"day_type":"dom","dom":["-1"],"hours":["-1"],"minutes":["45"]}]]></entry>
+  <entry entry_id="downgradeExpired" cron_class="XenForo_CronEntry_CleanUp" cron_method="runUserDowngrade" active="1"><![CDATA[{"day_type":"dom","dom":["-1"],"hours":["-1"],"minutes":["50"]}]]></entry>
+  <entry entry_id="feeder" cron_class="XenForo_CronEntry_Feeder" cron_method="importFeeds" active="1"><![CDATA[{"day_type":"dom","dom":["-1"],"hours":["-1"],"minutes":["2","12","22","32","42","52"]}]]></entry>
+  <entry entry_id="trophy" cron_class="XenForo_CronEntry_Trophy" cron_method="runTrophyCheck" active="1"><![CDATA[{"day_type":"dom","dom":["-1"],"hours":["-1"],"minutes":["40"]}]]></entry>
+  <entry entry_id="views" cron_class="XenForo_CronEntry_Views" cron_method="runViewUpdate" active="1"><![CDATA[{"day_type":"dom","dom":["-1"],"hours":["-1"],"minutes":["30"]}]]></entry>
+</cron>

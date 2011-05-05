@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<admin_style_properties>
+  <property property_name="body" property_type="css"><![CDATA[{"color":"rgb(20,20,20)","font-family":"'Trebuchet MS', Helvetica, Arial, sans-serif"}]]></property>
+  <property property_name="contentWidth" property_type="scalar" definition="1" group_name="general" title="Content Width" description="" css_components="" scalar_type="number" scalar_parameters="" display_order="1" sub_group="Content Area"><![CDATA[984px]]></property>
+  <property property_name="ctrlUnitLabelWidth" property_type="scalar"><![CDATA[220px]]></property>
+  <property property_name="formWidth" property_type="scalar"><![CDATA[720px]]></property>
+  <property property_name="pageWidth" property_type="css"><![CDATA[{"margin-all":"auto","width":"920px"}]]></property>
+  <property property_name="tabsnav" property_type="css" definition="1" group_name="general" title="Tab Navigation" description="" css_components="border" scalar_type="" scalar_parameters="" display_order="100" sub_group=""><![CDATA[{"border-color":"rgb(150,150,175)"}]]></property>
+</admin_style_properties>

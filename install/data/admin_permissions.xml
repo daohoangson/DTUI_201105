@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<admin_permissions>
+  <admin_permission admin_permission_id="addOn" display_order="1"/>
+  <admin_permission admin_permission_id="ban" display_order="1"/>
+  <admin_permission admin_permission_id="bbCodeSmilie" display_order="1"/>
+  <admin_permission admin_permission_id="cron" display_order="1"/>
+  <admin_permission admin_permission_id="identityService" display_order="1"/>
+  <admin_permission admin_permission_id="import" display_order="1"/>
+  <admin_permission admin_permission_id="language" display_order="1"/>
+  <admin_permission admin_permission_id="node" display_order="1"/>
+  <admin_permission admin_permission_id="option" display_order="1"/>
+  <admin_permission admin_permission_id="style" display_order="1"/>
+  <admin_permission admin_permission_id="trophy" display_order="1"/>
+  <admin_permission admin_permission_id="upgradeXenForo" display_order="1"/>
+  <admin_permission admin_permission_id="user" display_order="1"/>
+  <admin_permission admin_permission_id="userGroup" display_order="1"/>
+  <admin_permission admin_permission_id="userUpgrade" display_order="1"/>
+</admin_permissions>

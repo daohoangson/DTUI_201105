@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+  <permission_groups>
+    <permission_group permission_group_id="avatar"/>
+    <permission_group permission_group_id="conversation"/>
+    <permission_group permission_group_id="forum"/>
+    <permission_group permission_group_id="general"/>
+    <permission_group permission_group_id="profilePost"/>
+  </permission_groups>
+  <permissions>
+    <permission permission_group_id="avatar" permission_id="allowed" permission_type="flag" default_value="unset" interface_group_id="avatarPermissions" display_order="1"/>
+    <permission permission_group_id="avatar" permission_id="maxFileSize" permission_type="integer" depend_permission_id="allowed" default_value_int="0" interface_group_id="avatarPermissions" display_order="1"/>
+    <permission permission_group_id="conversation" permission_id="alwaysInvite" permission_type="flag" default_value="unset" interface_group_id="conversationModeratorPermissions" display_order="20"/>
+    <permission permission_group_id="conversation" permission_id="editAnyPost" permission_type="flag" default_value="unset" interface_group_id="conversationModeratorPermissions" display_order="10"/>
+    <permission permission_group_id="conversation" permission_id="editOwnPost" permission_type="flag" default_value="unset" interface_group_id="conversationPermissions" display_order="50"/>
+    <permission permission_group_id="conversation" permission_id="editOwnPostTimeLimit" permission_type="integer" depend_permission_id="editOwnPost" default_value_int="2" interface_group_id="conversationPermissions" display_order="55"/>
+    <permission permission_group_id="conversation" permission_id="maxRecipients" permission_type="integer" depend_permission_id="start" default_value_int="0" interface_group_id="conversationPermissions" display_order="15"/>
+    <permission permission_group_id="conversation" permission_id="start" permission_type="flag" default_value="unset" interface_group_id="conversationPermissions" display_order="10"/>
+    <permission permission_group_id="forum" permission_id="approveUnapprove" permission_type="flag" default_value="unset" interface_group_id="forumModeratorPermissions" display_order="1000"/>
+    <permission permission_group_id="forum" permission_id="deleteAnyPost" permission_type="flag" default_value="unset" interface_group_id="forumModeratorPermissions" display_order="1000"/>
+    <permission permission_group_id="forum" permission_id="deleteAnyThread" permission_type="flag" default_value="unset" interface_group_id="forumModeratorPermissions" display_order="1000"/>
+    <permission permission_group_id="forum" permission_id="deleteOwnPost" permission_type="flag" default_value="unset" interface_group_id="forumPermissions" display_order="20"/>
+    <permission permission_group_id="forum" permission_id="deleteOwnThread" permission_type="flag" default_value="unset" interface_group_id="forumPermissions" display_order="20"/>
+    <permission permission_group_id="forum" permission_id="editAnyPost" permission_type="flag" default_value="unset" interface_group_id="forumModeratorPermissions" display_order="1000"/>
+    <permission permission_group_id="forum" permission_id="editOwnPost" permission_type="flag" default_value="unset" interface_group_id="forumPermissions" display_order="20"/>
+    <permission permission_group_id="forum" permission_id="editOwnPostTimeLimit" permission_type="integer" depend_permission_id="editOwnPost" default_value_int="0" interface_group_id="forumPermissions" display_order="21"/>
+    <permission permission_group_id="forum" permission_id="hardDeleteAnyPost" permission_type="flag" default_value="unset" interface_group_id="forumModeratorPermissions" display_order="1000"/>
+    <permission permission_group_id="forum" permission_id="hardDeleteAnyThread" permission_type="flag" default_value="unset" interface_group_id="forumModeratorPermissions" display_order="1000"/>
+    <permission permission_group_id="forum" permission_id="like" permission_type="flag" default_value="unset" interface_group_id="forumPermissions" display_order="5"/>
+    <permission permission_group_id="forum" permission_id="lockUnlockThread" permission_type="flag" default_value="unset" interface_group_id="forumModeratorPermissions" display_order="1000"/>
+    <permission permission_group_id="forum" permission_id="manageAnyThread" permission_type="flag" default_value="unset" interface_group_id="forumModeratorPermissions" display_order="1"/>
+    <permission permission_group_id="forum" permission_id="postReply" permission_type="flag" default_value="allow" interface_group_id="forumPermissions" display_order="10"/>
+    <permission permission_group_id="forum" permission_id="postThread" permission_type="flag" default_value="unset" interface_group_id="forumPermissions" display_order="9"/>
+    <permission permission_group_id="forum" permission_id="stickUnstickThread" permission_type="flag" default_value="unset" interface_group_id="forumModeratorPermissions" display_order="1"/>
+    <permission permission_group_id="forum" permission_id="undelete" permission_type="flag" default_value="unset" interface_group_id="forumModeratorPermissions" display_order="1000"/>
+    <permission permission_group_id="forum" permission_id="uploadAttachment" permission_type="flag" depend_permission_id="viewAttachment" default_value="unset" interface_group_id="forumPermissions" display_order="31"/>
+    <permission permission_group_id="forum" permission_id="viewAttachment" permission_type="flag" default_value="unset" interface_group_id="forumPermissions" display_order="30"/>
+    <permission permission_group_id="forum" permission_id="viewDeleted" permission_type="flag" default_value="unset" interface_group_id="forumModeratorPermissions" display_order="1000"/>
+    <permission permission_group_id="forum" permission_id="viewModerated" permission_type="flag" default_value="unset" interface_group_id="forumModeratorPermissions" display_order="1000"/>
+    <permission permission_group_id="forum" permission_id="votePoll" permission_type="flag" default_value="unset" interface_group_id="forumPermissions" display_order="100"/>
+    <permission permission_group_id="general" permission_id="bypassFloodCheck" permission_type="flag" default_value="unset" interface_group_id="generalPermissions" display_order="10000"/>
+    <permission permission_group_id="general" permission_id="bypassUserPrivacy" permission_type="flag" default_value="unset" interface_group_id="generalModeratorPermissions" display_order="50"/>
+    <permission permission_group_id="general" permission_id="cleanSpam" permission_type="flag" default_value="unset" interface_group_id="generalModeratorPermissions" display_order="100"/>
+    <permission permission_group_id="general" permission_id="editCustomTitle" permission_type="flag" default_value="unset" interface_group_id="generalPermissions" display_order="500"/>
+    <permission permission_group_id="general" permission_id="editSignature" permission_type="flag" default_value="unset" interface_group_id="generalPermissions" display_order="500"/>
+    <permission permission_group_id="general" permission_id="followModerationRules" permission_type="flag" default_value="unset" interface_group_id="generalPermissions" display_order="9000"/>
+    <permission permission_group_id="general" permission_id="search" permission_type="flag" default_value="unset" interface_group_id="generalPermissions" display_order="100"/>
+    <permission permission_group_id="general" permission_id="view" permission_type="flag" default_value="allow" interface_group_id="generalPermissions" display_order="1"/>
+    <permission permission_group_id="general" permission_id="viewIps" permission_type="flag" default_value="unset" interface_group_id="generalModeratorPermissions" display_order="10"/>
+    <permission permission_group_id="general" permission_id="viewNode" permission_type="flag" depend_permission_id="view" default_value="unset" interface_group_id="generalPermissions" display_order="1"/>
+    <permission permission_group_id="general" permission_id="viewProfile" permission_type="flag" default_value="unset" interface_group_id="generalPermissions" display_order="50"/>
+    <permission permission_group_id="profilePost" permission_id="approveUnapprove" permission_type="flag" default_value="unset" interface_group_id="profilePostModeratorPermissions" display_order="1"/>
+    <permission permission_group_id="profilePost" permission_id="deleteAny" permission_type="flag" default_value="unset" interface_group_id="profilePostModeratorPermissions" display_order="1"/>
+    <permission permission_group_id="profilePost" permission_id="deleteOwn" permission_type="flag" default_value="unset" interface_group_id="profilePostPermissions" display_order="30"/>
+    <permission permission_group_id="profilePost" permission_id="editAny" permission_type="flag" default_value="unset" interface_group_id="profilePostModeratorPermissions" display_order="1"/>
+    <permission permission_group_id="profilePost" permission_id="editOwn" permission_type="flag" default_value="unset" interface_group_id="profilePostPermissions" display_order="40"/>
+    <permission permission_group_id="profilePost" permission_id="hardDeleteAny" permission_type="flag" default_value="unset" interface_group_id="profilePostModeratorPermissions" display_order="1"/>
+    <permission permission_group_id="profilePost" permission_id="like" permission_type="flag" default_value="unset" interface_group_id="profilePostPermissions" display_order="15"/>
+    <permission permission_group_id="profilePost" permission_id="manageOwn" permission_type="flag" default_value="unset" interface_group_id="profilePostPermissions" display_order="20"/>
+    <permission permission_group_id="profilePost" permission_id="post" permission_type="flag" default_value="unset" interface_group_id="profilePostPermissions" display_order="30"/>
+    <permission permission_group_id="profilePost" permission_id="undelete" permission_type="flag" default_value="unset" interface_group_id="profilePostModeratorPermissions" display_order="1"/>
+    <permission permission_group_id="profilePost" permission_id="view" permission_type="flag" default_value="unset" interface_group_id="profilePostPermissions" display_order="10"/>
+    <permission permission_group_id="profilePost" permission_id="viewDeleted" permission_type="flag" default_value="unset" interface_group_id="profilePostModeratorPermissions" display_order="1"/>
+    <permission permission_group_id="profilePost" permission_id="viewModerated" permission_type="flag" default_value="unset" interface_group_id="profilePostModeratorPermissions" display_order="1"/>
+  </permissions>
+  <interface_groups>
+    <interface_group interface_group_id="avatarPermissions" display_order="30"/>
+    <interface_group interface_group_id="conversationModeratorPermissions" display_order="105"/>
+    <interface_group interface_group_id="conversationPermissions" display_order="100"/>
+    <interface_group interface_group_id="forumModeratorPermissions" display_order="11"/>
+    <interface_group interface_group_id="forumPermissions" display_order="10"/>
+    <interface_group interface_group_id="generalModeratorPermissions" display_order="5"/>
+    <interface_group interface_group_id="generalPermissions" display_order="1"/>
+    <interface_group interface_group_id="profilePostModeratorPermissions" display_order="205"/>
+    <interface_group interface_group_id="profilePostPermissions" display_order="200"/>
+  </interface_groups>
+</permissions>

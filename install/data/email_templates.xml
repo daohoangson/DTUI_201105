@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<email_templates>
+  <template title="contact">
+    <subject><![CDATA[{xen:phrase contact_email_subject, 'subject={$subject}', 'board_title={$xenOptions.boardTitle}'}]]></subject>
+    <body_text><![CDATA[{xen:phrase contact_email_body_text,
+	'name={$name}',
+	'user_id={$userId}',
+	'email={$email}',
+	'subject={$subject}',
+	'message={$message}',
+	'board_title={$xenOptions.boardTitle}'
+}]]></body_text>
+    <body_html><![CDATA[{xen:phrase contact_email_body_html,
+	'name={$name}',
+	'user_id={$userId}',
+	'email={$email}',
+	'subject={$subject}',
+	'message={xen:string nl2br, $message}',
+	'board_title={$xenOptions.boardTitle}'
+}]]></body_html>
+  </template>
+  <template title="conversation_insert">
+    <subject><![CDATA[{xen:phrase conversation_insert_email_subject, 
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}"
+}]]></subject>
+    <body_text><![CDATA[{xen:phrase conversation_insert_email_text, 
+	"receiver_username={$receiver.username}",
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}",
+	"view_link={xen:link 'canonical:conversations/unread', $conversation}",
+	"inbox_link={xen:link 'canonical:conversations'}"
+}]]></body_text>
+    <body_html><![CDATA[{xen:phrase conversation_insert_email_html, 
+	"receiver_username={$receiver.username}",
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}",
+	"view_link={xen:link 'canonical:conversations/unread', $conversation}",
+	"inbox_link={xen:link 'canonical:conversations'}"
+}]]></body_html>
+  </template>
+  <template title="conversation_join">
+    <subject><![CDATA[{xen:phrase conversation_join_email_subject, 
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}"
+}]]></subject>
+    <body_text><![CDATA[{xen:phrase conversation_join_email_text, 
+	"receiver_username={$receiver.username}",
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}",
+	"view_link={xen:link 'canonical:conversations/unread', $conversation}",
+	"inbox_link={xen:link 'canonical:conversations'}"
+}]]></body_text>
+    <body_html><![CDATA[{xen:phrase conversation_join_email_html, 
+	"receiver_username={$receiver.username}",
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}",
+	"view_link={xen:link 'canonical:conversations/unread', $conversation}",
+	"inbox_link={xen:link 'canonical:conversations'}"
+}]]></body_html>
+  </template>
+  <template title="conversation_reply">
+    <subject><![CDATA[{xen:phrase conversation_reply_email_subject, 
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}"
+}]]></subject>
+    <body_text><![CDATA[{xen:phrase conversation_reply_email_text, 
+	"receiver_username={$receiver.username}",
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}",
+	"view_link={xen:link 'canonical:conversations/unread', $conversation}",
+	"inbox_link={xen:link 'canonical:conversations'}"
+}]]></body_text>
+    <body_html><![CDATA[{xen:phrase conversation_reply_email_html, 
+	"receiver_username={$receiver.username}",
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}",
+	"view_link={xen:link 'canonical:conversations/unread', $conversation}",
+	"inbox_link={xen:link 'canonical:conversations'}"
+}]]></body_html>
+  </template>
+  <template title="MAIL_CONTAINER">
+    <subject><![CDATA[{xen:raw $subject}]]></subject>
+    <body_text><![CDATA[{xen:raw $bodyText}]]></body_text>
+    <body_html><![CDATA[<html>
+<head>
+<title>{xen:raw $subject}</title>
+<base href="{$xenOptions.boardUrl}/" />
+</head>
+<body>
+
+{xen:raw $bodyHtml}
+
+</body>
+</html>]]></body_html>
+  </template>
+  <template title="spam_cleaner_applied">
+    <subject><![CDATA[{xen:phrase spam_cleaner_applied_subject, 'board_title={$xenOptions.boardTitle}'}]]></subject>
+    <body_text><![CDATA[{$plainText}]]></body_text>
+    <body_html><![CDATA[{xen:raw $htmlText}]]></body_html>
+  </template>
+  <template title="user_account_approved">
+    <subject><![CDATA[{xen:phrase user_account_approved_subject, 'board_title={$boardTitle}'}]]></subject>
+    <body_text><![CDATA[{xen:phrase user_account_approved_body_text,
+	"username={$user.username}",
+	"board_title={$boardTitle}",
+	"forum_link={xen:link 'canonical:index'}"
+}]]></body_text>
+    <body_html><![CDATA[{xen:phrase user_account_approved_body_html,
+	"username={$user.username}",
+	"board_title={$boardTitle}",
+	"forum_link={xen:link 'canonical:index'}"
+}]]></body_html>
+  </template>
+  <template title="user_account_rejected">
+    <subject><![CDATA[{xen:phrase user_account_rejected_subject, "board_title={$boardTitle}"}]]></subject>
+    <body_text><![CDATA[{xen:phrase user_account_rejected_body_text,
+	"username={$user.username}",
+	"board_title={$boardTitle}",
+	"forum_link={xen:link 'canonical:index'}",
+	"reason={xen:if {$rejectionReason}, {$rejectionReason}, 'N/A'}"
+}]]></body_text>
+    <body_html><![CDATA[{xen:phrase user_account_rejected_body_html,
+	"username={$user.username}",
+	"board_title={$boardTitle}",
+	"forum_link={xen:link 'canonical:index'}",
+	"reason={xen:if {$rejectionReason}, {$rejectionReason}, 'N/A'}"
+}]]></body_html>
+  </template>
+  <template title="user_email_confirmation">
+    <subject><![CDATA[{xen:phrase user_email_confirmation_subject, "boardTitle={$boardTitle}"}]]></subject>
+    <body_text><![CDATA[{xen:phrase user_email_confirmation_body_text,
+	"username={$user.username}",
+	"board_title={$boardTitle}",
+	"confirm_link={xen:link 'canonical:account-confirmation/email', $user, 'c={$confirmation.confirmation_key}'}"
+}]]></body_text>
+    <body_html><![CDATA[{xen:phrase user_email_confirmation_body_html,
+	"username={$user.username}",
+	"board_title={$boardTitle}",
+	"confirm_link={xen:link 'canonical:account-confirmation/email', $user, 'c={$confirmation.confirmation_key}'}"
+}]]></body_html>
+  </template>
+  <template title="user_lost_password">
+    <subject><![CDATA[{xen:phrase user_lost_password_subject, "boardTitle={$boardTitle}"}]]></subject>
+    <body_text><![CDATA[{xen:phrase user_lost_password_body_text,
+	"username={$user.username}",
+	"board_title={$boardTitle}",
+	"confirm_link={xen:link 'canonical:lost-password/confirm', $user, 'c={$confirmation.confirmation_key}'}"
+}]]></body_text>
+    <body_html><![CDATA[{xen:phrase user_lost_password_body_html,
+	"username={$user.username}",
+	"board_title={$boardTitle}",
+	"confirm_link={xen:link 'canonical:lost-password/confirm', $user, 'c={$confirmation.confirmation_key}'}"
+}]]></body_html>
+  </template>
+  <template title="user_lost_password_reset">
+    <subject><![CDATA[{xen:phrase user_lost_password_reset_subject, "boardTitle={$boardTitle}"}]]></subject>
+    <body_text><![CDATA[{xen:phrase user_lost_password_reset_body_text,
+	"username={$user.username}",
+	"board_title={$boardTitle}",
+	"board_url={$boardUrl}",
+	"password={$password}"
+}]]></body_text>
+    <body_html><![CDATA[{xen:phrase user_lost_password_reset_body_html,
+	"username={$user.username}",
+	"board_title={$boardTitle}",
+	"board_url={$boardUrl}",
+	"password={$password}"
+}]]></body_html>
+  </template>
+  <template title="watched_thread_reply">
+    <subject><![CDATA[{xen:phrase reply_to_watched_thread_x, "title={$thread.titleCensored}"}]]></subject>
+    <body_text><![CDATA[{xen:phrase watched_thread_reply_email_text, 
+	"receiver_username={$receiver.username}",
+	"username={$reply.username}",
+	"title={$thread.titleCensored}",
+	"view_link={xen:link 'canonical:posts', $reply}",
+	"manage_link={xen:link 'canonical:watched/threads/all'}"
+}]]></body_text>
+    <body_html><![CDATA[{xen:phrase watched_thread_reply_email_html,
+	"receiver_username={$receiver.username}",
+	"username={$reply.username}",
+	"title={$thread.titleCensored}",
+	"view_link={xen:link 'canonical:posts', $reply}",
+	"manage_link={xen:link 'canonical:watched/threads/all'}"
+}]]></body_html>
+  </template>
+</email_templates>

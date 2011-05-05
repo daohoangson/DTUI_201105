@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<code_events>
+  <event event_id="container_admin_params"><![CDATA[<p>Called while preparing the container template of admin/back-end pages (PAGE_CONTAINER). You should use this to fetch any data you need for the container.</p>
+
+<p>Callback signature:</p>
+<blockquote><code><em>array</em> &$params, <em>XenForo_Dependencies_Abstract</em> $dependencies</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>array</em> &$params</code> - an array of key-value params that will be available in the container. You may modify existing ones or add your own values here.</li>
+	<li><code><em>XenForo_Dependencies_Abstract</em> $dependencies</code> - the dependencies object that triggered this event. You will generally not need to use this.</li>
+</ol>]]></event>
+  <event event_id="container_public_params"><![CDATA[<p>Called while preparing the container template of public/front-end pages (PAGE_CONTAINER). You should use this to fetch any data you need for the container.</p>
+
+<p>Callback signature:</p>
+<blockquote><code><em>array</em> &$params, <em>XenForo_Dependencies_Abstract</em> $dependencies</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>array</em> &$params</code> - an array of key-value params that will be available in the container. You may modify existing ones or add your own values here.</li>
+	<li><code><em>XenForo_Dependencies_Abstract</em> $dependencies</code> - the dependencies object that triggered this event. You will generally not need to use this.</li>
+</ol>]]></event>
+  <event event_id="controller_pre_dispatch"><![CDATA[<p>Called before attempting to dispatch the request in a specific controller. The visitor object is available at this point.</p>
+
+<p>Callback signature:</p>
+<blockquote><code><em>XenForo_Controller</em> $controller, $action</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>XenForo_Controller</em> $controller</code> - the controller instance. From this, you can inspect the request, response, etc.</li>
+	<li><code><em>string</em> $action</code> - the specific action that will be executed in this controller.</li>
+</ol>]]></event>
+  <event event_id="front_controller_post_view"><![CDATA[<p>Called after the view has been executed, before outputting. This can be used to modify the final output.</p>
+
+<p>Callback signature:</p>
+<blockquote><code><em>XenForo_FrontController</em> $fc, &$output</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>XenForo_FrontController</em> $fc</code> - the front controller instance. From this, you can inspect the request, response, dependency loader, etc.</li>
+	<li><code><em>string</em> &$output</code> - string to output. Note that this may not be HTML or even text.</li>
+</ol>]]></event>
+  <event event_id="front_controller_pre_dispatch"><![CDATA[<p>Called before attempting to dispatch the request in the front controller. This could also be considered post-routing.</p>
+
+<p>Callback signature:</p>
+<blockquote><code><em>XenForo_FrontController</em> $fc, <em>XenForo_RouteMatch</em> &$routeMatch</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>XenForo_FrontController</em> $fc</code> - the front controller instance. From this, you can inspect the request, response, dependency loader, etc.</li>
+	<li><code><em>XenForo_RouteMatch</em> &$routeMatch</code> - the route match object. Note that this may represent an error page if routing was unsuccessful.</li>
+</ol>]]></event>
+  <event event_id="front_controller_pre_route"><![CDATA[<p>Called before attempting to route the request in the front controller.</p>
+
+<p>Callback signature:</p>
+<blockquote><code><em>XenForo_FrontController</em> $fc</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>XenForo_FrontController</em> $fc</code> - the front controller instance. From this, you can inspect the request, response, dependency loader, etc.</li>
+</ol>]]></event>
+  <event event_id="front_controller_pre_view"><![CDATA[<p>Called before attempting to prepare a view in the front controller. This could also be considered post-dispatch (after completing the dispatch loop).</p>
+
+<p>Callback signature:</p>
+<blockquote><code><em>XenForo_FrontController</em> $fc, <em>XenForo_ControllerResponse_Abstract</em> &$controllerResponse, <em>XenForo_ViewRenderer_Abstract</em> &$viewRenderer, <em>array</em> &$containerParams</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>XenForo_FrontController</em> $fc</code> - the front controller instance. From this, you can inspect the request, response, dependency loader, etc.</li>
+	<li><code><em>XenForo_ControllerResponse_Abstract</em> &$controllerResponse</code></li>
+	<li><code><em>XenForo_ViewRenderer_Abstract</em> &$viewRenderer</code></li>
+	<li><code><em>array</em> &$containerParams</code> - list of key-value parameters that will be used to help prepare/render the necessary container template.</li>
+</ol>]]></event>
+  <event event_id="init_dependencies"><![CDATA[<p>Called when the dependency manager loads its default data. This event is fired on virtually every page and is the first thing you can plug into.</p>
+
+<p>Callback signature:</p>
+<blockquote><code><em>XenForo_Dependencies_Abstract</em> $dependencies, <em>array</em> $data</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>XenForo_Dependencies_Abstract</em> $dependencies</code></li>
+	<li><code><em>array</em> $data</code></li>
+</ol>]]></event>
+  <event event_id="load_class_bb_code"><![CDATA[<p>Called when instantiating a BB code formatter. This event can be used to extend the class that will be instantiated dynamically.</p>
+
+<p>Callback signature:</p>
+<blockquote><code>$class, <em>array</em> &$extend</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>string</em> $class</code> - the name of the class to be created</li>
+	<li><code><em>array</em> &$extend</code> - a modifiable list of classes that wish to extend the class. See below.</li>
+</ol>
+
+<p>To use this event properly, determine if the class is one you want to extend. If so, add a new entry to $extend with the name of the class that should extend it. This class MUST be defined as follows:</p>
+
+<pre>class My_Class_Name extends XFCP_My_Class_Name
+{
+	// functionality to extend/override
+}</pre>
+
+<p>This class must extend the non-existent XFCP_x class. This will be resolved at run time.</p>]]></event>
+  <event event_id="load_class_controller"><![CDATA[<p>Called when instantiating a controller. This event can be used to extend the class that will be instantiated dynamically.</p>
+
+<p>Callback signature:</p>
+<blockquote><code>$class, <em>array</em> &$extend</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>string</em> $class</code> - the name of the class to be created</li>
+	<li><code><em>array</em> &$extend</code> - a modifiable list of classes that wish to extend the class. See below.</li>
+</ol>
+
+<p>To use this event properly, determine if the class is one you want to extend. If so, add a new entry to $extend with the name of the class that should extend it. This class MUST be defined as follows:</p>
+
+<pre>class My_Class_Name extends XFCP_My_Class_Name
+{
+	// functionality to extend/override
+}</pre>
+
+<p>This class must extend the non-existent XFCP_x class. This will be resolved at run time.</p>]]></event>
+  <event event_id="load_class_datawriter"><![CDATA[<p>Called when instantiating a data writer. This event can be used to extend the class that will be instantiated dynamically.</p>
+
+<p>Callback signature:</p>
+<blockquote><code>$class, <em>array</em> &$extend</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>string</em> $class</code> - the name of the class to be created</li>
+	<li><code><em>array</em> &$extend</code> - a modifiable list of classes that wish to extend the class. See below.</li>
+</ol>
+
+<p>To use this event properly, determine if the class is one you want to extend. If so, add a new entry to $extend with the name of the class that should extend it. This class MUST be defined as follows:</p>
+
+<pre>class My_Class_Name extends XFCP_My_Class_Name
+{
+	// functionality to extend/override
+}</pre>
+
+<p>This class must extend the non-existent XFCP_x class. This will be resolved at run time.</p>]]></event>
+  <event event_id="load_class_importer"><![CDATA[<p>Called when instantiating an importer. This event can be used to extend the class that will be instantiated dynamically.</p>
+
+<p>Callback signature:</p>
+<blockquote><code>$class, <em>array</em> &$extend</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>string</em> $class</code> - the name of the class to be created</li>
+	<li><code><em>array</em> &$extend</code> - a modifiable list of classes that wish to extend the class. See below.</li>
+</ol>
+
+<p>To use this event properly, determine if the class is one you want to extend. If so, add a new entry to $extend with the name of the class that should extend it. This class MUST be defined as follows:</p>
+
+<pre>class My_Class_Name extends XFCP_My_Class_Name
+{
+	// functionality to extend/override
+}</pre>
+
+<p>This class must extend the non-existent XFCP_x class. This will be resolved at run time.</p>]]></event>
+  <event event_id="load_class_mail"><![CDATA[<p>Called when instantiating a mail object. This event can be used to extend the class that will be instantiated dynamically.</p>
+
+<p>Callback signature:</p>
+<blockquote><code>$class, <em>array</em> &$extend</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>string</em> $class</code> - the name of the class to be created</li>
+	<li><code><em>array</em> &$extend</code> - a modifiable list of classes that wish to extend the class. See below.</li>
+</ol>
+
+<p>To use this event properly, determine if the class is one you want to extend. If so, add a new entry to $extend with the name of the class that should extend it. This class MUST be defined as follows:</p>
+
+<pre>class My_Class_Name extends XFCP_My_Class_Name
+{
+	// functionality to extend/override
+}</pre>
+
+<p>This class must extend the non-existent XFCP_x class. This will be resolved at run time.</p>]]></event>
+  <event event_id="load_class_model"><![CDATA[<p>Called when instantiating a model. This event can be used to extend the class that will be instantiated dynamically.</p>
+
+<p>Callback signature:</p>
+<blockquote><code>$class, <em>array</em> &$extend</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>string</em> $class</code> - the name of the class to be created</li>
+	<li><code><em>array</em> &$extend</code> - a modifiable list of classes that wish to extend the class. See below.</li>
+</ol>
+
+<p>To use this event properly, determine if the class is one you want to extend. If so, add a new entry to $extend with the name of the class that should extend it. This class MUST be defined as follows:</p>
+
+<pre>class My_Class_Name extends XFCP_My_Class_Name
+{
+	// functionality to extend/override
+}</pre>
+
+<p>This class must extend the non-existent XFCP_x class. This will be resolved at run time.</p>]]></event>
+  <event event_id="load_class_route_prefix"><![CDATA[<p>Called when instantiating a specific route prefix class. This event can be used to extend the class that will be instantiated dynamically.</p>
+
+<p>Callback signature:</p>
+<blockquote><code>$class, <em>array</em> &$extend</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>string</em> $class</code> - the name of the class to be created</li>
+	<li><code><em>array</em> &$extend</code> - a modifiable list of classes that wish to extend the class. See below.</li>
+</ol>
+
+<p>To use this event properly, determine if the class is one you want to extend. If so, add a new entry to $extend with the name of the class that should extend it. This class MUST be defined as follows:</p>
+
+<pre>class My_Class_Name extends XFCP_My_Class_Name
+{
+	// functionality to extend/override
+}</pre>
+
+<p>This class must extend the non-existent XFCP_x class. This will be resolved at run time.</p>]]></event>
+  <event event_id="load_class_search_data"><![CDATA[<p>Called when instantiating a search data handler. This event can be used to extend the class that will be instantiated dynamically.</p>
+
+<p>Callback signature:</p>
+<blockquote><code>$class, <em>array</em> &$extend</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>string</em> $class</code> - the name of the class to be created</li>
+	<li><code><em>array</em> &$extend</code> - a modifiable list of classes that wish to extend the class. See below.</li>
+</ol>
+
+<p>To use this event properly, determine if the class is one you want to extend. If so, add a new entry to $extend with the name of the class that should extend it. This class MUST be defined as follows:</p>
+
+<pre>class My_Class_Name extends XFCP_My_Class_Name
+{
+	// functionality to extend/override
+}</pre>
+
+<p>This class must extend the non-existent XFCP_x class. This will be resolved at run time.</p>]]></event>
+  <event event_id="load_class_view"><![CDATA[<p>Called when instantiating a view. This event can be used to extend the class that will be instantiated dynamically.</p>
+
+<p>Callback signature:</p>
+<blockquote><code>$class, <em>array</em> &$extend</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>string</em> $class</code> - the name of the class to be created</li>
+	<li><code><em>array</em> &$extend</code> - a modifiable list of classes that wish to extend the class. See below.</li>
+</ol>
+
+<p>To use this event properly, determine if the class is one you want to extend. If so, add a new entry to $extend with the name of the class that should extend it. This class MUST be defined as follows:</p>
+
+<pre>class My_Class_Name extends XFCP_My_Class_Name
+{
+	// functionality to extend/override
+}</pre>
+
+<p>This class must extend the non-existent XFCP_x class. This will be resolved at run time.</p>]]></event>
+  <event event_id="navigation_tabs"><![CDATA[<p>Called when preparing the tabs and links that are put in the main page navigation. You may use this event to add your own tabs.</p>
+
+<p>Callback signature:</p>
+<blockquote><code><em>array</em> &$extraTabs, $selectedTabId</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>array</em> &$extraTabs</code> - you may push additional tabs onto this array. Each tab must be identified with a unique key (see $selectedTabId) and be an array with the following keys:
+		<ul>
+			<li><i>title</i> - title for the main tab</li>
+			<li><i>href</i> - link for the root of the tab</li>
+			<li><i>position</i> - currently 'home', 'middle', or 'end'. This controls where the tab will show up in the navigation.</li>
+			<li><i>linksTemplate</i> - the name of the template that contains the links that will be displayed in the second row. The outer HTML of this template should be a &lt;ul class=&quot;secondaryContent blockLinksList&quot;&gt;.</li>
+		</ul>
+	</li>
+	<li><code><em>string</em> $selectedTabId</code> - the name of the selected tab. Select your tab if this matches.</li>
+</ol>]]></event>
+  <event event_id="search_source_create"><![CDATA[<p>Called when creating the default search source handlers. Search source handlers give the opportunity to use an alternative method of searching by overriding a particular class. This event gives the option to change the name of the search source handler class that it is initialized. Note that this differs from the load_class_* events in approach.</p>
+
+<p>Callback signature:</p>
+<blockquote><code>&$class</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>string</em> &$class</code> - when called, this contains the name of the search source handler that will be instantiated. You may overwrite the value of this variable to instantiate a different class. Note that your class should inherit from XenForo_Search_SourceHandler_Abstract.</li>
+</ol>]]></event>
+  <event event_id="template_create"><![CDATA[<p>Called whenever the template object constructor is called. You may use this event to modify the name of the template being called, to modify the params being passed to the template, or to pre-load additional templates as needed.</p>
+
+<p>Callback signature:</p>
+<blockquote><code>$templateName, <em>array</em> &$params, <em>XenForo_Template_Abstract</em> $template</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>string</em> &$templateName</code> - the name of the template to be rendered</li>
+	<li><code><em>array</em> &$params</code> - key-value pairs of parameters that are available to the template</li>
+	<li><code><em>XenForo_Template_Abstract</em> $template</code> - the template object itself</li>
+</ol>]]></event>
+  <event event_id="template_hook"><![CDATA[<p>Called whenever a template hook is encountered (via &lt;xen:hook&gt; tags). You may use this event to modify the final output of that portion of the template.</p>
+
+<p>A template hook may pass a block of final template output with it; you may either adjust this text (such as with regular expressions) or add additional output before or after the contents. Some blocks will not pass contents with them; they are primarily designed to allow you to add additional components in those positions.</p>
+
+<p>Callback signature:</p>
+<blockquote><code>$hookName, &$contents, <em>array</em> $hookParams, <em>XenForo_Template_Abstract</em> $template</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>string</em> $hookName</code> - the name of the template hook being called</li>
+	<li><code><em>string</em> &$contents</code> - the contents of the template hook block. This content will be the final rendered output of the block. You should manipulate this, such as by adding additional output at the end.</li>
+	<li><code><em>array</em> $hookParams</code> - explicit key-value params that have been passed to the hook, enabling content-aware decisions. These will not be all the params that are available to the template.</li>
+	<li><code><em>XenForo_Template_Abstract</em> $template</code> - the raw template object that has called this hook. You can access the template name and full, raw set of parameters via this object.</li>
+</ol>]]></event>
+  <event event_id="template_post_render"><![CDATA[<p>Called after a template is rendered. Please note that this is only called for templates that are created via the template object directly. Templates that are included via &lt;xen:include&gt; will not trigger this event.</p>
+
+<p>Callback prototype:</p>
+<blockquote><code>$templateName, &$content, <em>array</em> &$containerData, <em>XenForo_Template_Abstract</em> $template</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>string</em> $templateName</code> - the name of the template that was rendered</li>
+	<li><code><em>string</em> &$content</code> - the final string output of the template</li>
+	<li><code><em>array</em> &$containerData</code> - data that this template rendered for use in the container template</li>
+	<li><code><em>XenForo_Template_Abstract</em> $template</code> - the template object itself</li>
+</ol>]]></event>
+  <event event_id="visitor_setup"><![CDATA[<p>Called when the visitor object has been prepared.</p>
+
+<p>Callback signature:</p>
+<blockquote><code><em>XenForo_Visitor</em> &$visitor</code></blockquote>
+
+<p>Arguments:</p>
+<ol>
+	<li><code><em>XenForo_Visitor</em> &$visitor</code> - the visitor instance. From this, you can inspect the user, their permissions, profile fields etc.</li>
+</ol>]]></event>
+</code_events>

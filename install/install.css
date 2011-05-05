@@ -1,0 +1,689 @@
+@CHARSET "UTF-8";
+
+/*
+ * YUI reset-fonts.css
+ *
+Copyright (c) 2009, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.7.0
+*/
+html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var,optgroup{font-style:inherit;font-weight:inherit;}del,ins{text-decoration:none;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:baseline;}sub{vertical-align:baseline;}legend{color:#000;}input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;}input,button,textarea,select{*font-size:100%;}body{font:13px/1.231 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}select,input,button,textarea,button{font:99% arial,helvetica,clean,sans-serif;}table{font-size:inherit;font:100%;}pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%;}
+
+/** BASE SETUP **/
+
+html
+{
+	color: black;
+	background-color: rgb(240,240,240);
+	overflow-y: scroll !important;
+}
+
+body
+{
+	font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+	color: rgb(20,20,20);
+}
+
+a:link,
+a:visited
+{
+	color: #176093;
+	text-decoration: none;
+}
+
+	a[href]:hover
+	{
+		text-decoration: underline;
+	}
+
+.dimmed, a.dimmed, .dimmed a { color: rgb(100,100,100); }
+.muted, a.muted, .muted a { color: rgb(150,150,150); }
+.faint, a.faint, .faint a { color: rgb(200,200,200); }
+
+.concealed,
+a.concealed,
+.concealed a
+{
+	text-decoration: inherit !important;
+	color: inherit !important;
+	*clear:expression( style.color = parentNode.currentStyle.color, style.clear = "none", 0);
+}
+
+a.concealed:hover,
+.concealed a:hover
+{
+	text-decoration: underline !important;
+}
+
+p.text { margin: 1em 0; }
+
+/* The AJAX progress indicator overlay */
+
+#AjaxProgress.xenOverlay
+{
+	width: 100%;
+	overflow: hidden; zoom: 1;
+}
+
+	#AjaxProgress.xenOverlay .content
+	{
+		float: right;
+		width: 85px;
+		height: 30px;
+		border-bottom-left-radius: 10px; -webkit-border-bottom-left-radius: 10px; -moz-border-radius-bottomleft: 10px; -khtml-border-bottom-left-radius: 10px;
+		background: rgba(0,0,0, 0.5) url('../styles/default/xenforo/widgets/ajaxload.info_FFFFFF_facebook.gif') no-repeat center center;
+	}
+
+
+/** TITLE BAR **/
+
+.titleBar
+{
+	margin: 10px auto;
+}
+
+.titleBar { zoom: 1; } .titleBar:after { content: '.'; display: block; height: 0; clear: both; visibility: hidden; }
+
+.titleBar h1
+{
+	font-size: 18pt;
+	overflow: hidden; zoom: 1;
+}
+
+	.titleBar h1 em
+	{
+		color: #666666; /* see xenforo.css .dimmed */
+	}
+
+/** FORMS **/
+
+.xenForm
+{
+	margin: 10px auto;
+	width: 720px;
+}
+
+.xenForm .ctrlUnit dd
+{
+	width: 500px;
+}
+
+.xenForm .ctrlUnit dd .textCtrl
+{
+	width: 462px;
+}
+
+.xenForm .ctrlUnit dd li > ul .textCtrl
+{
+	width: 442px;
+}
+
+.xenForm .ctrlUnit.fullWidth dd .textCtrl,
+.xenForm .ctrlUnit.fullWidth dd .explain
+{
+	margin-left: 30px;
+}
+
+.xenForm .ctrlUnit.fullWidth dd .textCtrl
+{
+	width: 652px;
+}
+
+	.xenForm .ctrlUnit dd > select.textCtrl
+	{
+		min-width: 150px;
+	}
+
+	.xenForm .ctrlUnit dd .textCtrl[size],
+	.xenForm .ctrlUnit dd .textCtrl.autoSize,
+	.xenForm .ctrlUnit.fullWidth dd .textCtrl[size],
+	.xenForm .ctrlUnit.fullWidth dd .textCtrl.autoSize
+	{
+		width: auto;
+		min-width: 0;
+	}
+
+	.xenForm .ctrlUnit dd .textCtrl.number
+	{
+		width: 150px;
+	}
+
+.xenForm fieldset
+{
+	border-top: 1px solid #d7edfc;
+	margin: 20px auto;
+}
+
+.xenForm > fieldset:first-child
+{
+	border-top: none;
+	margin: auto;
+}
+
+.xenForm fieldset + .ctrlUnit,
+.xenForm .submitUnit
+{
+	border-top: 1px solid #d7edfc;
+}
+
+.xenForm fieldset + .ctrlUnit
+{
+	padding-top: 10px;
+}
+
+.xenForm .ctrlUnit.submitUnit dd
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+/** TEXT INPUTS **/
+
+.textCtrl
+{
+	font: 13px Calibri, 'Trebuchet MS', Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color: black;
+	background-color: white;
+	padding: 3px;
+	margin-bottom: 2px;
+	border: 1px solid silver;
+	border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px;
+	outline: 0;
+}
+
+	.textCtrl:focus
+	{
+		background: rgb(255,255,240) url('../styles/default/xenforo/gradients/form-element-focus-25.png') repeat-x;
+		border-top-color: rgb(150,150,150);
+		border-bottom-color: rgb(230,230,230);
+	}
+
+	textarea.textCtrl:focus
+	{
+		background-image: url('../styles/default/xenforo/gradients/form-element-focus-100.png');
+	}
+
+	input.textCtrl.disabled,
+	textarea.textCtrl.disabled,
+	.disabled .textCtrl
+	{
+		font-style: italic;
+		color: rgb(100,100,100);
+		background-color: rgb(245,245,245);
+	}
+
+	.textCtrl.prompt
+	{
+		font-style: italic;
+		color: rgb(160,160,160);
+	}
+
+	.textCtrl::-webkit-input-placeholder
+	{
+		font-style: italic;
+		color: rgb(160,160,160);
+	}
+
+	.textCtrl.number
+	{
+		text-align: right;
+		width: 150px;
+	}
+
+	.textCtrl.code
+	{
+		font-family: Consolas, "Courier New", Courier, monospace;
+		white-space: pre;
+		direction: ltr;
+	}
+
+	input[type="email"],
+	input[type="url"]
+	{
+		direction: ltr;
+	}
+
+/** BUTTONS **/
+
+.button
+{
+	font: 12px Calibri, 'Trebuchet MS', Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color: rgb(0, 0, 0);
+	background: rgb(220,220,235) url('../styles/default/xenforo/gradients/form-button-white-25px.png') repeat-x top;
+	padding: 0px 6px;
+	border: 1px solid rgb(221, 221, 235);
+	border-top-color: rgb(255, 255, 255);
+	border-bottom-color: rgb(179, 179, 189);
+	border-radius: 7px; -webkit-border-radius: 7px; -moz-border-radius: 7px; -khtml-border-radius: 7px;
+	text-align: center;
+	box-shadow: 0px 1px 4px 0px rgb(200,200,210); -webkit-box-shadow:0px 1px 4px 0px rgb(200,200,210); -moz-box-shadow:0px 1px 4px 0px rgb(200,200,210); -khtml-box-shadow:0px 1px 4px 0px rgb(200,200,210);
+	text-shadow: 0px -1px 2px white;
+	outline: none;
+	line-height: 23px;
+	display: inline-block;
+	cursor: pointer;
+	box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box;
+	height: 23px;
+}
+
+.button.primary
+{
+	background-color: #a5cae4;
+}
+
+
+input.button.disabled,
+a.button.disabled,
+input.button.primary.disabled,
+a.button.primary.disabled
+{
+	color: #999;
+	background-color: #EEE;
+	border-color: #CCC;
+	box-shadow: 0 0 0 transparent; -webkit-box-shadow:0 0 0 transparent; -moz-box-shadow:0 0 0 transparent; -khtml-box-shadow:0 0 0 transparent;
+}
+
+	.button::-moz-focus-inner
+	{
+		border: none;
+	}
+
+	a.button
+	{
+		display: inline-block;
+		color: black;
+	}
+
+	.button:hover,
+	.button[href]:hover
+	{
+		color: black;
+		text-decoration: none;
+		background-color: rgb(255,255,200);
+		border-color: rgb(255,255,200);
+		border-top-color: white;
+		border-bottom-color: rgb(190,190,170);
+	}
+
+	.button:focus
+	{
+		border-color: #6cb2e4;
+
+	}
+
+	.button:active,
+	.button.ToggleButton.checked
+	{
+		background-color: #9999a3;
+		border-color: rgb(200,200,215);
+		border-top-color: #b3b3bd;
+		border-bottom-color: white;
+		box-shadow: 0px 0px 0px 0px transparent; -webkit-box-shadow:0px 0px 0px 0px transparent; -moz-box-shadow:0px 0px 0px 0px transparent; -khtml-box-shadow:0px 0px 0px 0px transparent;
+		outline: 0;
+	}
+
+	.submitUnit .button
+	{
+		min-width: 100px;
+		*min-width: 0;
+	}
+	
+.button.spinBoxButton
+{
+	font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+	font-size: 11pt;
+}
+
+/** CONTROL UNITS **/
+
+.xenForm .ctrlUnit
+{
+	position: relative;
+	margin: 10px auto;
+}
+
+.xenForm .ctrlUnit { zoom: 1; } .xenForm .ctrlUnit:after { content: '.'; display: block; height: 0; clear: both; visibility: hidden; }
+
+.xenForm .ctrlUnit.fullWidth
+{
+	overflow: visible;
+}
+
+.xenForm .ctrlUnit dt
+{
+	padding-top: 4px;
+	padding-right: 10px;
+	text-align: right;
+	vertical-align: top;
+
+	width: 210px;
+	float: left;
+}
+
+.xenForm .ctrlUnit.fullWidth dt,
+.xenForm .ctrlUnit.submitUnit.fullWidth dt
+{
+	float: none;
+	width: auto;
+	text-align: left;
+	height: auto;
+}
+
+	.xenForm .ctrlUnit dt label
+	{
+		margin-left: 30px;
+	}
+	
+	/** Hints **/
+
+	.xenForm .ctrlUnit dt dfn
+	{
+		font-style: italic;
+		font-size: 10px;
+		color: rgb(100,100,100);
+		margin-left: 30px;
+		display: block;
+	}
+
+.xenForm .ctrlUnit.submitUnit dt
+{
+	height: 19px;
+	display: block;
+}
+
+/** CONTROL CONTENTS **/
+
+.xenForm .ctrlUnit dd
+{
+	float: left;
+}
+
+.xenForm .ctrlUnit.fullWidth dd
+{
+	float: none;
+	width: auto;
+	padding-left: 0;
+}
+
+	/** Explanatory paragraph **/
+
+	.xenForm .ctrlUnit dd .explain
+	{
+		font-size: 11px;
+		color: rgb(150,150,150);
+		margin-top: 2px;
+		margin-right: 30px;
+	}
+
+	/** List items inside controls **/
+
+	.xenForm .ctrlUnit dd li
+	{
+		margin: 4px 0;
+	}
+
+	/** Hints underneath checkbox / radio controls **/
+
+	.xenForm .ctrlUnit dd li .hint
+	{
+		font-size: 11px;
+		color: rgb(150,150,150);
+		margin-left: 20px;
+	}
+
+	/** DISABLERS **/
+
+	.xenForm .ctrlUnit dd li > ul
+	{
+		margin-left: 20px;
+	}
+	
+/** DL Name-Value Pairs **/
+
+.pairs dt,
+.pairsInline dt,
+.pairsRows dt,
+.pairsColumns dt,
+.pairsJustified dt
+{
+	color: rgb(150,150,150);
+}
+
+.pairsInline dl,
+.pairsInline dt,
+.pairsInline dd
+{
+	display: inline;
+}
+
+.pairsRows dt,
+.pairsRows dd
+{
+	display: inline-block;
+	vertical-align: top;
+
+	*display: inline;
+	*margin-right: 1ex;
+	*zoom: 1;
+}
+
+dl.pairsColumns,
+dl.pairsJustified,
+.pairsColumns dl,
+.pairsJustified dl
+{
+	overflow: hidden; zoom: 1;
+}
+
+.pairsColumns dt,
+.pairsColumns dd
+{
+	float: left;
+	width: 48%;
+}
+
+.pairsJustified dt
+{
+	float: left;
+}
+.pairsJustified dd
+{
+	float: right;
+	text-align: right;
+}
+
+
+/** MAIN STYLING **/
+
+.pageWidth
+{
+	margin: auto;
+	width: 920px;
+}
+
+#body
+{
+	position: relative;
+}
+
+.titleBar
+{
+	padding: 5px 0;
+	border-bottom: 1px solid #d7edfc;
+	margin: 0px auto 10px;
+}
+
+#contentContainer
+{
+	position: absolute;
+	top: 0;
+	left: 160px;	
+	z-index: 500;
+}
+	#contentContainer.noSideBar
+	{
+		left: 0;
+	}
+
+	#content
+	{
+		width: 720px;
+		min-height: 100px;
+		padding: 10px 20px 20px;
+		
+		background: rgb(252, 252, 255);
+		
+		border-bottom-left-radius: 5px; -webkit-border-bottom-left-radius: 5px; -moz-border-radius-bottomleft: 5px; -khtml-border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px; -webkit-border-bottom-right-radius: 5px; -moz-border-radius-bottomright: 5px; -khtml-border-bottom-right-radius: 5px;
+		box-shadow: 0px 5px 30px #2b485c; -webkit-box-shadow:0px 5px 30px #2b485c; -moz-box-shadow:0px 5px 30px #2b485c; -khtml-box-shadow:0px 5px 30px #2b485c;
+	}
+	
+		.noSideBar #content
+		{
+			width: 880px;
+			min-height: 0;
+		}
+
+#sideNav
+{
+	float: left;
+	width: 180px;
+}
+
+	#sideNav li
+	{
+		padding: 2px 10px;
+		background: #2b485c;
+	}
+	
+	#sideNav li:first-child
+	{
+		padding-top: 4px;
+	}
+	
+	#sideNav li:last-child
+	{
+		padding-bottom: 4px;
+		border-bottom-left-radius: 5px; -webkit-border-bottom-left-radius: 5px; -moz-border-radius-bottomleft: 5px; -khtml-border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px; -webkit-border-bottom-right-radius: 5px; -moz-border-radius-bottomright: 5px; -khtml-border-bottom-right-radius: 5px;
+	}
+	
+		#sideNav li span
+		{
+			color: #A5CAE4;
+			font-size: 11px;
+		}
+		
+		#sideNav li span.selected
+		{
+			font-weight: bold;
+			color: white;
+		}
+
+#header
+{
+	background: #176093;
+}
+
+/* logo line */
+
+#logoLine
+{
+	text-align: center;
+	border-bottom: 1px solid #1d74b3;
+	overflow: hidden; zoom: 1;
+}
+
+	#logoLine .pageWidth
+	{
+		position: relative;
+	}
+	
+	#version,
+	#logoutLink
+	{
+		position: absolute;
+		top: 17px;
+		left: 0px;
+		font-size: 11px;
+		color: #a5cae4;
+		padding: 0 11px;
+		/*font-family: Eurostile, 'Trebuchet MS', Helvetica, Arial, sans-serif;*/
+	}
+	
+		#logoLine a
+		{
+			color: #a5cae4;
+		}
+	
+		#logoLine a:hover
+		{
+			color: #f0f7fc;
+			text-decoration: none;
+		}
+	
+		#logoutLink
+		{
+			left: auto;
+			right: 0px;
+		}
+
+	#logo
+	{
+		width: 100px;
+	}
+
+#tabsNav .pad
+{
+	background: #6cb2e4;
+	height: 7px;
+	border-bottom: 1px solid #176093;
+	zoom: 1;
+}
+
+#footer
+{
+	margin: 20px 30px;
+	font-size: 11px;
+	color: rgb(150,150,150);
+	font-family: Eurostile, 'Trebuchet MS', Helvetica, Arial, sans-serif;
+	}
+
+#footer #debugInfo
+{
+	float: right;
+}
+
+
+/** Simple page output **/
+
+.Install body.simple #content
+{
+	padding: 0 25px 25px 25px;
+	width: 800px;
+	margin: 50px auto 0;
+	border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px;
+}
+
+/* un-reset, mostly from YUI */
+
+.baseHtml h1 { font-size:138.5%; } 
+.baseHtml h2 { font-size:123.1%; }
+.baseHtml h3 { font-size:108%; } 
+.baseHtml h1, .baseHtml h2, .baseHtml h3 {  margin:1em 0; } 
+.baseHtml h1, .baseHtml h2, .baseHtml h3, .baseHtml h4, .baseHtml h5, .baseHtml h6, .baseHtml strong { font-weight:bold; } 
+.baseHtml abbr, .baseHtml acronym { border-bottom:1px dotted #000; cursor:help; }  
+.baseHtml em {  font-style:italic; } 
+.baseHtml blockquote, .baseHtml ul, .baseHtml ol, .baseHtml dl { margin:1em; } 
+.baseHtml ol, .baseHtml ul, .baseHtml dl { margin-left:2em; } 
+.baseHtml ul ul, .baseHtml ul ol,.baseHtml ul dl, .baseHtml ol ul, .baseHtml ol ol, .baseHtml ol dl, .baseHtml dl ul, .baseHtml dl ol, .baseHtml dl dl { margin-top:0; margin-bottom:0; }
+.baseHtml ol ul, .baseHtml ul ul { list-style-type: circle; }
+.baseHtml ol ol ul, .baseHtml ol ul ul, .baseHtml ul ol ul, .baseHtml ul ul ul { list-style-type: square; }
+.baseHtml ol li { list-style: decimal outside; } 
+.baseHtml ul li { list-style: disc outside; } 
+.baseHtml dl dd { margin-left:1em; } 
+.baseHtml th, .baseHtml td { border:1px solid #000; padding:.5em; } 
+.baseHtml th { font-weight:bold; text-align:center; } 
+.baseHtml caption { margin-bottom:.5em; text-align:center; } 
+.baseHtml p, .baseHtml pre, .baseHtml fieldset, .baseHtml table { margin-bottom:1em; }

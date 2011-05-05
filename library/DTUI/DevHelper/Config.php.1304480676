@@ -1,0 +1,71 @@
+<?php
+class DTUI_DevHelper_Config extends DevHelper_Config_Base {
+	protected $_dataClasses = array();
+	protected $_dataPatches = array();
+	protected $_exportPath = false;
+	
+	/**
+	 * Return false to trigger the upgrade!
+	 * common use methods:
+	 * 	public function addDataClass($name, $fields = array(), $primaryKey = false, $indeces = array())
+	 *	public function addDataPatch($table, array $field)
+	 *	public function setExportPath($path)
+	**/
+	protected function _upgrade() {
+		$this->addDataClass('category', array(
+			'category_id' => array('type' => 'uint', 'autoIncrement' => true),
+			'category_name' => array('type' => 'string', 'length' => 255, 'required' => true),
+			'category_description' => array('type' => 'string'),
+			'category_options' => array('type' => 'serialized'),
+		), 'category_id');
+		
+		$this->addDataClass('item', array(
+			'item_id' => array('type' => 'uint', 'autoIncrement' => true),
+			'item_name' => array('type' => 'string', 'length' => 255, 'required' => true),
+			'item_description' => array('type' => 'string'),
+			'category_id' => array('type' => 'uint', 'required' => true),
+			'price' => array('type' => 'float', 'required' => true),
+			'item_options' => array('type' => 'serialized'),
+		
+			'item_order_count' => array('type' => 'uint', 'required' => true, 'default' => 0),
+		), 'item_id', array(
+			array('fields' => array('category_id'), 'type' => 'NORMAL')
+		));
+		
+		$this->addDataClass('table', array(
+			'table_id' => array('type' => 'uint', 'autoIncrement' => true),
+			'table_name' => array('type' => 'string', 'length' => 255, 'required' => true),
+			'table_description' => array('type' => 'string'),
+			'is_busy' => array('type' => 'boolean', 'required' => true, 'default' => 0),
+			'last_order_id' => array('type' => 'uint', 'required' => true, 'default' => 0),
+		
+			'table_order_count' => array('type' => 'uint', 'required' => true, 'default' => 0),
+		), 'table_id');
+		
+		$this->addDataClass('order', array(
+			'order_id' => array('type' => 'uint', 'autoIncrement' => true),
+			'table_id' => array('type' => 'uint', 'required' => true),
+			'order_date' => array('type' => 'uint', 'required' => true),
+			'is_paid' => array('type' => 'boolean', 'required' => true, 'default' => 0),
+			'paid_amount' => array('type' => 'float', 'required' => true, 'default' => 0.0),
+		), 'order_id');
+		
+		$this->addDataClass('order_item', array(
+			'order_item_id' => array('type' => 'uint', 'autoIncrement' => true),
+			'order_id' => array('type' => 'uint', 'required' => true),
+			'trigger_user_id' => array('type' => 'uint', 'required' => true),
+			'target_user_id' => array('type' => 'uint', 'required' => true),
+			'item_id' => array('type' => 'uint', 'required' => true),
+			'order_item_date' => array('type' => 'uint', 'required' => true),
+			'status' => array(
+				'type' => 'string',
+				'allowedValues' => array('waiting', 'served', 'paid'),
+				'required' => true
+			),
+		), 'order_item_id', array(
+			array('fields' => array('order_id'), 'type' => 'NORMAL'),
+			array('fields' => array('target_user_id'), 'type' => 'NORMAL'),
+			array('fields' => array('item_id', 'type' => 'NORMAL')),
+		));
+	}
+}
