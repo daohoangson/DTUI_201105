@@ -128,7 +128,7 @@ class DTUI_DevHelper_Config extends DevHelper_Config_Base {
 		)
 	);
 	protected $_dataPatches = array();
-	protected $_exportPath = 'C:\\xampp\\htdocs\\dtui\\addons\\DTUI';
+	protected $_exportPath = 'E:\\www\\dtui\\addons\\DTUI';
 
 	/**
 	 * Return false to trigger the upgrade!
