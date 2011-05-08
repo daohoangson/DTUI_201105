@@ -9,8 +9,7 @@ class DTUI_DataWriter_Item extends XenForo_DataWriter {
 				'category_id' => array('type' => 'uint', 'required' => true),
 				'price' => array('type' => 'float', 'required' => true),
 				'item_options' => array('type' => 'serialized'),
-				'item_order_count' => array('type' => 'uint', 'required' => true, 'default' => 0),
-				'last_update_date' => array('type' => 'uint', 'required' => true)
+				'item_order_count' => array('type' => 'uint', 'default' => 0)
 			)
 		);
 	}
