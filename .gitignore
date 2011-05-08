@@ -3,3 +3,5 @@ internal_data/
 data/
 .settings/
 nbproject/
+library/DTUI/DevHelper/
+library/DTUI/DevHelper/Config.php
