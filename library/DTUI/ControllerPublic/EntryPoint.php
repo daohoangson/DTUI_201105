@@ -1,6 +1,6 @@
 <?php
 
-class DTUI_ControllerPublic_EntryPoint extends XenForo_ControllerPublic_Abstract {
+class DTUI_ControllerPublic_EntryPoint extends DTUI_ControllerPublic_EntryPointQuanUH {
 
     public function actionIndex() {
 		$viewParams = array();
