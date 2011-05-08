@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="DTUI" title="DTUI 201105" version_string="0.9" version_id="1" url="" install_callback_class="DTUI_Installer" install_callback_method="install" uninstall_callback_class="DTUI_Installer" uninstall_callback_method="uninstall">
+  <admin_navigation>
+    <navigation navigation_id="DTUI_categories" parent_navigation_id="dtui" display_order="20" link="dtui-categories" admin_permission_id="DTUI" debug_only="0" hide_no_children="0"/>
+    <navigation navigation_id="DTUI_items" parent_navigation_id="dtui" display_order="30" link="dtui-items" admin_permission_id="DTUI" debug_only="0" hide_no_children="0"/>
+    <navigation navigation_id="DTUI_tables" parent_navigation_id="dtui" display_order="10" link="dtui-tables" admin_permission_id="DTUI" debug_only="0" hide_no_children="0"/>
+    <navigation navigation_id="dtui" parent_navigation_id="" display_order="9999" link="dtui-tables" admin_permission_id="DTUI" debug_only="0" hide_no_children="0"/>
+  </admin_navigation>
+  <admin_permissions>
+    <admin_permission admin_permission_id="DTUI" display_order="9999"/>
+  </admin_permissions>
+  <admin_style_properties/>
+  <admin_templates>
+    <template title="dtui_category_delete"><![CDATA[<xen:title>{xen:phrase dtui_category_confirm_deletion}: {$category.category_name}</xen:title>
+<xen:h1>{xen:phrase dtui_category_confirm_deletion}</xen:h1>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:adminlink 'dtui-categories/edit', $category}">{$category.category_name}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:require css="delete_confirmation.css" />
+
+<xen:form action="{xen:adminlink 'dtui-categories/delete', $category}" class="deleteConfirmForm formOverlay">
+
+	<p>{xen:phrase dtui_category_please_confirm}:</p>
+	<strong><a href="{xen:adminlink 'dtui-categories/edit', $category}">{$category.category_name}</a></strong>
+
+	<xen:submitunit save="{xen:phrase dtui_category_delete}" />
+	
+	<input type="hidden" name="_xfConfirm" value="1" />
+</xen:form>]]></template>
+    <template title="dtui_category_edit"><![CDATA[<xen:title>{xen:if '{$category.category_id}', '{xen:phrase dtui_category_edit}', '{xen:phrase dtui_category_add}'}</xen:title>
+
+<xen:form action="{xen:adminlink 'dtui-categories/save'}" class="AutoValidator" data-redirect="yes">
+
+	
+	<xen:textboxunit label="{xen:phrase dtui_category_name}:" name="category_name" value="{$category.category_name}" data-liveTitleTemplate="{xen:if {$category.category_id},
+		'{xen:phrase dtui_category_edit}: <em>%s</em>',
+		'{xen:phrase dtui_category_add}: <em>%s</em>'}" />
+	<xen:textboxunit label="{xen:phrase dtui_category_description}:" name="category_description" value="{$category.category_description}"  rows="5"/>
+
+	<xen:submitunit save="{xen:phrase dtui_category_save}">
+		<input type="button" name="delete" value="{xen:phrase dtui_category_delete}"
+			accesskey="d" class="button OverlayTrigger"
+			data-href="{xen:adminlink 'dtui-categories/delete', $category}"
+			{xen:if '!{$category.category_id}', 'style="display: none"'}
+		/>
+	</xen:submitunit>
+	
+	<input type="hidden" name="category_id" value="{$category.category_id}" />
+</xen:form>]]></template>
+    <template title="dtui_category_list"><![CDATA[<xen:title>{xen:phrase dtui_category}</xen:title>
+
+<xen:topctrl>
+	<a href="{xen:adminlink 'dtui-categories/add'}" class="button" accesskey="a">+ {xen:phrase dtui_category_add}</a>
+</xen:topctrl>
+
+<xen:require css="filter_list.css" />
+<xen:require js="js/xenforo/filter_list.js" />
+
+<xen:form action="{xen:adminlink 'dtui-categories'}" class="section">
+	<xen:if is="{$allCategory}">
+		<h2 class="subHeading">
+			<link rel="xenforo_template" type="text/html" href="filter_list_controls.html" />
+			{xen:phrase dtui_category}
+		</h2>
+	
+		<ol class="FilterList Scrollable">
+			<xen:foreach loop="$allCategory" value="$category">
+				<xen:listitem
+					id="{$category.category_id}"
+					href="{xen:adminlink 'dtui-categories/edit', $category}"
+					label="{$category.category_name}"
+					delete="{xen:adminlink 'dtui-categories/delete', $category}" />
+			</xen:foreach>
+		</ol>
+	
+		<p class="sectionFooter">{xen:phrase showing_x_of_y_items, 'count=<span class="FilterListCount">{xen:count $allCategory}</span>', 'total={xen:count $allCategory}'}</p>
+	<xen:else />
+		<div class="noResults">{xen:phrase dtui_category_no_results}</div>
+	</xen:if>
+</xen:form>]]></template>
+    <template title="dtui_item_delete"><![CDATA[<xen:title>{xen:phrase dtui_item_confirm_deletion}: {$item.item_name}</xen:title>
+<xen:h1>{xen:phrase dtui_item_confirm_deletion}</xen:h1>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:adminlink 'dtui-items/edit', $item}">{$item.item_name}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:require css="delete_confirmation.css" />
+
+<xen:form action="{xen:adminlink 'dtui-items/delete', $item}" class="deleteConfirmForm formOverlay">
+
+	<p>{xen:phrase dtui_item_please_confirm}:</p>
+	<strong><a href="{xen:adminlink 'dtui-items/edit', $item}">{$item.item_name}</a></strong>
+
+	<xen:submitunit save="{xen:phrase dtui_item_delete}" />
+	
+	<input type="hidden" name="_xfConfirm" value="1" />
+</xen:form>]]></template>
+    <template title="dtui_item_edit"><![CDATA[<xen:title>{xen:if '{$item.item_id}', '{xen:phrase dtui_item_edit}', '{xen:phrase dtui_item_add}'}</xen:title>
+
+<xen:form action="{xen:adminlink 'dtui-items/save'}" class="AutoValidator" data-redirect="yes">
+
+	
+	<xen:textboxunit label="{xen:phrase dtui_item_name}:" name="item_name" value="{$item.item_name}" data-liveTitleTemplate="{xen:if {$item.item_id},
+		'{xen:phrase dtui_item_edit}: <em>%s</em>',
+		'{xen:phrase dtui_item_add}: <em>%s</em>'}" />
+	<xen:textboxunit label="{xen:phrase dtui_item_description}:" name="item_description" value="{$item.item_description}"  rows="5"/>
+	<xen:selectunit label="{xen:phrase dtui_category}:" name="category_id" value="{$item.category_id}">
+		<xen:option value="">&nbsp;</xen:option>
+		<xen:options source="$allCategory" />
+	</xen:selectunit>
+	<xen:textboxunit label="{xen:phrase dtui_price}:" name="price" value="{$item.price}" />
+
+	<xen:submitunit save="{xen:phrase dtui_item_save}">
+		<input type="button" name="delete" value="{xen:phrase dtui_item_delete}"
+			accesskey="d" class="button OverlayTrigger"
+			data-href="{xen:adminlink 'dtui-items/delete', $item}"
+			{xen:if '!{$item.item_id}', 'style="display: none"'}
+		/>
+	</xen:submitunit>
+	
+	<input type="hidden" name="item_id" value="{$item.item_id}" />
+</xen:form>]]></template>
+    <template title="dtui_item_list"><![CDATA[<xen:title>{xen:phrase dtui_item}</xen:title>
+
+<xen:topctrl>
+	<a href="{xen:adminlink 'dtui-items/add'}" class="button" accesskey="a">+ {xen:phrase dtui_item_add}</a>
+</xen:topctrl>
+
+<xen:require css="filter_list.css" />
+<xen:require js="js/xenforo/filter_list.js" />
+
+<xen:form action="{xen:adminlink 'dtui-items'}" class="section">
+	<xen:if is="{$allItem}">
+		<h2 class="subHeading">
+			<link rel="xenforo_template" type="text/html" href="filter_list_controls.html" />
+			{xen:phrase dtui_item}
+		</h2>
+	
+		<ol class="FilterList Scrollable">
+			<xen:foreach loop="$allItem" value="$item">
+				<xen:listitem
+					id="{$item.item_id}"
+					href="{xen:adminlink 'dtui-items/edit', $item}"
+					label="{$item.item_name}"
+					delete="{xen:adminlink 'dtui-items/delete', $item}" />
+			</xen:foreach>
+		</ol>
+	
+		<p class="sectionFooter">{xen:phrase showing_x_of_y_items, 'count=<span class="FilterListCount">{xen:count $allItem}</span>', 'total={xen:count $allItem}'}</p>
+	<xen:else />
+		<div class="noResults">{xen:phrase dtui_item_no_results}</div>
+	</xen:if>
+</xen:form>]]></template>
+    <template title="dtui_order_delete"><![CDATA[<xen:title>{xen:phrase dtui_order_confirm_deletion}: {$order.order_id}</xen:title>
+<xen:h1>{xen:phrase dtui_order_confirm_deletion}</xen:h1>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:adminlink 'dtui-orders/edit', $order}">{$order.order_id}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:require css="delete_confirmation.css" />
+
+<xen:form action="{xen:adminlink 'dtui-orders/delete', $order}" class="deleteConfirmForm formOverlay">
+
+	<p>{xen:phrase dtui_order_please_confirm}:</p>
+	<strong><a href="{xen:adminlink 'dtui-orders/edit', $order}">{$order.order_id}</a></strong>
+
+	<xen:submitunit save="{xen:phrase dtui_order_delete}" />
+	
+	<input type="hidden" name="_xfConfirm" value="1" />
+</xen:form>]]></template>
+    <template title="dtui_order_edit"><![CDATA[<xen:title>{xen:if '{$order.order_id}', '{xen:phrase dtui_order_edit}', '{xen:phrase dtui_order_add}'}</xen:title>
+
+<xen:form action="{xen:adminlink 'dtui-orders/save'}" class="AutoValidator" data-redirect="yes">
+
+	
+	<xen:selectunit label="{xen:phrase dtui_table}:" name="table_id" value="{$order.table_id}">
+		<xen:option value="">&nbsp;</xen:option>
+		<xen:options source="$allTable" />
+	</xen:selectunit>
+	<xen:textboxunit label="{xen:phrase dtui_order_date}:" name="order_date" value="{$order.order_date}" />
+	<xen:textboxunit label="{xen:phrase dtui_is_paid}:" name="is_paid" value="{$order.is_paid}" />
+	<xen:textboxunit label="{xen:phrase dtui_paid_amount}:" name="paid_amount" value="{$order.paid_amount}" />
+
+	<xen:submitunit save="{xen:phrase dtui_order_save}">
+		<input type="button" name="delete" value="{xen:phrase dtui_order_delete}"
+			accesskey="d" class="button OverlayTrigger"
+			data-href="{xen:adminlink 'dtui-orders/delete', $order}"
+			{xen:if '!{$order.order_id}', 'style="display: none"'}
+		/>
+	</xen:submitunit>
+	
+	<input type="hidden" name="order_id" value="{$order.order_id}" />
+</xen:form>]]></template>
+    <template title="dtui_order_list"><![CDATA[<xen:title>{xen:phrase dtui_order}</xen:title>
+
+<xen:topctrl>
+	<a href="{xen:adminlink 'dtui-orders/add'}" class="button" accesskey="a">+ {xen:phrase dtui_order_add}</a>
+</xen:topctrl>
+
+<xen:require css="filter_list.css" />
+<xen:require js="js/xenforo/filter_list.js" />
+
+<xen:form action="{xen:adminlink 'dtui-orders'}" class="section">
+	<xen:if is="{$allOrder}">
+		<h2 class="subHeading">
+			<link rel="xenforo_template" type="text/html" href="filter_list_controls.html" />
+			{xen:phrase dtui_order}
+		</h2>
+	
+		<ol class="FilterList Scrollable">
+			<xen:foreach loop="$allOrder" value="$order">
+				<xen:listitem
+					id="{$order.order_id}"
+					href="{xen:adminlink 'dtui-orders/edit', $order}"
+					label="{$order.order_id}"
+					delete="{xen:adminlink 'dtui-orders/delete', $order}" />
+			</xen:foreach>
+		</ol>
+	
+		<p class="sectionFooter">{xen:phrase showing_x_of_y_items, 'count=<span class="FilterListCount">{xen:count $allOrder}</span>', 'total={xen:count $allOrder}'}</p>
+	<xen:else />
+		<div class="noResults">{xen:phrase dtui_order_no_results}</div>
+	</xen:if>
+</xen:form>]]></template>
+    <template title="dtui_table_delete"><![CDATA[<xen:title>{xen:phrase dtui_table_confirm_deletion}: {$table.table_name}</xen:title>
+<xen:h1>{xen:phrase dtui_table_confirm_deletion}</xen:h1>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:adminlink 'dtui-tables/edit', $table}">{$table.table_name}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:require css="delete_confirmation.css" />
+
+<xen:form action="{xen:adminlink 'dtui-tables/delete', $table}" class="deleteConfirmForm formOverlay">
+
+	<p>{xen:phrase dtui_table_please_confirm}:</p>
+	<strong><a href="{xen:adminlink 'dtui-tables/edit', $table}">{$table.table_name}</a></strong>
+
+	<xen:submitunit save="{xen:phrase dtui_table_delete}" />
+	
+	<input type="hidden" name="_xfConfirm" value="1" />
+</xen:form>]]></template>
+    <template title="dtui_table_edit"><![CDATA[<xen:title>{xen:if '{$table.table_id}', '{xen:phrase dtui_table_edit}', '{xen:phrase dtui_table_add}'}</xen:title>
+
+<xen:form action="{xen:adminlink 'dtui-tables/save'}" class="AutoValidator" data-redirect="yes">
+
+	
+	<xen:textboxunit label="{xen:phrase dtui_table_name}:" name="table_name" value="{$table.table_name}" data-liveTitleTemplate="{xen:if {$table.table_id},
+		'{xen:phrase dtui_table_edit}: <em>%s</em>',
+		'{xen:phrase dtui_table_add}: <em>%s</em>'}" />
+	<xen:textboxunit label="{xen:phrase dtui_table_description}:" name="table_description" value="{$table.table_description}"  rows="5"/>
+	<xen:textboxunit label="{xen:phrase dtui_is_busy}:" name="is_busy" value="{$table.is_busy}" />
+	<xen:textboxunit label="{xen:phrase dtui_last_order_id}:" name="last_order_id" value="{$table.last_order_id}" />
+	<xen:textboxunit label="{xen:phrase dtui_table_order_count}:" name="table_order_count" value="{$table.table_order_count}" />
+
+	<xen:submitunit save="{xen:phrase dtui_table_save}">
+		<input type="button" name="delete" value="{xen:phrase dtui_table_delete}"
+			accesskey="d" class="button OverlayTrigger"
+			data-href="{xen:adminlink 'dtui-tables/delete', $table}"
+			{xen:if '!{$table.table_id}', 'style="display: none"'}
+		/>
+	</xen:submitunit>
+	
+	<input type="hidden" name="table_id" value="{$table.table_id}" />
+</xen:form>]]></template>
+    <template title="dtui_table_list"><![CDATA[<xen:title>{xen:phrase dtui_table}</xen:title>
+
+<xen:topctrl>
+	<a href="{xen:adminlink 'dtui-tables/add'}" class="button" accesskey="a">+ {xen:phrase dtui_table_add}</a>
+</xen:topctrl>
+
+<xen:require css="filter_list.css" />
+<xen:require js="js/xenforo/filter_list.js" />
+
+<xen:form action="{xen:adminlink 'dtui-tables'}" class="section">
+	<xen:if is="{$allTable}">
+		<h2 class="subHeading">
+			<link rel="xenforo_template" type="text/html" href="filter_list_controls.html" />
+			{xen:phrase dtui_table}
+		</h2>
+	
+		<ol class="FilterList Scrollable">
+			<xen:foreach loop="$allTable" value="$table">
+				<xen:listitem
+					id="{$table.table_id}"
+					href="{xen:adminlink 'dtui-tables/edit', $table}"
+					label="{$table.table_name}"
+					delete="{xen:adminlink 'dtui-tables/delete', $table}" />
+			</xen:foreach>
+		</ol>
+	
+		<p class="sectionFooter">{xen:phrase showing_x_of_y_items, 'count=<span class="FilterListCount">{xen:count $allTable}</span>', 'total={xen:count $allTable}'}</p>
+	<xen:else />
+		<div class="noResults">{xen:phrase dtui_table_no_results}</div>
+	</xen:if>
+</xen:form>]]></template>
+  </admin_templates>
+  <code_events/>
+  <code_event_listeners/>
+  <cron/>
+  <email_templates/>
+  <optiongroups/>
+  <permissions>
+    <permission_groups/>
+    <permissions/>
+    <interface_groups/>
+  </permissions>
+  <phrases>
+    <phrase title="admin_navigation_dtui" version_id="1" version_string="0.9"><![CDATA[DTUI]]></phrase>
+    <phrase title="admin_navigation_DTUI_categories" version_id="1" version_string="0.9"><![CDATA[Categories]]></phrase>
+    <phrase title="admin_navigation_DTUI_items" version_id="1" version_string="0.9"><![CDATA[Items]]></phrase>
+    <phrase title="admin_navigation_DTUI_tables" version_id="1" version_string="0.9"><![CDATA[Tables]]></phrase>
+    <phrase title="admin_permission_DTUI" version_id="1" version_string="0.9"><![CDATA[DTUI]]></phrase>
+    <phrase title="dtui_category" version_id="1" version_string="0.9"><![CDATA[Category]]></phrase>
+    <phrase title="dtui_category_add" version_id="1" version_string="0.9"><![CDATA[Add New Category]]></phrase>
+    <phrase title="dtui_category_confirm_deletion" version_id="1" version_string="0.9"><![CDATA[Confirm Deletion of Category]]></phrase>
+    <phrase title="dtui_category_delete" version_id="1" version_string="0.9"><![CDATA[Delete Category]]></phrase>
+    <phrase title="dtui_category_description" version_id="1" version_string="0.9"><![CDATA[Category Description]]></phrase>
+    <phrase title="dtui_category_edit" version_id="1" version_string="0.9"><![CDATA[Edit Category]]></phrase>
+    <phrase title="dtui_category_name" version_id="1" version_string="0.9"><![CDATA[Category Name]]></phrase>
+    <phrase title="dtui_category_not_found" version_id="1" version_string="0.9"><![CDATA[The requested Category could not be found]]></phrase>
+    <phrase title="dtui_category_no_results" version_id="1" version_string="0.9"><![CDATA[No clues of Category at this moment...]]></phrase>
+    <phrase title="dtui_category_options" version_id="1" version_string="0.9"><![CDATA[Category Options]]></phrase>
+    <phrase title="dtui_category_please_confirm" version_id="1" version_string="0.9"><![CDATA[Please confirm that you want to delete the following Category]]></phrase>
+    <phrase title="dtui_category_save" version_id="1" version_string="0.9"><![CDATA[Save Category]]></phrase>
+    <phrase title="dtui_is_busy" version_id="1" version_string="0.9"><![CDATA[Is Busy]]></phrase>
+    <phrase title="dtui_is_paid" version_id="1" version_string="0.9"><![CDATA[Is Paid]]></phrase>
+    <phrase title="dtui_item" version_id="1" version_string="0.9"><![CDATA[Item]]></phrase>
+    <phrase title="dtui_item_add" version_id="1" version_string="0.9"><![CDATA[Add New Item]]></phrase>
+    <phrase title="dtui_item_confirm_deletion" version_id="1" version_string="0.9"><![CDATA[Confirm Deletion of Item]]></phrase>
+    <phrase title="dtui_item_delete" version_id="1" version_string="0.9"><![CDATA[Delete Item]]></phrase>
+    <phrase title="dtui_item_description" version_id="1" version_string="0.9"><![CDATA[Item Description]]></phrase>
+    <phrase title="dtui_item_edit" version_id="1" version_string="0.9"><![CDATA[Edit Item]]></phrase>
+    <phrase title="dtui_item_name" version_id="1" version_string="0.9"><![CDATA[Item Name]]></phrase>
+    <phrase title="dtui_item_not_found" version_id="1" version_string="0.9"><![CDATA[The requested Item could not be found]]></phrase>
+    <phrase title="dtui_item_no_results" version_id="1" version_string="0.9"><![CDATA[No clues of Item at this moment...]]></phrase>
+    <phrase title="dtui_item_options" version_id="1" version_string="0.9"><![CDATA[Item Options]]></phrase>
+    <phrase title="dtui_item_order_count" version_id="1" version_string="0.9"><![CDATA[Item Order Count]]></phrase>
+    <phrase title="dtui_item_please_confirm" version_id="1" version_string="0.9"><![CDATA[Please confirm that you want to delete the following Item]]></phrase>
+    <phrase title="dtui_item_save" version_id="1" version_string="0.9"><![CDATA[Save Item]]></phrase>
+    <phrase title="dtui_last_order_id" version_id="1" version_string="0.9"><![CDATA[Last Order Id]]></phrase>
+    <phrase title="dtui_order" version_id="1" version_string="0.9"><![CDATA[Order]]></phrase>
+    <phrase title="dtui_order_add" version_id="1" version_string="0.9"><![CDATA[Add New Order]]></phrase>
+    <phrase title="dtui_order_confirm_deletion" version_id="1" version_string="0.9"><![CDATA[Confirm Deletion of Order]]></phrase>
+    <phrase title="dtui_order_date" version_id="1" version_string="0.9"><![CDATA[Order Date]]></phrase>
+    <phrase title="dtui_order_delete" version_id="1" version_string="0.9"><![CDATA[Delete Order]]></phrase>
+    <phrase title="dtui_order_edit" version_id="1" version_string="0.9"><![CDATA[Edit Order]]></phrase>
+    <phrase title="dtui_order_not_found" version_id="1" version_string="0.9"><![CDATA[The requested Order could not be found]]></phrase>
+    <phrase title="dtui_order_no_results" version_id="1" version_string="0.9"><![CDATA[No clues of Order at this moment...]]></phrase>
+    <phrase title="dtui_order_please_confirm" version_id="1" version_string="0.9"><![CDATA[Please confirm that you want to delete the following Order]]></phrase>
+    <phrase title="dtui_order_save" version_id="1" version_string="0.9"><![CDATA[Save Order]]></phrase>
+    <phrase title="dtui_paid_amount" version_id="1" version_string="0.9"><![CDATA[Paid Amount]]></phrase>
+    <phrase title="dtui_price" version_id="1" version_string="0.9"><![CDATA[Price]]></phrase>
+    <phrase title="dtui_table" version_id="1" version_string="0.9"><![CDATA[Table]]></phrase>
+    <phrase title="dtui_table_add" version_id="1" version_string="0.9"><![CDATA[Add New Table]]></phrase>
+    <phrase title="dtui_table_confirm_deletion" version_id="1" version_string="0.9"><![CDATA[Confirm Deletion of Table]]></phrase>
+    <phrase title="dtui_table_delete" version_id="1" version_string="0.9"><![CDATA[Delete Table]]></phrase>
+    <phrase title="dtui_table_description" version_id="1" version_string="0.9"><![CDATA[Table Description]]></phrase>
+    <phrase title="dtui_table_edit" version_id="1" version_string="0.9"><![CDATA[Edit Table]]></phrase>
+    <phrase title="dtui_table_name" version_id="1" version_string="0.9"><![CDATA[Table Name]]></phrase>
+    <phrase title="dtui_table_not_found" version_id="1" version_string="0.9"><![CDATA[The requested Table could not be found]]></phrase>
+    <phrase title="dtui_table_no_results" version_id="1" version_string="0.9"><![CDATA[No clues of Table at this moment...]]></phrase>
+    <phrase title="dtui_table_order_count" version_id="1" version_string="0.9"><![CDATA[Table Order Count]]></phrase>
+    <phrase title="dtui_table_please_confirm" version_id="1" version_string="0.9"><![CDATA[Please confirm that you want to delete the following Table]]></phrase>
+    <phrase title="dtui_table_save" version_id="1" version_string="0.9"><![CDATA[Save Table]]></phrase>
+  </phrases>
+  <route_prefixes>
+    <route_type type="admin">
+      <prefix original_prefix="dtui-categories" class="DTUI_Route_PrefixAdmin_Category" build_link="data_only"/>
+      <prefix original_prefix="dtui-items" class="DTUI_Route_PrefixAdmin_Item" build_link="data_only"/>
+      <prefix original_prefix="dtui-orders" class="DTUI_Route_PrefixAdmin_Order" build_link="data_only"/>
+      <prefix original_prefix="dtui-tables" class="DTUI_Route_PrefixAdmin_Table" build_link="data_only"/>
+    </route_type>
+    <route_type type="public">
+      <prefix original_prefix="dtui-entry-point" class="DTUI_Route_Prefix_EntryPoint" build_link="all"/>
+    </route_type>
+  </route_prefixes>
+  <style_properties/>
+  <templates/>
+</addon>

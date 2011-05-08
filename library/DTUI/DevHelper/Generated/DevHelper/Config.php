@@ -128,8 +128,8 @@ class DTUI_DevHelper_Config extends DevHelper_Config_Base {
 		)
 	);
 	protected $_dataPatches = array();
-	protected $_exportPath = false;
-	
+	protected $_exportPath = 'E:\\www\\dtui\\addons\\DTUI';
+
 	/**
 	 * Return false to trigger the upgrade!
 	 * common use methods:
@@ -138,6 +138,28 @@ class DTUI_DevHelper_Config extends DevHelper_Config_Base {
 	 *	public function setExportPath($path)
 	**/
 	protected function _upgrade() {
-		return true;
+		return true; // remove this line to trigger update
+
+		/*
+		$this->addDataClass(
+			'name_here',
+			array( // fields
+				'field_here' => array(
+					'type' => 'type_here',
+					// 'length' => 'length_here',
+					// 'required' => true,
+					// 'allowedValues' => array('value_1', 'value_2'), 
+				),
+				// other fields go here
+			),
+			'primary_key_field_here',
+			array( // indeces
+				array(
+					'fields' => array('field_1', 'field_2'),
+					'type' => 'NORMAL', // UNIQUE or FULLTEXT
+				),
+			),
+		);
+		*/
 	}
 }
