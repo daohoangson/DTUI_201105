@@ -25,9 +25,9 @@ class DTUI_Model_Order extends XenForo_Model {
 		$limitOptions = $this->prepareLimitFetchOptions($fetchOptions);
 
 		return $this->fetchAllKeyed($this->limitQueryResults("
-				SELECT order.*
+				SELECT `order`.*
 					$joinOptions[selectFields]
-				FROM `xf_dtui_order` AS order
+				FROM `xf_dtui_order` AS `order`
 					$joinOptions[joinTables]
 				WHERE $whereConditions
 					$orderClause
@@ -44,7 +44,7 @@ class DTUI_Model_Order extends XenForo_Model {
 
 		return $this->_getDb()->fetchOne("
 			SELECT COUNT(*)
-			FROM `xf_dtui_order` AS order
+			FROM `xf_dtui_order` AS `order`
 				$joinOptions[joinTables]
 			WHERE $whereConditions
 		");
@@ -58,9 +58,9 @@ class DTUI_Model_Order extends XenForo_Model {
 			if (!isset($conditions[$intField])) continue;
 			
 			if (is_array($conditions[$intField])) {
-				$sqlConditions[] = "order.$intField IN (" . $db->quote($conditions[$intField]) . ")";
+				$sqlConditions[] = "`order`.$intField IN (" . $db->quote($conditions[$intField]) . ")";
 			} else {
-				$sqlConditions[] = "order.$intField = " . $db->quote($conditions[$intField]);
+				$sqlConditions[] = "`order`.$intField = " . $db->quote($conditions[$intField]);
 			}
 		}
 		

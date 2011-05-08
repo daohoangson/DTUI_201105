@@ -27,7 +27,7 @@ class DTUI_ControllerPublic_EntryPoint extends XenForo_ControllerPublic_Abstract
 		return $this->responseView('DTUI_ViewPublic_EntryPoint_Table', '', $viewParams);
 	}
 	/**
-	 * date : 08/05/2011
+	 * date : 08/05/2011 : Manh Hoang Xuan
 	 */
 	public function actionNewOrder() {
 		$input = $this->_input->filter(array(
@@ -64,7 +64,13 @@ class DTUI_ControllerPublic_EntryPoint extends XenForo_ControllerPublic_Abstract
 		$viewParams = array('items' => $order_items);
 		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Tasks','',$viewParams);
 	}
+	public function actionOrders(){
+		$OrdersTmp = $this ->getModelFromCache('DTUI_Model_Order')->getAllOrder();
+		$viewParams = array('Orders' => $OrdersTmp);
+		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Orders','testTemp1',$viewParams);
+	}
 	
+	/*********************************/
 	
 	protected function _getTableOrError($tableId) {
 		$tableModel = $this->_getTableModel();
