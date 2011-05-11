@@ -38,7 +38,7 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 			'items' => $order_items
 		);
 		
-		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Tasks','',$viewParams);
+		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Tasks','Tasks',$viewParams);
 	}
 	
 	public function actionOrders(){// get all Order in database
@@ -48,6 +48,6 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 			'Orders' => $OrdersTmp
 		);
 		
-		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Orders','testTemp1',$viewParams);
+		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Orders','Orders',$viewParams);
 	}
 }

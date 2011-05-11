@@ -7,11 +7,11 @@
  */
  class DTUI_ViewPublic_EntryPoint_Tasks extends XenForo_ViewPublic_Base {
 	public function renderHtml() {
-		die('html');
+		//die('html');
 	}
 	
 	public function renderJson() {
-		$items = $this->_params['items'];
+		$items = $this->_params['items'];// $items de hien thi ket qua ra html
 		
 		return array(
 			'items' => $items,
