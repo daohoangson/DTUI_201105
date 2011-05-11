@@ -41,7 +41,7 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Tasks','',$viewParams);
 	}
 	
-	public function actionOrders(){
+	public function actionOrders(){// get all Order in database
 		$OrdersTmp = $this->_getOrderModel()->getAllOrder();
 		
 		$viewParams = array(

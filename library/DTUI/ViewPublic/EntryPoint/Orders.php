@@ -5,10 +5,12 @@
  * Window - Preferences - PHPeclipse - PHP - Code Templates
  */
  class DTUI_ViewPublic_EntryPoint_Orders extends XenForo_ViewPublic_Base {
+ 	
 	public function renderHtml() {
 		//die('html');
+		//die('html');
+		$Orders = "Vit Lon";
 	}
-	
 	public function renderJson() {
 		$Orders = $this->_params['Orders'];
 		
