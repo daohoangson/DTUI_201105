@@ -7,19 +7,22 @@ abstract class DTUI_ControllerPublic_EntryPointQuanUH extends DTUI_ControllerPub
 		    'categories' => $categories,
 		);
 		
-		return $this->responseView('DTUI_ViewPublic_EntryPoint_Categories', '', $viewParams);
+		return $this->responseView('DTUI_ViewPublic_EntryPoint_Categories', 'dtui_entry_point_categories', $viewParams);
     }
 
     public function actionItems() {
 		$category_id = $this->_input->filterSingle('category_id', XenForo_Input::UINT);
-		$conditions = array('category_id' => $category_id);
-		$items = $this->_getItemModel()->getAllItem($conditions);
-		
+		if(empty($category_id)){
+			$items = $this->_getItemModel()->getAllItem();
+		}else{
+			$conditions = array('category_id' => $category_id);
+			$items = $this->_getItemModel()->getAllItem($conditions);
+		}
 		$viewParams = array(
 		    'items' => $items,
 		);
 		
-		return $this->responseView('DTUI_ViewPublic_EntryPoint_Items', '', $viewParams);
+		return $this->responseView('DTUI_ViewPublic_EntryPoint_Items', 'dtui_entry_point_items', $viewParams);
     }
 
     public function actionCategory() {
