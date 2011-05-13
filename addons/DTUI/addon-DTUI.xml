@@ -367,6 +367,18 @@
     <phrase title="dtui_table_order_count" version_id="1" version_string="0.9"><![CDATA[Table Order Count]]></phrase>
     <phrase title="dtui_table_please_confirm" version_id="1" version_string="0.9"><![CDATA[Please confirm that you want to delete the following Table]]></phrase>
     <phrase title="dtui_table_save" version_id="1" version_string="0.9"><![CDATA[Save Table]]></phrase>
+    <phrase title="is_paid" version_id="4" version_string="0.9.2"><![CDATA[is_paid]]></phrase>
+    <phrase title="item_id" version_id="4" version_string="0.9.2"><![CDATA[item_id]]></phrase>
+    <phrase title="List_Order" version_id="4" version_string="0.9.2"><![CDATA[List Orders ]]></phrase>
+    <phrase title="List_Tasks" version_id="4" version_string="0.9.2"><![CDATA[List Tasks]]></phrase>
+    <phrase title="order_date" version_id="0" version_string=""><![CDATA[order_date]]></phrase>
+    <phrase title="order_id" version_id="4" version_string="0.9.2"><![CDATA[order_id]]></phrase>
+    <phrase title="order_item_date" version_id="4" version_string="0.9.2"><![CDATA[order_item_date]]></phrase>
+    <phrase title="order_item_id" version_id="4" version_string="0.9.2"><![CDATA[order_item_id]]></phrase>
+    <phrase title="paid_amount" version_id="0" version_string=""><![CDATA[paid_amount]]></phrase>
+    <phrase title="table_id" version_id="4" version_string="0.9.2"><![CDATA[table_id]]></phrase>
+    <phrase title="target_user_id" version_id="4" version_string="0.9.2"><![CDATA[target_user_id]]></phrase>
+    <phrase title="trigger_user_id" version_id="4" version_string="0.9.2"><![CDATA[trigger_user_id]]></phrase>
   </phrases>
   <route_prefixes>
     <route_type type="admin">
@@ -381,11 +393,7 @@
   </route_prefixes>
   <style_properties/>
   <templates>
-    <template title="Orders" version_id="4" version_string="0.9.2"><![CDATA[<xen:title>{xen:phrase List_Order}</xen:title>
-<head>
-	<style  type="text/css">
-	<!--
-	.tablediv {
+    <template title="dtui_manhhx.css" version_id="4" version_string="0.9.2"><![CDATA[.tablediv {
 		display: table;
 		width:100%;
 		background-color:#eee;
@@ -393,61 +401,69 @@
 		border-spacing:5px;/*cellspacing:poor IE support for  this*/
 		border-collapse:separate;
 	}
-	.celldiv {
-		float:left;/*fix for  buggy browsers*/
-		display:  table-cell;
-		width:19%;
-		background-color:#ccc;
-                border:1px solid  #666666;
+.celldiv1 {
+	float:left;/*fix for  buggy browsers*/
+	display:  table-cell;
+	width:19%;
+	background-color:#ccc;
+        border:1px solid  #666666;
 		
-	}
-	.rowdiv  {
+}
+.celldiv2 {
+	float:left;/*fix for  buggy browsers*/
+	display:  table-cell;
+	width:14%;
+	background-color:#ccc;
+        border:1px solid  #666666;
+		
+}
+.rowdiv  {
 		display:  table-row;
 		width:auto;
-	}
-	-->
-    </style>
-</head>
+	}]]></template>
+    <template title="dtui_order_list" version_id="4" version_string="0.9.2"><![CDATA[<xen:title>{xen:phrase List_Order}</xen:title>
+<xen:require css="dtui_manhhx.css" />
 <div class="tablediv">
 	<div class="rowdiv">
-	<div class="celldiv">order_id</div>
-	<div class="celldiv">table_id</div>
-	<div class="celldiv">order_date</div>
-	<div class="celldiv">is_paid</div>
-	<div class="celldiv">paid_amount</div>
-	</div>
+	<div class="celldiv1">{xen:phrase order_id}</div>
+	<div class="celldiv1">{xen:phrase table_id}</div>
+	<div class="celldiv1">{xen:phrase order_date}</div>
+	<div class="celldiv1">{xen:phrase is_paid}</div>
+	<div class="celldiv1">{xen:phrase paid_amount}</div>
+</div>
 <xen:foreach loop="$Orders" value="$item">
 		  <div class="rowdiv">
-		  <div class="celldiv">{$item.order_id}</div>
-		  <div class="celldiv">{$item.table_id}</div>
-		  <div class="celldiv">{$item.order_date}</div>
-		  <div class="celldiv">{$item.is_paid}</div> 
-		  <div class="celldiv"> &nbsp;{$item.paid_mount}</div>
+		  <div class="celldiv1">{$item.order_id}</div>
+		  <div class="celldiv1">{$item.table_id}</div>
+		  <div class="celldiv1">{$item.order_date}</div>
+		  <div class="celldiv1">{$item.is_paid}</div> 
+		  <div class="celldiv1"> &nbsp;{$item.paid_mount}</div>
 		  </div>
 </xen:foreach>
 </div>]]></template>
-    <template title="Tasks" version_id="1" version_string="0.9"><![CDATA[<xen:title>{xen:phrase List_Tasks}</xen:title>
-<table width = 100% border ="1">
-        <tr>
-            <td> order_item_id </td>
-            <td> order_id </td>
-            <td> trigger_user_id </td>
-            <td> target_user_id </td>
-            <td> item_id </td>
-            <td> order_item_date</td>
-            <td> status</td> 
-         </tr>
+    <template title="dtui_task_list" version_id="4" version_string="0.9.2"><![CDATA[<xen:title>{xen:phrase List_Tasks}</xen:title>
+<xen:require css="dtui_manhhx.css" />
+<div class="tablediv">
+	<div class="rowdiv">
+        <div class="celldiv2">{xen:phrase order_item_id}</div>
+	<div class="celldiv2">{xen:phrase order_id}</div>
+	<div class="celldiv2">{xen:phrase trigger_user_id}</div>
+	<div class="celldiv2">{xen:phrase target_user_id}</div>
+	<div class="celldiv2">{xen:phrase item_id}</div>
+	<div class="celldiv2">{xen:phrase order_item_date}</div>
+        <div class="celldiv2">{xen:phrase status}</div>
+</div>
 <xen:foreach loop="$items" value="$item">
-         <tr>
-            <td> {$item.order_item_id} </td>
-            <td> {$item.order_id} </td>
-            <td> {$item.trigger_user_id} </td>
-            <td> {$item.target_user_id} </td>
-            <td> {$item.item_id} </td>
-            <td> {$item.order_item_date} </td>
-            <td> {$item.status} </td> 
-          </tr>
+		  <div class="rowdiv">
+                  <div class="celldiv2">{$item.order_item_id}</div>
+		  <div class="celldiv2">{$item.order_id}</div>
+		  <div class="celldiv2">{$item.trigger_user_id}</div>
+		  <div class="celldiv2">{$item.target_user_id}</div>
+		  <div class="celldiv2">{$item.item_id}</div> 
+		  <div class="celldiv2">{$item.order_item_date}</div>
+                  <div class="celldiv2">{$item.status}</div> 
+		  </div>
 </xen:foreach>
-</table>]]></template>
+</div>]]></template>
   </templates>
 </addon>
