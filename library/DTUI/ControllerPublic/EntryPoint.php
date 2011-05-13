@@ -17,9 +17,13 @@ class DTUI_ControllerPublic_EntryPoint extends XenForo_ControllerPublic_Abstract
     }
 
     public function actionItems() {
-		$category_id = $this->_input->filterSingle('category_id', XenForo_Input::UINT);
-		$conditions = array('category_id' => $category_id);
-		$items = $this->getModelFromCache('DTUI_Model_Item')->getAllItem($conditions);
+    	$category_id = $this->_input->filterSingle('category_id', XenForo_Input::UINT);
+    	if(empty($category_id)){
+    		$items = $this->getModelFromCache('DTUI_Model_Item')->getAllItem();
+    	}else{
+    		$conditions = array('category_id' => $category_id);
+			$items = $this->getModelFromCache('DTUI_Model_Item')->getAllItem($conditions);
+    	}
 		$viewParams = array(
 		    'items' => $items,
 		);
