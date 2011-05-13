@@ -2,10 +2,9 @@
 abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPublic_EntryPointBase {
 	public function actionNewOrder() {
 		$input = $this->_input->filter(array(
-		'table_id' => XenForo_Input::UINT,
-		'item_ids' => array(XenForo_Input::UINT, 'array' => true)
+			'table_id' => XenForo_Input::UINT,
+			'item_ids' => array(XenForo_Input::UINT, 'array' => true)
 		));
-		
 		
 		$orderDw = XenForo_DataWriter::create('DTUI_DataWriter_Order');// new order
 		$orderDw->set('table_id', $input['table_id']);
@@ -24,8 +23,8 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 			$orderItemDw->set('status','waiting');
 			
 			$tmp = $orderItemDw->save();// storage new order_item into OrderItem table in Database
-			
 		}
+		
 		die('Ok');
 	}
 	
@@ -35,17 +34,17 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 		$order_items = $this->_getOrderItemModel()->getAllOrderItem($conditions);
 		
 		$viewParams = array(
-			'items' => $order_items
+			'tasks' => $order_items
 		);
 		
 		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Tasks','Tasks',$viewParams);
 	}
 	
 	public function actionOrders(){// get all Order in database
-		$OrdersTmp = $this->_getOrderModel()->getAllOrder();
+		$orders = $this->_getOrderModel()->getAllOrder();
 		
 		$viewParams = array(
-			'Orders' => $OrdersTmp
+			'orders' => $orders
 		);
 		
 		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Orders','Orders',$viewParams);
