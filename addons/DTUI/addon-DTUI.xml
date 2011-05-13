@@ -381,25 +381,51 @@
   </route_prefixes>
   <style_properties/>
   <templates>
-    <template title="Orders" version_id="1" version_string="0.9"><![CDATA[<xen:title>{xen:phrase List_Order}</xen:title>
-<table width = 100% border ="1">
-        <tr>
-           <td> order_id</td>
-            <td>table_id</td>
-            <td> order_date</td>
-            <td> is_paid</td>
-            <td> paid_amount</td>
-         </tr>
+    <template title="Orders" version_id="4" version_string="0.9.2"><![CDATA[<xen:title>{xen:phrase List_Order}</xen:title>
+<head>
+	<style  type="text/css">
+	<!--
+	.tablediv {
+		display: table;
+		width:100%;
+		background-color:#eee;
+		border:1px solid  #666666;
+		border-spacing:5px;/*cellspacing:poor IE support for  this*/
+		border-collapse:separate;
+	}
+	.celldiv {
+		float:left;/*fix for  buggy browsers*/
+		display:  table-cell;
+		width:19%;
+		background-color:#ccc;
+                border:1px solid  #666666;
+		
+	}
+	.rowdiv  {
+		display:  table-row;
+		width:auto;
+	}
+	-->
+    </style>
+</head>
+<div class="tablediv">
+	<div class="rowdiv">
+	<div class="celldiv">order_id</div>
+	<div class="celldiv">table_id</div>
+	<div class="celldiv">order_date</div>
+	<div class="celldiv">is_paid</div>
+	<div class="celldiv">paid_amount</div>
+	</div>
 <xen:foreach loop="$Orders" value="$item">
-         <tr>
-            <td> {$item.order_id}</td>
-            <td> {$item.table_id}</td>
-            <td> {$item.order_date}</td>
-            <td> {$item.is_paid}</td> 
-            <td> {$item.paid_mount}</td>
-          </tr>
+		  <div class="rowdiv">
+		  <div class="celldiv">{$item.order_id}</div>
+		  <div class="celldiv">{$item.table_id}</div>
+		  <div class="celldiv">{$item.order_date}</div>
+		  <div class="celldiv">{$item.is_paid}</div> 
+		  <div class="celldiv"> &nbsp;{$item.paid_mount}</div>
+		  </div>
 </xen:foreach>
-</table>]]></template>
+</div>]]></template>
     <template title="Tasks" version_id="1" version_string="0.9"><![CDATA[<xen:title>{xen:phrase List_Tasks}</xen:title>
 <table width = 100% border ="1">
         <tr>
