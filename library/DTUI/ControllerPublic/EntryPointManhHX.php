@@ -12,7 +12,7 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 			$orderDw = XenForo_DataWriter::create('DTUI_DataWriter_Order');// new order
 			$orderDw->set('table_id', $input['table_id']);
 			$orderDw->set('order_date',XenForo_Application::$time);
-			$orderDw->save();// storage new order into Oder table in database;
+			$orderDw->save();// storage new order into Order table in database;
 			
 			$order = $orderDw->getMergedData();// get data is saved ;
 			// create items for a order 
@@ -21,7 +21,7 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 				$orderItemDw->set('order_id', $order['order_id']);
 				$orderItemDw->set('trigger_user_id',XenForo_Visitor::getUserId());
 				$orderItemDw->set('target_user_id',0);
-				$orderItemDw->set('item_id',$itemId);
+				$orderItemDw->set('item_id',$itemId);//
 				$orderItemDw->set('order_item_date', XenForo_Application::$time);
 				$orderItemDw->set('status','waiting');
 				
@@ -32,7 +32,15 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 		} else {
 			// this is a GET request
 			// display a form
-			die('get');
+			$tables = $this ->_getTableModel()->getAllTable();// get array tables with key= tableId and values = tableName
+			$items = $this->_getItemModel()->getAllItem();// get all items from database
+			
+			$viewParams = array(
+			'table' => $tables,
+			'items' => $items
+			);
+			
+			return $this -> responseView('DTUI_ViewPublic_EntryPoint_NewOrder','dtui_entrypoint_new_order',$viewParams);
 		}
 	}
 	
