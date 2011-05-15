@@ -12,10 +12,10 @@
 		$Orders = "Vit Lon";
 	}
 	public function renderJson() {
-		$Orders = $this->_params['Orders'];// Orders hien thi ket qua thanh html
+		$orders = $this->_params['orders'];// Orders hien thi ket qua thanh html
 		
 		return array(
-			'items' => $Orders,
+			'orders' => $orders,
 		);
 	}
  }
