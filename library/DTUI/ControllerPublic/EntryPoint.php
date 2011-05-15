@@ -9,7 +9,7 @@ class DTUI_ControllerPublic_EntryPoint extends DTUI_ControllerPublic_EntryPointQ
     }
     
     public function actionUserInfo() {
-    	return $this->responseView('DTUI_ViewPublic_EntryPoint_UserInfo', '', $viewParams);
+    	return $this->responseView('DTUI_ViewPublic_EntryPoint_UserInfo');
     }
 
 	protected function _getTableOrError($tableId) {
