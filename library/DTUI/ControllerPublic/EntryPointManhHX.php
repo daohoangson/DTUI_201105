@@ -65,4 +65,15 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 		
 		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Orders','dtui_order_list',$viewParams);
 	}
+	
+	public function actionTables() {
+		$tableId = $this->_input->filterSingle('data', XenForo_Input::UINT);
+	
+		$table = $this->_getTableOrError($tableId);
+	
+		var_dump($tableId);
+		exit;
+	
+		return $this->responseView('DTUI_ViewPublic_EntryPoint_Tables');
+    }
 }
