@@ -30,7 +30,7 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 			}
 			
 			$this->_request->setParam('data', $order['order_id']);
-			return $this->responseReroute(__CLASS__, 'order');
+			return $this->responseReroute('DTUI_ControllerPublic_EntryPoint', 'order');
 		} else {
 			// this is a GET request
 			// display a form
@@ -69,9 +69,22 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 	}
 	
 	public function actionOrder() {
-		$orderId = $this->_input->filter('data', XenForo_Input::UINT);
+		$orderId = $this->_input->filterSingle('data', XenForo_Input::UINT);
 		
-		die($orderId);
+		$order = $this->_getOrderModel()->getOrderById($orderId);
+		
+		if (empty($order)) {
+			return $this->responseNoPermission();
+		}
+		
+		$orderItems = $this->_getOrderItemModel()->getAllOrderItem(array('order_id' => $order['order_id']));
+		
+		$viewParams = array(
+			'order' => $order,
+			'orderItems' => $orderItems,
+		);
+		
+		return $this->responseView('DTUI_ViewPublic_EntryPoint_Order', '', $viewParams);
 	}
 	
 	public function actionTables() {
