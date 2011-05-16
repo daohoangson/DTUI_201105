@@ -28,7 +28,8 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 				$tmp = $orderItemDw->save();// storage new order_item into OrderItem table in Database
 			}
 			
-			die('ok');
+			$this->_request->setParam('data', $order['order_id']);
+			return $this->responseReroute(__CLASS__, 'order');
 		} else {
 			// this is a GET request
 			// display a form
@@ -56,6 +57,12 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 		);
 		
 		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Orders','dtui_order_list',$viewParams);
+	}
+	
+	public function actionOrder() {
+		$orderId = $this->_input->filter('data', XenForo_Input::UINT);
+		
+		die($orderId);
 	}
 	
 	public function actionTables() {
