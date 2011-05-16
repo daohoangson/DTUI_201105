@@ -327,14 +327,15 @@
     <phrase title="dtui_category_options" version_id="1" version_string="0.9"><![CDATA[Category Options]]></phrase>
     <phrase title="dtui_category_please_confirm" version_id="1" version_string="0.9"><![CDATA[Please confirm that you want to delete the following Category]]></phrase>
     <phrase title="dtui_category_save" version_id="1" version_string="0.9"><![CDATA[Save Category]]></phrase>
+    <phrase title="dtui_enter_order" version_id="5" version_string="0.9.3"><![CDATA[Enter New Order]]></phrase>
     <phrase title="dtui_is_busy" version_id="1" version_string="0.9"><![CDATA[Is Busy]]></phrase>
-    <phrase title="dtui_is_paid" version_id="1" version_string="0.9"><![CDATA[Is Paid]]></phrase>
     <phrase title="dtui_item" version_id="1" version_string="0.9"><![CDATA[Item]]></phrase>
     <phrase title="dtui_item_add" version_id="1" version_string="0.9"><![CDATA[Add New Item]]></phrase>
     <phrase title="dtui_item_confirm_deletion" version_id="1" version_string="0.9"><![CDATA[Confirm Deletion of Item]]></phrase>
     <phrase title="dtui_item_delete" version_id="1" version_string="0.9"><![CDATA[Delete Item]]></phrase>
     <phrase title="dtui_item_description" version_id="1" version_string="0.9"><![CDATA[Item Description]]></phrase>
     <phrase title="dtui_item_edit" version_id="1" version_string="0.9"><![CDATA[Edit Item]]></phrase>
+    <phrase title="dtui_item_id" version_id="5" version_string="0.9.3"><![CDATA[Item ID]]></phrase>
     <phrase title="dtui_item_name" version_id="1" version_string="0.9"><![CDATA[Item Name]]></phrase>
     <phrase title="dtui_item_not_found" version_id="1" version_string="0.9"><![CDATA[The requested Item could not be found]]></phrase>
     <phrase title="dtui_item_no_results" version_id="1" version_string="0.9"><![CDATA[No clues of Item at this moment...]]></phrase>
@@ -349,11 +350,15 @@
     <phrase title="dtui_order_date" version_id="1" version_string="0.9"><![CDATA[Order Date]]></phrase>
     <phrase title="dtui_order_delete" version_id="1" version_string="0.9"><![CDATA[Delete Order]]></phrase>
     <phrase title="dtui_order_edit" version_id="1" version_string="0.9"><![CDATA[Edit Order]]></phrase>
+    <phrase title="dtui_order_id" version_id="4" version_string="0.9.2"><![CDATA[Order Id]]></phrase>
+    <phrase title="dtui_order_is_paid" version_id="4" version_string="0.9.2"><![CDATA[Is Paid]]></phrase>
+    <phrase title="dtui_order_item_date" version_id="4" version_string="0.9.2"><![CDATA[Order Item Date]]></phrase>
+    <phrase title="dtui_order_item_id" version_id="4" version_string="0.9.2"><![CDATA[Order Item Id]]></phrase>
     <phrase title="dtui_order_not_found" version_id="1" version_string="0.9"><![CDATA[The requested Order could not be found]]></phrase>
     <phrase title="dtui_order_no_results" version_id="1" version_string="0.9"><![CDATA[No clues of Order at this moment...]]></phrase>
+    <phrase title="dtui_order_paid_amount" version_id="4" version_string="0.9.2"><![CDATA[Paid Amount]]></phrase>
     <phrase title="dtui_order_please_confirm" version_id="1" version_string="0.9"><![CDATA[Please confirm that you want to delete the following Order]]></phrase>
     <phrase title="dtui_order_save" version_id="1" version_string="0.9"><![CDATA[Save Order]]></phrase>
-    <phrase title="dtui_paid_amount" version_id="1" version_string="0.9"><![CDATA[Paid Amount]]></phrase>
     <phrase title="dtui_price" version_id="1" version_string="0.9"><![CDATA[Price]]></phrase>
     <phrase title="dtui_table" version_id="1" version_string="0.9"><![CDATA[Table]]></phrase>
     <phrase title="dtui_table_add" version_id="1" version_string="0.9"><![CDATA[Add New Table]]></phrase>
@@ -361,24 +366,21 @@
     <phrase title="dtui_table_delete" version_id="1" version_string="0.9"><![CDATA[Delete Table]]></phrase>
     <phrase title="dtui_table_description" version_id="1" version_string="0.9"><![CDATA[Table Description]]></phrase>
     <phrase title="dtui_table_edit" version_id="1" version_string="0.9"><![CDATA[Edit Table]]></phrase>
+    <phrase title="dtui_table_id" version_id="4" version_string="0.9.2"><![CDATA[Table Id]]></phrase>
     <phrase title="dtui_table_name" version_id="1" version_string="0.9"><![CDATA[Table Name]]></phrase>
     <phrase title="dtui_table_not_found" version_id="1" version_string="0.9"><![CDATA[The requested Table could not be found]]></phrase>
     <phrase title="dtui_table_no_results" version_id="1" version_string="0.9"><![CDATA[No clues of Table at this moment...]]></phrase>
     <phrase title="dtui_table_order_count" version_id="1" version_string="0.9"><![CDATA[Table Order Count]]></phrase>
     <phrase title="dtui_table_please_confirm" version_id="1" version_string="0.9"><![CDATA[Please confirm that you want to delete the following Table]]></phrase>
     <phrase title="dtui_table_save" version_id="1" version_string="0.9"><![CDATA[Save Table]]></phrase>
+    <phrase title="dtui_task_item_id" version_id="4" version_string="0.9.2"><![CDATA[Item Id]]></phrase>
+    <phrase title="dtui_task_status" version_id="4" version_string="0.9.2"><![CDATA[Status]]></phrase>
+    <phrase title="dtui_task_target_user_id" version_id="4" version_string="0.9.2"><![CDATA[Target User Id]]></phrase>
+    <phrase title="dtui_task_trigger_user_id" version_id="4" version_string="0.9.2"><![CDATA[Trigger User Id]]></phrase>
     <phrase title="is_paid" version_id="4" version_string="0.9.2"><![CDATA[is_paid]]></phrase>
-    <phrase title="item_id" version_id="4" version_string="0.9.2"><![CDATA[item_id]]></phrase>
     <phrase title="List_Order" version_id="4" version_string="0.9.2"><![CDATA[List Orders ]]></phrase>
     <phrase title="List_Tasks" version_id="4" version_string="0.9.2"><![CDATA[List Tasks]]></phrase>
-    <phrase title="order_date" version_id="0" version_string=""><![CDATA[order_date]]></phrase>
-    <phrase title="order_id" version_id="4" version_string="0.9.2"><![CDATA[order_id]]></phrase>
-    <phrase title="order_item_date" version_id="4" version_string="0.9.2"><![CDATA[order_item_date]]></phrase>
-    <phrase title="order_item_id" version_id="4" version_string="0.9.2"><![CDATA[order_item_id]]></phrase>
-    <phrase title="paid_amount" version_id="0" version_string=""><![CDATA[paid_amount]]></phrase>
-    <phrase title="table_id" version_id="4" version_string="0.9.2"><![CDATA[table_id]]></phrase>
-    <phrase title="target_user_id" version_id="4" version_string="0.9.2"><![CDATA[target_user_id]]></phrase>
-    <phrase title="trigger_user_id" version_id="4" version_string="0.9.2"><![CDATA[trigger_user_id]]></phrase>
+    <phrase title="New_Order" version_id="5" version_string="0.9.3"><![CDATA[New Order]]></phrase>
   </phrases>
   <route_prefixes>
     <route_type type="admin">
@@ -393,6 +395,78 @@
   </route_prefixes>
   <style_properties/>
   <templates>
+    <template title="dtui_entrypoint_new_order" version_id="5" version_string="0.9.3"><![CDATA[<xen:title>{xen:phrase New_Order}</xen:title>
+{xen:phrase dtui_enter_order }
+<form method ="post" action="{xen:link dtui-entry-point/new-order}">
+       <table width ="50%" align="left">
+           <tr>
+              <td width="20%"> {xen:phrase dtui_table} </td>
+              <td>
+                  <select name="table_id">
+                      <xen:foreach loop="$table" value="$tb">
+	              <option value="{$tb.table_id}">{$tb.table_name} </option>
+                      </xen:foreach>
+                   </select>
+               </td>
+            </tr>
+            <tr>
+            <td>  {xen:phrase dtui_item} </td>
+            <td>
+                <select name="item_ids[]">
+                      <xen:foreach loop="$items" value="$item">
+	              <option value="{$item.item_id}">{$item.item_name} </option>
+                      </xen:foreach>
+                </select>
+            </td>
+            </tr>
+            <tr>
+            <td>  {xen:phrase dtui_item} </td>
+            <td>
+                <select name="item_ids[]">
+                      <xen:foreach loop="$items" value="$item">
+	              <option value="{$item.item_id}">{$item.item_name} </option>
+                      </xen:foreach>
+                </select>
+            </td>
+            </tr>
+            <tr>
+            <td>  {xen:phrase dtui_item} </td>
+            <td>
+                <select name="item_ids[]">
+                      <xen:foreach loop="$items" value="$item">
+	              <option value="{$item.item_id}">{$item.item_name} </option>
+                      </xen:foreach>
+                </select>
+            </td>
+            </tr>
+            <tr>
+            <td>  {xen:phrase dtui_item} </td>
+            <td>
+                <select name="item_ids[]">
+                      <xen:foreach loop="$items" value="$item">
+	              <option value="{$item.item_id}">{$item.item_name} </option>
+                      </xen:foreach>
+                </select>
+            </td>
+            </tr>
+            <tr>
+            <td>  {xen:phrase dtui_item} </td>
+            <td>
+                <select name="item_ids[]">
+                      <xen:foreach loop="$items" value="$item">
+	              <option value="{$item.item_id}">{$item.item_name} </option>
+                      </xen:foreach>
+                </select>
+            </td>
+            </tr>
+            <tr>
+               <td colspan ="2" > 
+                   <input type="submit" name="cmd" value ="submit"/>
+               </td>
+            </tr>
+       </table>
+      <input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+</form>]]></template>
     <template title="dtui_manhhx.css" version_id="4" version_string="0.9.2"><![CDATA[.tablediv {
 		display: table;
 		width:100%;
@@ -425,11 +499,11 @@
 <xen:require css="dtui_manhhx.css" />
 <div class="tablediv">
 	<div class="rowdiv">
-	<div class="celldiv1">{xen:phrase order_id}</div>
-	<div class="celldiv1">{xen:phrase table_id}</div>
-	<div class="celldiv1">{xen:phrase order_date}</div>
-	<div class="celldiv1">{xen:phrase is_paid}</div>
-	<div class="celldiv1">{xen:phrase paid_amount}</div>
+	<div class="celldiv1">{xen:phrase dtui_order_id}</div>
+	<div class="celldiv1">{xen:phrase dtui_table_id}</div>
+	<div class="celldiv1">{xen:phrase dtui_order_date}</div>
+	<div class="celldiv1">{xen:phrase dtui_order_is_paid}</div>
+	<div class="celldiv1">{xen:phrase dtui_order_paid_amount}</div>
 </div>
 <xen:foreach loop="$orders" value="$order">
 		  <div class="rowdiv">
@@ -445,13 +519,13 @@
 <xen:require css="dtui_manhhx.css" />
 <div class="tablediv">
 	<div class="rowdiv">
-        <div class="celldiv2">{xen:phrase order_item_id}</div>
-	<div class="celldiv2">{xen:phrase order_id}</div>
-	<div class="celldiv2">{xen:phrase trigger_user_id}</div>
-	<div class="celldiv2">{xen:phrase target_user_id}</div>
-	<div class="celldiv2">{xen:phrase item_id}</div>
-	<div class="celldiv2">{xen:phrase order_item_date}</div>
-        <div class="celldiv2">{xen:phrase status}</div>
+        <div class="celldiv2">{xen:phrase dtui_order_item_id}</div>
+	<div class="celldiv2">{xen:phrase dtui_order_id}</div>
+	<div class="celldiv2">{xen:phrase dtui_task_trigger_user_id}</div>
+	<div class="celldiv2">{xen:phrase dtui_task_target_user_id}</div>
+	<div class="celldiv2">{xen:phrase dtui_task_item_id}</div>
+	<div class="celldiv2">{xen:phrase dtui_order_item_date}</div>
+        <div class="celldiv2">{xen:phrase dtui_task_status}</div>
 </div>
 <xen:foreach loop="$tasks" value="$task">
 		  <div class="rowdiv">
