@@ -24,7 +24,6 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 				//$orderItemDw->set('target_user_id',2);
 				$orderItemDw->set('item_id',$itemId);//
 				$orderItemDw->set('order_item_date', XenForo_Application::$time);
-				$orderItemDw->set('status','waiting');
 				
 				$tmp = $orderItemDw->save();// storage new order_item into OrderItem table in Database
 			}
@@ -49,13 +48,51 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 	public function actionTasks(){// return list order_items of a user 
 		$userIdtmp = XenForo_Visitor::getUserId();
 		$conditions = array('userId' => $userIdtmp);
-		$order_items = $this->_getOrderItemModel()->getAllOrderItem($conditions);
+		$fetchOptions = array(
+			'join' => DTUI_Model_OrderItem::FETCH_ITEM + DTUI_Model_OrderItem::FETCH_ORDER,
+		);
+		$order_items = $this->_getOrderItemModel()->getAllOrderItem($conditions, $fetchOptions);
 		
 		$viewParams = array(
-			'tasks' => $order_items
+			'tasks' => $order_items,
+			'direction' => array(
+		/*
+				'from' => DTUI_DataWriter_OrderItem::STATUS_WAITING,
+				'to' => DTUI_DataWriter_OrderItem::STATUS_PREPARED,
+				*/
+		
+		'from' => DTUI_DataWriter_OrderItem::STATUS_PREPARED,
+				'to' => DTUI_DataWriter_OrderItem::STATUS_SERVED,
+			),
 		);
 		
 		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Tasks','dtui_task_list',$viewParams);
+	}
+	
+	public function actionUpdateTask() {
+		$this->_assertPostOnly();
+		
+		$input = $this->_input->filter(array(
+			'order_item_id' => XenForo_Input::UINT,
+			'status' => XenForo_Input::STRING,
+		));
+		
+		$orderItem = $this->_getOrderItemModel()->getOrderItemById($input['order_item_id']);
+		
+		if (empty($orderItem)) {
+			return $this->responseNoPermission();
+		}
+		
+		$dw = XenForo_DataWriter::create('DTUI_DataWriter_OrderItem');
+		$dw->setExistingData($orderItem, true);
+		$dw->set('status', $input['status']);
+		$dw->save();
+		
+		$viewParams = array(
+			'orderItem' => $dw->getMergedData(),
+		);
+		
+		return $this->responseView('DTUI_ViewPublic_EntryPoint_UpdateTask', '', $viewParams);
 	}
 	
 	public function actionOrders(){// get all Order in database
@@ -96,6 +133,23 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 	
 		return $this->responseView('DTUI_ViewPublic_EntryPoint_Tables','dtui_table_list',$viewParams);
     }
+    
+    public function actionTable() {
+    	$tableId = $this->_input->filterSingle('data', XenForo_Input::UINT);
+		
+		$table = $this->_getTableModel()->getTableById($tableId);
+		
+		if (empty($table)) {
+			return $this->responseNoPermission();
+		}
+		
+		$viewParams = array(
+			'table' => $table,
+		);
+		
+		return $this->responseView('DTUI_ViewPublic_EntryPoint_Table', '', $viewParams);
+    }
+    
     public function findTargetUserId()// get target id for a user 
     {
     	/*
