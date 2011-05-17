@@ -1,5 +1,9 @@
 <?php
 class DTUI_Model_OrderItem extends XenForo_Model {
+	
+	const FETCH_ITEM = 0x01;
+	const FETCH_ORDER = 0x02;
+	
 	public function getList(array $conditions = array(), array $fetchOptions = array()) {
 		$data = $this->getAllOrderItem($conditions, $fetchOptions);
 		$list = array();
@@ -27,7 +31,7 @@ class DTUI_Model_OrderItem extends XenForo_Model {
 		return $this->fetchAllKeyed($this->limitQueryResults("
 				SELECT order_item.*
 					$joinOptions[selectFields]
-				FROM `xf_order_item` AS order_item
+				FROM `xf_dtui_order_item` AS order_item
 					$joinOptions[joinTables]
 				WHERE $whereConditions
 					$orderClause
@@ -44,7 +48,7 @@ class DTUI_Model_OrderItem extends XenForo_Model {
 
 		return $this->_getDb()->fetchOne("
 			SELECT COUNT(*)
-			FROM `xf_order_item` AS order_item
+			FROM `xf_dtui_order_item` AS order_item
 				$joinOptions[joinTables]
 			WHERE $whereConditions
 		");
@@ -70,6 +74,18 @@ class DTUI_Model_OrderItem extends XenForo_Model {
 	public function prepareOrderItemFetchOptions(array $fetchOptions) {
 		$selectFields = '';
 		$joinTables = '';
+		
+		if (!empty($fetchOptions['join'])) {
+			if ($fetchOptions['join'] & self::FETCH_ITEM) {
+				$selectFields .= ' ,item.* ';
+				$joinTables .= ' INNER JOIN `xf_dtui_item` AS item ON (item.item_id = order_item.item_id) ';
+			}
+			
+			if ($fetchOptions['join'] & self::FETCH_ORDER) {
+				$selectFields .= ' ,`order`.* ';
+				$joinTables .= ' INNER JOIN `xf_dtui_order` AS `order` ON (`order`.order_id = order_item.order_id) ';
+			}
+		}
 
 		return array(
 			'selectFields' => $selectFields,

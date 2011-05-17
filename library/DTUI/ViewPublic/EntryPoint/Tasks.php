@@ -11,10 +11,9 @@
 	}
 	
 	public function renderJson() {
-		$tasks = $this->_params['tasks'];// $items de hien thi ket qua ra html
-		
 		return array(
-			'tasks' => $tasks,
+			'tasks' => $this->_params['tasks'],
+			'direction' => $this->_params['direction'],
 		);
 	}
  }
