@@ -12,4 +12,12 @@ class DTUI_Route_Prefix_EntryPoint implements XenForo_Route_Interface {
 		
 		return $router->getRouteMatch('DTUI_ControllerPublic_EntryPoint', $action, 'dtui');
 	}
+
+	public function buildLink($originalPrefix, $outputPrefix, $action, $extension, $data, array &$extraParams) {
+		if (!empty($data)) {
+			return XenForo_Link::buildBasicLink($outputPrefix, $action . '/' . $data, $extension);
+		} else {
+			return XenForo_Link::buildBasicLink($outputPrefix, $action, $extension);
+		}
+	}
 }

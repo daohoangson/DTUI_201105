@@ -52,14 +52,14 @@ class DTUI_Installer {
 			'dropQuery' => false
 		),
 		'order_item' => array(
-			'createQuery' => 'CREATE TABLE IF NOT EXISTS `xf_order_item` (
+			'createQuery' => 'CREATE TABLE IF NOT EXISTS `xf_dtui_order_item` (
 				`order_item_id` INT(10) UNSIGNED AUTO_INCREMENT
 				,`order_id` INT(10) UNSIGNED NOT NULL
 				,`trigger_user_id` INT(10) UNSIGNED NOT NULL
 				,`target_user_id` INT(10) UNSIGNED NOT NULL
 				,`item_id` INT(10) UNSIGNED NOT NULL
 				,`order_item_date` INT(10) UNSIGNED NOT NULL
-				,`status` TEXT NOT NULL
+				,`status` ENUM(\'waiting\', \'prepared\', \'served\', \'paid\') NOT NULL
 				, PRIMARY KEY (`order_item_id`)
 				, INDEX `order_id` (`order_id`)
 				, INDEX `target_user_id` (`target_user_id`)

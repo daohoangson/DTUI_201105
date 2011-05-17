@@ -49,6 +49,12 @@ class DTUI_ControllerAdmin_Item extends XenForo_ControllerAdmin_Abstract {
 			$dw->setExistingData($id);
 		}
 		$dw->bulkSet($dwInput);
+		
+		$image = XenForo_Upload::getUploadedFile('image');
+		if (!empty($image)) {
+			$dw->setImage($image);
+		}
+		
 		$dw->save();
 
 		return $this->responseRedirect(

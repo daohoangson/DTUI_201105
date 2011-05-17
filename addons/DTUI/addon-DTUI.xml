@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="DTUI" title="DTUI 201105" version_string="0.9.3" version_id="5" url="" install_callback_class="DTUI_Installer" install_callback_method="install" uninstall_callback_class="DTUI_Installer" uninstall_callback_method="uninstall">
+<addon addon_id="DTUI" title="DTUI 201105" version_string="1.0.1" version_id="6" url="" install_callback_class="DTUI_Installer" install_callback_method="install" uninstall_callback_class="DTUI_Installer" uninstall_callback_method="uninstall">
   <admin_navigation>
     <navigation navigation_id="DTUI_categories" parent_navigation_id="dtui" display_order="20" link="dtui-categories" admin_permission_id="DTUI" debug_only="0" hide_no_children="0"/>
     <navigation navigation_id="DTUI_items" parent_navigation_id="dtui" display_order="30" link="dtui-items" admin_permission_id="DTUI" debug_only="0" hide_no_children="0"/>
@@ -31,13 +31,16 @@
 </xen:form>]]></template>
     <template title="dtui_category_edit"><![CDATA[<xen:title>{xen:if '{$category.category_id}', '{xen:phrase dtui_category_edit}', '{xen:phrase dtui_category_add}'}</xen:title>
 
-<xen:form action="{xen:adminlink 'dtui-categories/save'}" class="AutoValidator" data-redirect="yes">
-
+<xen:form action="{xen:adminlink 'dtui-categories/save'}" class="xAutoValidator" data-redirect="yes"
+	enctype="multipart/form-data"
+	>
 	
 	<xen:textboxunit label="{xen:phrase dtui_category_name}:" name="category_name" value="{$category.category_name}" data-liveTitleTemplate="{xen:if {$category.category_id},
 		'{xen:phrase dtui_category_edit}: <em>%s</em>',
 		'{xen:phrase dtui_category_add}: <em>%s</em>'}" />
 	<xen:textboxunit label="{xen:phrase dtui_category_description}:" name="category_description" value="{$category.category_description}"  rows="5"/>
+	
+	<xen:uploadunit label="{xen:phrase image}" name="image" />
 
 	<xen:submitunit save="{xen:phrase dtui_category_save}">
 		<input type="button" name="delete" value="{xen:phrase dtui_category_delete}"
@@ -100,8 +103,9 @@
 </xen:form>]]></template>
     <template title="dtui_item_edit"><![CDATA[<xen:title>{xen:if '{$item.item_id}', '{xen:phrase dtui_item_edit}', '{xen:phrase dtui_item_add}'}</xen:title>
 
-<xen:form action="{xen:adminlink 'dtui-items/save'}" class="AutoValidator" data-redirect="yes">
-
+<xen:form action="{xen:adminlink 'dtui-items/save'}" class="xAutoValidator" data-redirect="yes"
+	enctype="multipart/form-data"
+	>
 	
 	<xen:textboxunit label="{xen:phrase dtui_item_name}:" name="item_name" value="{$item.item_name}" data-liveTitleTemplate="{xen:if {$item.item_id},
 		'{xen:phrase dtui_item_edit}: <em>%s</em>',
@@ -112,6 +116,8 @@
 		<xen:options source="$allCategory" />
 	</xen:selectunit>
 	<xen:textboxunit label="{xen:phrase dtui_price}:" name="price" value="{$item.price}" />
+	
+	<xen:uploadunit label="{xen:phrase image}" name="image" />
 
 	<xen:submitunit save="{xen:phrase dtui_item_save}">
 		<input type="button" name="delete" value="{xen:phrase dtui_item_delete}"
@@ -315,14 +321,14 @@
     <phrase title="admin_navigation_DTUI_items" version_id="1" version_string="0.9"><![CDATA[Items]]></phrase>
     <phrase title="admin_navigation_DTUI_tables" version_id="1" version_string="0.9"><![CDATA[Tables]]></phrase>
     <phrase title="admin_permission_DTUI" version_id="1" version_string="0.9"><![CDATA[DTUI]]></phrase>
-    <phrase title="dtui_categories" version_id="4" version_string="0.9.2"><![CDATA[Categories]]></phrase>
+	<phrase title="dtui_categories" version_id="4" version_string="0.9.2"><![CDATA[Categories]]></phrase>
     <phrase title="dtui_category" version_id="1" version_string="0.9"><![CDATA[Category]]></phrase>
     <phrase title="dtui_category_add" version_id="1" version_string="0.9"><![CDATA[Add New Category]]></phrase>
     <phrase title="dtui_category_confirm_deletion" version_id="1" version_string="0.9"><![CDATA[Confirm Deletion of Category]]></phrase>
     <phrase title="dtui_category_delete" version_id="1" version_string="0.9"><![CDATA[Delete Category]]></phrase>
     <phrase title="dtui_category_description" version_id="1" version_string="0.9"><![CDATA[Category Description]]></phrase>
     <phrase title="dtui_category_edit" version_id="1" version_string="0.9"><![CDATA[Edit Category]]></phrase>
-    <phrase title="dtui_category_list" version_id="4" version_string="0.9.2"><![CDATA[This is list of Categories]]></phrase>
+	<phrase title="dtui_category_list" version_id="4" version_string="0.9.2"><![CDATA[This is list of Categories]]></phrase>
     <phrase title="dtui_category_name" version_id="1" version_string="0.9"><![CDATA[Category Name]]></phrase>
     <phrase title="dtui_category_not_found" version_id="1" version_string="0.9"><![CDATA[The requested Category could not be found]]></phrase>
     <phrase title="dtui_category_no_results" version_id="1" version_string="0.9"><![CDATA[No clues of Category at this moment...]]></phrase>
@@ -332,14 +338,14 @@
     <phrase title="dtui_enter_order" version_id="5" version_string="0.9.3"><![CDATA[Enter New Order]]></phrase>
     <phrase title="dtui_is_busy" version_id="1" version_string="0.9"><![CDATA[Is Busy]]></phrase>
     <phrase title="dtui_item" version_id="1" version_string="0.9"><![CDATA[Item]]></phrase>
-    <phrase title="dtui_items" version_id="4" version_string="0.9.2"><![CDATA[Items]]></phrase>
+	<phrase title="dtui_items" version_id="4" version_string="0.9.2"><![CDATA[Items]]></phrase>
     <phrase title="dtui_item_add" version_id="1" version_string="0.9"><![CDATA[Add New Item]]></phrase>
     <phrase title="dtui_item_confirm_deletion" version_id="1" version_string="0.9"><![CDATA[Confirm Deletion of Item]]></phrase>
     <phrase title="dtui_item_delete" version_id="1" version_string="0.9"><![CDATA[Delete Item]]></phrase>
     <phrase title="dtui_item_description" version_id="1" version_string="0.9"><![CDATA[Item Description]]></phrase>
     <phrase title="dtui_item_edit" version_id="1" version_string="0.9"><![CDATA[Edit Item]]></phrase>
     <phrase title="dtui_item_id" version_id="5" version_string="0.9.3"><![CDATA[Item ID]]></phrase>
-    <phrase title="dtui_item_list" version_id="4" version_string="0.9.2"><![CDATA[This is list of Items]]></phrase>
+	<phrase title="dtui_item_list" version_id="4" version_string="0.9.2"><![CDATA[This is list of Items]]></phrase>
     <phrase title="dtui_item_name" version_id="1" version_string="0.9"><![CDATA[Item Name]]></phrase>
     <phrase title="dtui_item_not_found" version_id="1" version_string="0.9"><![CDATA[The requested Item could not be found]]></phrase>
     <phrase title="dtui_item_no_results" version_id="1" version_string="0.9"><![CDATA[No clues of Item at this moment...]]></phrase>
@@ -348,7 +354,7 @@
     <phrase title="dtui_item_please_confirm" version_id="1" version_string="0.9"><![CDATA[Please confirm that you want to delete the following Item]]></phrase>
     <phrase title="dtui_item_save" version_id="1" version_string="0.9"><![CDATA[Save Item]]></phrase>
     <phrase title="dtui_last_order_id" version_id="1" version_string="0.9"><![CDATA[Last Order Id]]></phrase>
-    <phrase title="dtui_no_category" version_id="4" version_string="0.9.2"><![CDATA[Not have any Categories]]></phrase>
+	<phrase title="dtui_no_category" version_id="4" version_string="0.9.2"><![CDATA[Not have any Categories]]></phrase>
     <phrase title="dtui_no_item" version_id="4" version_string="0.9.2"><![CDATA[Not have any Items]]></phrase>
     <phrase title="dtui_order" version_id="1" version_string="0.9"><![CDATA[Order]]></phrase>
     <phrase title="dtui_order_add" version_id="1" version_string="0.9"><![CDATA[Add New Order]]></phrase>
@@ -360,6 +366,7 @@
     <phrase title="dtui_order_is_paid" version_id="4" version_string="0.9.2"><![CDATA[Is Paid]]></phrase>
     <phrase title="dtui_order_item_date" version_id="4" version_string="0.9.2"><![CDATA[Order Item Date]]></phrase>
     <phrase title="dtui_order_item_id" version_id="4" version_string="0.9.2"><![CDATA[Order Item Id]]></phrase>
+    <phrase title="dtui_order_item_not_found" version_id="5" version_string="0.9.3"><![CDATA[The requested Order Item could not be found]]></phrase>
     <phrase title="dtui_order_not_found" version_id="1" version_string="0.9"><![CDATA[The requested Order could not be found]]></phrase>
     <phrase title="dtui_order_no_results" version_id="1" version_string="0.9"><![CDATA[No clues of Order at this moment...]]></phrase>
     <phrase title="dtui_order_paid_amount" version_id="4" version_string="0.9.2"><![CDATA[Paid Amount]]></phrase>

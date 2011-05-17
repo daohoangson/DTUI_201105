@@ -1,5 +1,29 @@
 <?php
-class DTUI_Model_Item extends XenForo_Model {
+class DTUI_Model_Item extends DTUI_Model_WithImage {
+	protected function _getImageInternal(array $data, $sizeCode) {
+		return 'dtui/item/' . $data['item_id'] . $this->_getImageFileNameFromName($data['item_name']) . $sizeCode . '.jpg';		
+	}
+	
+	public function prepareItem(array &$item) {
+		$item['links'] = array();
+		
+		$item['links']['self'] = XenForo_Link::buildPublicLink('full:dtui-entry-point/item.json', $item['item_id']);
+		
+		$itemSimple = array();
+		foreach ($item as $key => $value) {
+			if (strpos($key, 'item_') === 0 AND !empty($value)) {
+				$itemSimple[$key] = $value;
+			}
+		}
+		$item['qrcode'] = DTUI_Helper_QrCode::getUrl($itemSimple);
+	}
+	
+	public function prepareItems(array &$items) {
+		foreach ($items as &$item) {
+			$this->prepareItem($item);
+		}
+	}
+	
 	public function getList(array $conditions = array(), array $fetchOptions = array()) {
 		$data = $this->getAllItem($conditions, $fetchOptions);
 		$list = array();
