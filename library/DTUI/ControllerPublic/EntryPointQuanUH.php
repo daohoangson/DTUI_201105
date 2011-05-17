@@ -11,9 +11,9 @@ abstract class DTUI_ControllerPublic_EntryPointQuanUH extends DTUI_ControllerPub
 		    'categories' => $categories,
 		);
 		
-		return $this->responseView('DTUI_ViewPublic_EntryPoint_Categories', '', $viewParams);
+		return $this->responseView('DTUI_ViewPublic_EntryPoint_Categories', 'dtui_entry_point_categories', $viewParams);
     }
-    
+
     public function actionCategory() {
 		$categoryId = $this->_input->filterSingle('data', XenForo_Input::UINT);
 		
@@ -26,7 +26,7 @@ abstract class DTUI_ControllerPublic_EntryPointQuanUH extends DTUI_ControllerPub
 		$viewParams = array(
 		    'category' => $category,
 		);
-		
+
 		return $this->responseView('DTUI_ViewPublic_EntryPoint_Category', '', $viewParams);
     }
     
@@ -49,7 +49,7 @@ abstract class DTUI_ControllerPublic_EntryPointQuanUH extends DTUI_ControllerPub
 		);
 		if (!empty($category)) $viewParams['category'] = $category; // add the found category to viewParams (optional)
 		
-		return $this->responseView('DTUI_ViewPublic_EntryPoint_Items', '', $viewParams);
+		return $this->responseView('DTUI_ViewPublic_EntryPoint_Items', 'dtui_entry_point_items', $viewParams);
     }
 
     public function actionItem() {

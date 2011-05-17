@@ -315,12 +315,14 @@
     <phrase title="admin_navigation_DTUI_items" version_id="1" version_string="0.9"><![CDATA[Items]]></phrase>
     <phrase title="admin_navigation_DTUI_tables" version_id="1" version_string="0.9"><![CDATA[Tables]]></phrase>
     <phrase title="admin_permission_DTUI" version_id="1" version_string="0.9"><![CDATA[DTUI]]></phrase>
+    <phrase title="dtui_categories" version_id="4" version_string="0.9.2"><![CDATA[Categories]]></phrase>
     <phrase title="dtui_category" version_id="1" version_string="0.9"><![CDATA[Category]]></phrase>
     <phrase title="dtui_category_add" version_id="1" version_string="0.9"><![CDATA[Add New Category]]></phrase>
     <phrase title="dtui_category_confirm_deletion" version_id="1" version_string="0.9"><![CDATA[Confirm Deletion of Category]]></phrase>
     <phrase title="dtui_category_delete" version_id="1" version_string="0.9"><![CDATA[Delete Category]]></phrase>
     <phrase title="dtui_category_description" version_id="1" version_string="0.9"><![CDATA[Category Description]]></phrase>
     <phrase title="dtui_category_edit" version_id="1" version_string="0.9"><![CDATA[Edit Category]]></phrase>
+    <phrase title="dtui_category_list" version_id="4" version_string="0.9.2"><![CDATA[This is list of Categories]]></phrase>
     <phrase title="dtui_category_name" version_id="1" version_string="0.9"><![CDATA[Category Name]]></phrase>
     <phrase title="dtui_category_not_found" version_id="1" version_string="0.9"><![CDATA[The requested Category could not be found]]></phrase>
     <phrase title="dtui_category_no_results" version_id="1" version_string="0.9"><![CDATA[No clues of Category at this moment...]]></phrase>
@@ -330,12 +332,14 @@
     <phrase title="dtui_enter_order" version_id="5" version_string="0.9.3"><![CDATA[Enter New Order]]></phrase>
     <phrase title="dtui_is_busy" version_id="1" version_string="0.9"><![CDATA[Is Busy]]></phrase>
     <phrase title="dtui_item" version_id="1" version_string="0.9"><![CDATA[Item]]></phrase>
+    <phrase title="dtui_items" version_id="4" version_string="0.9.2"><![CDATA[Items]]></phrase>
     <phrase title="dtui_item_add" version_id="1" version_string="0.9"><![CDATA[Add New Item]]></phrase>
     <phrase title="dtui_item_confirm_deletion" version_id="1" version_string="0.9"><![CDATA[Confirm Deletion of Item]]></phrase>
     <phrase title="dtui_item_delete" version_id="1" version_string="0.9"><![CDATA[Delete Item]]></phrase>
     <phrase title="dtui_item_description" version_id="1" version_string="0.9"><![CDATA[Item Description]]></phrase>
     <phrase title="dtui_item_edit" version_id="1" version_string="0.9"><![CDATA[Edit Item]]></phrase>
     <phrase title="dtui_item_id" version_id="5" version_string="0.9.3"><![CDATA[Item ID]]></phrase>
+    <phrase title="dtui_item_list" version_id="4" version_string="0.9.2"><![CDATA[This is list of Items]]></phrase>
     <phrase title="dtui_item_name" version_id="1" version_string="0.9"><![CDATA[Item Name]]></phrase>
     <phrase title="dtui_item_not_found" version_id="1" version_string="0.9"><![CDATA[The requested Item could not be found]]></phrase>
     <phrase title="dtui_item_no_results" version_id="1" version_string="0.9"><![CDATA[No clues of Item at this moment...]]></phrase>
@@ -344,6 +348,8 @@
     <phrase title="dtui_item_please_confirm" version_id="1" version_string="0.9"><![CDATA[Please confirm that you want to delete the following Item]]></phrase>
     <phrase title="dtui_item_save" version_id="1" version_string="0.9"><![CDATA[Save Item]]></phrase>
     <phrase title="dtui_last_order_id" version_id="1" version_string="0.9"><![CDATA[Last Order Id]]></phrase>
+    <phrase title="dtui_no_category" version_id="4" version_string="0.9.2"><![CDATA[Not have any Categories]]></phrase>
+    <phrase title="dtui_no_item" version_id="4" version_string="0.9.2"><![CDATA[Not have any Items]]></phrase>
     <phrase title="dtui_order" version_id="1" version_string="0.9"><![CDATA[Order]]></phrase>
     <phrase title="dtui_order_add" version_id="1" version_string="0.9"><![CDATA[Add New Order]]></phrase>
     <phrase title="dtui_order_confirm_deletion" version_id="1" version_string="0.9"><![CDATA[Confirm Deletion of Order]]></phrase>
@@ -467,6 +473,59 @@
        </table>
       <input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
 </form>]]></template>
+   <template title="dtui_entry_point_categories" version_id="4" version_string="0.9.2"><![CDATA[<xen:title>{xen:phrase dtui_categories}</xen:title>
+
+<xen:description>{xen:phrase dtui_category_list}</xen:description>
+
+<div>
+	<xen:if is="{$categories}">		
+		<ol>
+		<xen:foreach loop="$categories" value="$category">
+			<li>
+                        <table width="100%" border="0">
+  				<tr>
+    				        <td rowspan="2"><xen:avatar user="$category" size="s" img="true" /></td>
+					<td style="font-size:19px;"font-weight: bold;>{$category.category_name}</td>
+  				</tr>
+  				<tr>
+    				        <td>{$category.category_description}</td>
+  				</tr>
+			</table>
+            </li>
+		</xen:foreach>
+		</ol>
+	<xen:else />
+		<div>{xen:phrase dtui_no_category}</div>
+	</xen:if>
+</div>]]></template>
+    <template title="dtui_entry_point_items" version_id="4" version_string="0.9.2"><![CDATA[<xen:title>{xen:phrase dtui_items}</xen:title>
+
+<xen:description>{xen:phrase dtui_item_list}</xen:description>
+
+<div>
+	<xen:if is="{$items}">		
+		<ol>
+		<xen:foreach loop="$items" value="$item">
+			<li>
+                        <table width="100%" border="0">
+  				<tr>
+    				        <td rowspan="3"><xen:avatar user="$item" size="s" img="true" /></td>
+					<td style="font-size:19px;font-weight: bold;">{$item.item_name}</td>
+  				</tr>
+                                <tr>
+    				        <td>prime: ${$item.price}</td>
+  				</tr>
+  				<tr>
+    				        <td>{$item.item_description}</td>
+  				</tr>
+			</table>
+            </li>
+		</xen:foreach>
+		</ol>
+	<xen:else />
+		<div>{xen:phrase dtui_no_item}</div>
+	</xen:if>
+</div>]]></template>
     <template title="dtui_manhhx.css" version_id="4" version_string="0.9.2"><![CDATA[.tablediv {
 		display: table;
 		width:100%;
