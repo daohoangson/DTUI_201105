@@ -56,13 +56,8 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 		$viewParams = array(
 			'tasks' => $order_items,
 			'direction' => array(
-		/*
 				'from' => DTUI_DataWriter_OrderItem::STATUS_WAITING,
 				'to' => DTUI_DataWriter_OrderItem::STATUS_PREPARED,
-				*/
-		
-		'from' => DTUI_DataWriter_OrderItem::STATUS_PREPARED,
-				'to' => DTUI_DataWriter_OrderItem::STATUS_SERVED,
 			),
 		);
 		
