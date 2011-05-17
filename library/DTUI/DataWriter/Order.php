@@ -5,7 +5,7 @@ class DTUI_DataWriter_Order extends XenForo_DataWriter {
 			'xf_dtui_order' => array(
 				'order_id' => array('type' => 'uint', 'autoIncrement' => true),
 				'table_id' => array('type' => 'uint', 'required' => true),
-				'order_date' => array('type' => 'uint', 'required' => true),
+				'order_date' => array('type' => 'uint', 'default' => XenForo_Application::$time),
 				'is_paid' => array('type' => 'boolean', 'required' => true, 'default' => 0),
 				'paid_amount' => array('type' => 'float', 'required' => true, 'default' => 0)
 			)

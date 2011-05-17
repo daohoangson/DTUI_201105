@@ -1,12 +1,15 @@
 <xen:title>{xen:if '{$category.category_id}', '{xen:phrase dtui_category_edit}', '{xen:phrase dtui_category_add}'}</xen:title>
 
-<xen:form action="{xen:adminlink 'dtui-categories/save'}" class="AutoValidator" data-redirect="yes">
-
+<xen:form action="{xen:adminlink 'dtui-categories/save'}" class="xAutoValidator" data-redirect="yes"
+	enctype="multipart/form-data"
+	>
 	
 	<xen:textboxunit label="{xen:phrase dtui_category_name}:" name="category_name" value="{$category.category_name}" data-liveTitleTemplate="{xen:if {$category.category_id},
 		'{xen:phrase dtui_category_edit}: <em>%s</em>',
 		'{xen:phrase dtui_category_add}: <em>%s</em>'}" />
 	<xen:textboxunit label="{xen:phrase dtui_category_description}:" name="category_description" value="{$category.category_description}"  rows="5"/>
+	
+	<xen:uploadunit label="{xen:phrase image}" name="image" />
 
 	<xen:submitunit save="{xen:phrase dtui_category_save}">
 		<input type="button" name="delete" value="{xen:phrase dtui_category_delete}"

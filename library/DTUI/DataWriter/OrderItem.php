@@ -13,7 +13,7 @@ class DTUI_DataWriter_OrderItem extends XenForo_DataWriter {
 				'trigger_user_id' => array('type' => 'uint', 'required' => true),
 				'target_user_id' => array('type' => 'uint', 'required' => true),
 				'item_id' => array('type' => 'uint', 'required' => true),
-				'order_item_date' => array('type' => 'uint', 'required' => true),
+				'order_item_date' => array('type' => 'uint', 'default' => XenForo_Application::$time),
 				'status' => array(
 					'type' => 'string',
 					'allowedValues' => array(

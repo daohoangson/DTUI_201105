@@ -1,5 +1,9 @@
 <?php
-class DTUI_DataWriter_Category extends XenForo_DataWriter {
+class DTUI_DataWriter_Category extends DTUI_DataWriter_WithImage {
+	protected function _getImageModel() {
+		return $this->_getCategoryModel();		
+	}
+	
 	protected function _getFields() {
 		return array(
 			'xf_dtui_category' => array(

@@ -1,7 +1,11 @@
 <?php
 abstract class DTUI_ControllerPublic_EntryPointQuanUH extends DTUI_ControllerPublic_EntryPointManhHX {
     public function actionCategories() {
-		$categories = $this->_getCategoryModel()->getAllCategory();
+    	$categoryModel = $this->_getCategoryModel();
+    	
+		$categories = $categoryModel->getAllCategory();
+		$categoryModel->prepareImagesMultiple($categories);
+		$categoryModel->prepareCategories($categories);
 		
 		$viewParams = array(
 		    'categories' => $categories,
@@ -9,22 +13,15 @@ abstract class DTUI_ControllerPublic_EntryPointQuanUH extends DTUI_ControllerPub
 		
 		return $this->responseView('DTUI_ViewPublic_EntryPoint_Categories', '', $viewParams);
     }
-
-    public function actionItems() {
-		$category_id = $this->_input->filterSingle('category_id', XenForo_Input::UINT);
-		$conditions = array('category_id' => $category_id);
-		$items = $this->_getItemModel()->getAllItem($conditions);
-		
-		$viewParams = array(
-		    'items' => $items,
-		);
-		
-		return $this->responseView('DTUI_ViewPublic_EntryPoint_Items', '', $viewParams);
-    }
-
+    
     public function actionCategory() {
-		$category_id = $this->_input->filterSingle('data', XenForo_Input::UINT);
-		$category = $this->_getCategoryModel()->getCategoryById($category_id);
+		$categoryId = $this->_input->filterSingle('data', XenForo_Input::UINT);
+		
+		$categoryModel = $this->_getCategoryModel();
+		
+		$category = $this->_getCategoryOrError($categoryId);
+		$categoryModel->prepareImages($category);
+		$categoryModel->prepareCategory($category);
 		
 		$viewParams = array(
 		    'category' => $category,
@@ -32,11 +29,37 @@ abstract class DTUI_ControllerPublic_EntryPointQuanUH extends DTUI_ControllerPub
 		
 		return $this->responseView('DTUI_ViewPublic_EntryPoint_Category', '', $viewParams);
     }
+    
+    public function actionItems() {
+		$categoryId = $this->_input->filterSingle('category_id', XenForo_Input::UINT);
+		
+		$itemModel = $this->_getItemModel();
+		
+		if (!empty($categoryId)) {
+			$category = $this->_getCategoryOrError($categoryId);
+			$items = $itemModel->getAllItem(array('category_id' => $category['category_id']));
+		} else {
+			$items = $itemModel->getAllItem();
+		}
+		$itemModel->prepareImagesMultiple($items);
+		$itemModel->prepareItems($items);
+		
+		$viewParams = array(
+		    'items' => $items,
+		);
+		if (!empty($category)) $viewParams['category'] = $category; // add the found category to viewParams (optional)
+		
+		return $this->responseView('DTUI_ViewPublic_EntryPoint_Items', '', $viewParams);
+    }
 
     public function actionItem() {
-		$item_id = $this->_input->filterSingle('data', XenForo_Input::UINT);
+		$itemId = $this->_input->filterSingle('data', XenForo_Input::UINT);
 		
-		$item = $this->_getItemModel()->getItemById($item_id);
+		$itemModel = $this->_getItemModel();
+		
+		$item = $this->_getItemOrError($itemId);
+		$itemModel->prepareImages($item);
+		$itemModel->prepareItem($item);
 		
 		$viewParams = array(
 		    'item' => $item,

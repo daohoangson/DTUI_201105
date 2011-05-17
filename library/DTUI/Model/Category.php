@@ -1,5 +1,30 @@
 <?php
-class DTUI_Model_Category extends XenForo_Model {
+class DTUI_Model_Category extends DTUI_Model_WithImage {
+	protected function _getImageInternal(array $data, $sizeCode) {
+		return 'dtui/category/' . $data['category_id'] . $this->_getImageFileNameFromName($data['category_name']) . $sizeCode . '.jpg';		
+	}
+	
+	public function prepareCategory(array &$category) {
+		$category['links'] = array();
+		
+		$category['links']['self'] = XenForo_Link::buildPublicLink('full:dtui-entry-point/category.json', $category['category_id']);
+		$category['links']['items'] = XenForo_Link::buildPublicLink('full:dtui-entry-point/items.json', '', array('category_id' => $category['category_id']));
+		
+		$categorySimple = array();
+		foreach ($category as $key => $value) {
+			if (strpos($key, 'category_') === 0 AND !empty($value)) {
+				$categorySimple[$key] = $value;
+			}
+		}
+		$category['qrcode'] = DTUI_Helper_QrCode::getUrl($categorySimple);
+	}
+	
+	public function prepareCategories(array &$categories) {
+		foreach ($categories as &$category) {
+			$this->prepareCategory($category);
+		}
+	}
+	
 	public function getList(array $conditions = array(), array $fetchOptions = array()) {
 		$data = $this->getAllCategory($conditions, $fetchOptions);
 		$list = array();

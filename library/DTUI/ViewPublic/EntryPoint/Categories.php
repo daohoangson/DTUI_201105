@@ -10,10 +10,8 @@ class DTUI_ViewPublic_EntryPoint_Categories extends XenForo_ViewPublic_Base {
 	}
 	
 	public function renderJson() {
-		$categories = $this->_params['categories'];
-		
 		return array(
-			'categories' => $categories,
+			'categories' => $this->_params['categories'],
 		);
 	}
 }

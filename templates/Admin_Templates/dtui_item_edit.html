@@ -1,7 +1,8 @@
 <xen:title>{xen:if '{$item.item_id}', '{xen:phrase dtui_item_edit}', '{xen:phrase dtui_item_add}'}</xen:title>
 
-<xen:form action="{xen:adminlink 'dtui-items/save'}" class="AutoValidator" data-redirect="yes">
-
+<xen:form action="{xen:adminlink 'dtui-items/save'}" class="xAutoValidator" data-redirect="yes"
+	enctype="multipart/form-data"
+	>
 	
 	<xen:textboxunit label="{xen:phrase dtui_item_name}:" name="item_name" value="{$item.item_name}" data-liveTitleTemplate="{xen:if {$item.item_id},
 		'{xen:phrase dtui_item_edit}: <em>%s</em>',
@@ -12,6 +13,8 @@
 		<xen:options source="$allCategory" />
 	</xen:selectunit>
 	<xen:textboxunit label="{xen:phrase dtui_price}:" name="price" value="{$item.price}" />
+	
+	<xen:uploadunit label="{xen:phrase image}" name="image" />
 
 	<xen:submitunit save="{xen:phrase dtui_item_save}">
 		<input type="button" name="delete" value="{xen:phrase dtui_item_delete}"

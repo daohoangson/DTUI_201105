@@ -1,5 +1,26 @@
 <?php
 class DTUI_Model_Table extends XenForo_Model {
+	
+	public function prepareTable(array &$table) {
+		$table['links'] = array();
+		
+		$table['links']['self'] = XenForo_Link::buildPublicLink('full:dtui-entry-point/table.json', $table['table_id']);
+		
+		$tableSimple = array();
+		foreach ($table as $key => $value) {
+			if (strpos($key, 'table_') === 0 AND !empty($value)) {
+				$tableSimple[$key] = $value;
+			}
+		}
+		$table['qrcode'] = DTUI_Helper_QrCode::getUrl($tableSimple);
+	}
+	
+	public function prepareTables(array &$tables) {
+		foreach ($tables as &$table) {
+			$this->prepareTable($table);
+		}
+	}
+	
 	public function getList(array $conditions = array(), array $fetchOptions = array()) {
 		$data = $this->getAllTable($conditions, $fetchOptions);
 		$list = array();
