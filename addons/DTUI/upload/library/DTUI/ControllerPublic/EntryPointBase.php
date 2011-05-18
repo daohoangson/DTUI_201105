@@ -1,7 +1,7 @@
 <?php
 abstract class DTUI_ControllerPublic_EntryPointBase extends XenForo_ControllerPublic_Abstract {
-	protected function _getTableOrError($tableId) {
-		$info = $this->_getTableModel()->getTableById($tableId);
+	protected function _getTableOrError($tableId, array $fetchOptions = array()) {
+		$info = $this->_getTableModel()->getTableById($tableId, $fetchOptions);
 		
 		if (empty($info)) {
 			throw new XenForo_Exception(new XenForo_Phrase('dtui_table_not_found'), true);
@@ -10,8 +10,8 @@ abstract class DTUI_ControllerPublic_EntryPointBase extends XenForo_ControllerPu
 		return $info;
 	}
 	
-	protected function _getOrderOrError($orderId) {
-		$info = $this->_getOrderModel()->getOrderById($orderId);
+	protected function _getOrderOrError($orderId, array $fetchOptions = array()) {
+		$info = $this->_getOrderModel()->getOrderById($orderId, $fetchOptions);
 		
 		if (empty($info)) {
 			throw new XenForo_Exception(new XenForo_Phrase('dtui_order_not_found'), true);
@@ -20,8 +20,8 @@ abstract class DTUI_ControllerPublic_EntryPointBase extends XenForo_ControllerPu
 		return $info;
 	}
 	
-	protected function _getOrderItemOrError($orderItemId) {
-		$info = $this->_getOrderItemModel()->getOrderItemByid($orderItemId);
+	protected function _getOrderItemOrError($orderItemId, array $fetchOptions = array()) {
+		$info = $this->_getOrderItemModel()->getOrderItemByid($orderItemId, $fetchOptions);
 		
 		if (empty($info)) {
 			throw new XenForo_Exception(new XenForo_Phrase('dtui_order_item_not_found'), true);
@@ -30,8 +30,8 @@ abstract class DTUI_ControllerPublic_EntryPointBase extends XenForo_ControllerPu
 		return $info;
 	}
 	
-	protected function _getCategoryOrError($categoryId) {
-		$info = $this->_getCategoryModel()->getCategoryById($categoryId);
+	protected function _getCategoryOrError($categoryId, array $fetchOptions = array()) {
+		$info = $this->_getCategoryModel()->getCategoryById($categoryId, $fetchOptions);
 		
 		if (empty($info)) {
 			throw new XenForo_Exception(new XenForo_Phrase('dtui_category_not_found'), true);
@@ -40,8 +40,8 @@ abstract class DTUI_ControllerPublic_EntryPointBase extends XenForo_ControllerPu
 		return $info;
 	}
 	
-	protected function _getItemOrError($itemId) {
-		$info = $this->_getItemModel()->getItemById($itemId);
+	protected function _getItemOrError($itemId, array $fetchOptions = array()) {
+		$info = $this->_getItemModel()->getItemById($itemId, $fetchOptions);
 		
 		if (empty($info)) {
 			throw new XenForo_Exception(new XenForo_Phrase('dtui_item_not_found'), true);

@@ -1,0 +1,604 @@
+.discussionList
+{
+	position: relative;
+	zoom: 1;
+}
+
+/** column style and width **/
+
+.discussionList .sectionHeaders,
+.discussionListItem
+{
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+	word-wrap: normal;
+}
+
+	.discussionList .sectionHeaders dt,
+	.discussionList .sectionHeaders dd,
+	.discussionListItem .listBlock
+	{
+		display: table-cell;
+		vertical-align: middle;
+	}
+	
+		.discussionList .posterAvatar
+		{
+			width: @discussionListAvatarWidth;
+		}
+		
+		.discussionList .main
+		{
+			width: auto;
+		}
+
+			.discussionList .sectionHeaders .main .postDate
+			{
+				text-align: right;
+			}
+		
+		.discussionList .stats
+		{
+			width: @discussionListStatsWidth;
+		}
+			
+			.discussionList .sectionHeaders .stats .minor
+			{
+				text-align: right;
+			}
+		
+		.discussionList .lastPost
+		{
+			width: @discussionListLastPostWidth;
+			text-align: right;
+			overflow: hidden;
+		}
+		
+		.discussionList .statsLastPost /* combined last two columns */
+		{
+			width: {xen:calc '@discussionListStatsWidth + @discussionListLastPostWidth'}px;
+		}
+	
+
+/* column headers */
+
+.discussionList .sectionHeaders
+{	
+	@property "subHeading";
+	font-size: 11px;
+	color: @secondaryDarker;
+	background: @secondaryLighter url('@imagePath/xenforo/gradients/category-23px-light.png') repeat-x top;
+	padding: 5px 10px;
+	margin: 3px auto 0;
+	border-top: 1px solid @secondaryLighter;
+	border-bottom: 1px solid @secondaryLight;
+	@property "/subHeading";
+	
+	padding: 0;
+}
+
+	.discussionList .sectionHeaders dt span
+	{
+		display: none !important;
+	}
+		
+	.discussionList .sectionHeaders a
+	{
+		display: block;
+		color: @subHeading.color;
+		outline: none;
+	}
+	
+	.discussionList .sectionHeaders a:hover
+	{
+		text-decoration: none;
+	}
+			
+	.discussionList .sectionHeaders dd a[href]:hover
+	{
+		@property "subHeadingHover";
+		text-decoration: none;
+		background-color: @secondaryLightest;
+		@property "/subHeadingHover";
+	}
+		
+	.discussionList .sectionHeaders .main a,
+	.discussionList .sectionHeaders .stats a
+	{
+		float: left;
+		width: 50%;
+		white-space: nowrap;
+	}
+	
+		.discussionList .sectionHeaders a span
+		{
+			@property "subHeading.padding";
+			padding: 5px 10px;
+			@property "/subHeading.padding";
+			display: block;
+		}
+		
+/** IE <8 **/
+.discussionList .sectionHeaders,
+.discussionListItem                { *display: block; _vertical-align: bottom; }
+.discussionList .sectionHeaders dt,
+.discussionList .sectionHeaders dd,
+.discussionListItem .listBlock     { *display: block; *float: left; }
+.discussionListItem .listBlock     { _height: 52px; *min-height: 52px; } /* todo: should be calculation */
+.discussionList .posterAvatar      { *width: 6.98%; }
+.discussionListItem .posterAvatar  { *font-size: 0; }	
+.discussionList .main              { *width: 56.98%; }
+.discussionList .stats             { *width: 15.97%; }	
+.discussionList .lastPost          { *width: 19.97%; }
+.discussionList .statsLastPost     { *width: 35.97%; }
+.discussionList .sectionHeaders dt,
+.discussionList .sectionHeaders dd { *padding: 5px 0; }
+.discussionList .sectionHeaders a,
+.discussionList .sectionHeaders a span { *display: inline !important; *float: none !important; }
+
+/* items in thread list */
+
+.discussionListItems
+{
+}
+
+
+
+	
+/* individual thread list item */
+	
+/** main **/
+
+.discussionListItem
+{
+	@property "primaryContent.background";
+	background-color: @contentBackground;
+	@property "/primaryContent.background";
+	
+	@property "primaryContent.border";
+	border-bottom: 1px solid @primaryLighterStill;
+	@property "/primaryContent.border";
+}
+
+
+
+
+
+	/* sections, section widths */
+	
+		.discussionListItem .posterAvatar,		
+		.discussionListItem .stats
+		{
+			@property "secondaryContent.background";
+			background: @primaryLightest url('@imagePath/xenforo/gradients/category-23px-light.png') repeat-x top;
+			@property "/secondaryContent.background";
+		}
+		
+		.discussionListItem .main,
+		.discussionListItem .lastPost
+		{
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+	/* avatar section */
+	
+	.discussionListItem .posterAvatar .avatarContainer
+	{
+		display: block;
+		position: relative;
+	}
+	
+	.discussionListItem .posterAvatar .avatar
+	{
+		@property "discussionListAvatar";
+		padding: 5px;
+		display: block;
+		width: 36px;
+		height: 36px;
+		@property "/discussionListAvatar";
+		
+		width: auto;
+		height: auto;
+	}
+	
+		.discussionListItem .posterAvatar .avatar img
+		{
+			width: @discussionListAvatar.width;
+			height: @discussionListAvatar.height;
+			display: block;
+		}
+		
+		.discussionListItem .posterAvatar .miniMe
+		{
+			@property "discussionListMiniMe";
+			padding: 0;
+			position: absolute;
+			bottom: 1px;
+			left: 29px;
+			z-index: 10;
+			@property "/discussionListMiniMe";
+		}
+		
+			.discussionListItem .posterAvatar .miniMe img
+			{
+				@property "discussionListMiniMeImg";
+				padding: 1px;
+				border: 1px none black;
+				border-radius: 2px;
+				box-shadow: 1px 1px 5px rgba(0,0,0, 0.5);
+				width: 20px;
+				height: 20px;
+				@property "/discussionListMiniMeImg";				
+			}		
+		
+		
+	/* title, poster section */
+	
+	.discussionListItem .titleText
+	{
+		padding: 5px;
+		overflow: hidden; zoom: 1;
+		position: relative;
+	}
+	
+		/* unread indicator */
+		
+		.LoggedIn .discussionListItem .titleText
+		{			
+			padding-left: 20px;
+		}
+		
+		.LoggedIn .discussionListItem .unreadLink
+		{
+			display: block;
+			width: 10px;
+			height: 10px;
+			
+			position: absolute;
+			left: 5px;
+			top: 10px;
+			
+			background: url('@imagePath/xenforo/widgets/unread.png') no-repeat -5px -10px;
+		}
+	
+		/* first row */
+	
+		.discussionListItem .title
+		{
+			@property "discussionListFirstRow";
+			font-size: 11pt;
+			@property "/discussionListFirstRow";
+			float: left;
+		}
+		
+			.discussionListItems .unread .title a
+			{
+				@property "discussionListTitleUnread";
+				font-weight: bold;
+				/*padding-right: 18px;
+				background: transparent url('@imagePath/xenforo/widgets/discussion-new.png') no-repeat right center;*/
+				@property "/discussionListTitleUnread";
+			}
+			
+		
+		.discussionListItem .iconKey span
+		{
+			@property "dicussionListIcon";
+			margin-left: 3px;
+			text-indent: -10000em;
+			float: right;
+			background-repeat: no-repeat;
+			width: 16px;
+			height: 16px;
+			@property "/dicussionListIcon";
+		}
+			
+			.discussionListItem .iconKey .sticky    { background-image: url('@imagePath/xenforo/icons/sticky.png'); }
+			.discussionListItem .iconKey .locked    { background-image: url('@imagePath/xenforo/icons/locked.png'); }
+			.discussionListItem .iconKey .moderated { background-image: url('@imagePath/xenforo/icons/moderated.png'); }
+			.discussionListItem .iconKey .redirect  { background-image: url('@imagePath/xenforo/icons/redirect.png'); }
+			.discussionListItem .iconKey .new       { background-image: url('@imagePath/xenforo/widgets/discussion-new.png'); }
+		
+		/* second row */
+		
+		.discussionListItem .secondRow
+		{
+			@property "discussionListSecondRow";
+			font-size: 11px;
+			@property "/discussionListSecondRow";
+			clear: both;
+		}
+		
+			.discussionListItem .secondRow .controls
+			{
+				float: right;
+				padding-left: 20px;
+			}
+				
+				.discussionListItem.AjaxProgress .controls
+				{
+					background: transparent url('@imagePath/xenforo/widgets/ajaxload.info_B4B4DC_facebook.gif') no-repeat left center;
+				}
+			
+			.discussionListItem .posterDate
+			{
+				float: left;
+			}
+			
+			
+			
+	/* stats section */
+	
+	.discussionListItem .stats dl
+	{
+		padding: 0 10px;
+		border-left: 1px solid @primaryLighterStill;
+		border-right: 1px solid @primaryLighterStill;
+	}
+		.discussionListItem .stats .major
+		{
+			@property "discussionListFirstRow";
+			font-size: 11pt;
+			@property "/discussionListFirstRow";;
+			
+			margin-top: 5px;
+		}
+			
+		.discussionListItem .stats .minor
+		{
+			@property "discussionListSecondRow";
+			font-size: 11px;
+			@property "/discussionListSecondRow";;
+			
+			margin-bottom: 5px;
+		}
+			
+	/* last post section */
+	
+	.discussionListItem .lastPostInfo
+	{
+		padding: 5px;
+	}
+	
+		.discussionListItem .lastPostInfo .username
+		{
+			@property "discussionListFirstRow";
+			font-size: 11pt;
+			@property "/discussionListFirstRow";;
+		}
+		
+	
+			.discussionListItems .unread .lastPostInfo .username
+			{
+				@property "discussionListTitleUnread";
+				font-weight: bold;
+				/*padding-right: 18px;
+				background: transparent url('@imagePath/xenforo/widgets/discussion-new.png') no-repeat right center;*/
+				@property "/discussionListTitleUnread";
+			}
+		
+		.discussionListItem .lastPostInfo .dateTime
+		{
+			@property "discussionListSecondRow";
+			font-size: 11px;
+			@property "/discussionListSecondRow";
+		}
+
+
+/* extra note row */
+
+.discussionListItem .noteRow
+{
+	@property "primaryContent.background";
+	background-color: @contentBackground;
+	@property "/primaryContent.background";
+	padding: 5px;
+	text-align: center;
+	font-size: 11px;
+	color: @primaryMedium;
+}
+
+
+
+
+/* deleted item */
+
+.discussionList .discussionListItem.deleted
+{
+}
+
+	.discussionList .discussionListItem.deleted .avatar img
+	{
+		opacity: 0.5;
+		filter: alpha(opacity='50');
+	}
+		
+	.discussionList .discussionListItem.deleted .deletionNote
+	{
+		float: left;
+		color: rgb(150,0,0);
+	}
+		
+/* moderated item */
+
+.discussionList .discussionListItem.moderated .listBlock
+{
+	@property "primaryContent.background";
+	background-color: @contentBackground;
+	@property "/primaryContent.background";
+}
+
+		
+		
+		
+		
+		
+			
+/* inline mod selected/checked classes */
+
+.discussionListItem.InlineModChecked,
+.discussionListItem.InlineModChecked .posterAvatar,
+.discussionListItem.InlineModChecked .main,
+.discussionListItem.InlineModChecked .stats,
+.discussionListItem.InlineModChecked .lastPost,
+.discussionListItem.deleted.InlineModChecked,
+.discussionListItem.moderated.InlineModChecked
+{
+	@property "inlineModChecked";
+	background: @inlineMod url('@imagePath/xenforo/gradients/category-23px-light.png') repeat-x top;
+	@property "/inlineModChecked";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+/** bottom summary **/
+
+.discussionList .sectionFooter
+{
+	overflow: hidden; zoom: 1;
+}
+
+	.discussionList .sectionFooter .contentSummary
+	{
+		float: left;
+		display: block;
+	}
+
+		
+/** thread list options **/
+
+.DiscussionListOptions
+{
+	@property "discussionListOptions";
+	margin: 10px auto;
+	border: 1px solid @primaryLighter;
+	border-radius: 5px;
+	line-height: 20px;
+	overflow: hidden;
+	zoom: 1;
+	@property "/discussionListOptions";
+	
+}
+
+	.DiscussionListOptions dl,
+	.DiscussionListOptions .controlGroup
+	{
+		float: left;
+		margin-right: 10px;
+		
+		overflow: hidden; zoom: 1;
+	}
+	
+		.DiscussionListOptions dt
+		{
+			float: left;
+		}
+		
+		.DiscussionListOptions dd
+		{
+			margin-left: 120px;
+		}
+		
+	.DiscussionListOptions .buttonGroup
+	{
+		float: right;
+	}
+	
+		.DiscussionListOptions .buttonGroup input
+		{
+			min-width: 75px;
+		}
+	
+#DiscussionListOptionsHandle
+{
+	@property "discussionListOptionsHandle";
+	position: absolute;
+	bottom: -17px;
+	left: 0px;
+	line-height: 16px;
+	text-align: center;
+	width: 100%;
+	@property "/discussionListOptionsHandle";
+}
+	
+	#DiscussionListOptionsHandle a
+	{
+		@property "discussionListOptionsHandleLink";
+		font-size: 11px;
+		color: @primaryLighter;
+		background-color: @sectionMain.background-color;
+		margin: 0 auto;
+		border: 1px solid @primaryLighter;
+		border-top: 1px none black;
+		border-bottom-right-radius: 10px;
+		border-bottom-left-radius: 10px;
+		display: block;
+		outline: 0;
+		width: 180px;
+		@property "/discussionListOptionsHandleLink";
+	}
+	
+/** item page nav **/
+
+.discussionListItem .itemPageNav
+{
+	{xen:if '@discussionListPageNavHidden', 'visibility: hidden;'}
+}
+
+.discussionListItem:hover .itemPageNav,
+.Touch .discussionListItem .itemPageNav
+{
+	visibility: visible;
+}
+
+	.itemPageNav a,
+	.itemPageNav span
+	{
+		@property "discussionListItemPageNavItem";
+		font-size: 9px;
+		padding: 0 3px;
+		border-radius: 3px;
+		display: inline-block;
+		text-align: center;
+		@property "/discussionListItemPageNavItem";
+	}
+	
+	.itemPageNav a
+	{
+		@property "discussionListItemPageNavLink";
+		color: @secondaryDark;
+		background: @secondaryLightest url('@imagePath/xenforo/gradients/category-23px-light.png') repeat-x;
+		border: 1px solid @secondaryLighter;
+		@property "/discussionListItemPageNavLink";
+	}
+	
+	.itemPageNav a:hover
+	{
+		@property "discussionListItemPageNavLinkHover";
+		color: @secondaryDark;
+		text-decoration: none;
+		background-color: @secondaryLighter;
+		border-color: @secondaryLight;
+		@property "/discussionListItemPageNavLinkHover";
+	}

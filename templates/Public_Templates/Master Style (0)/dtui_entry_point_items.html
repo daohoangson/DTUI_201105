@@ -1,0 +1,85 @@
+<link rel="xenforo_stylesheet" type="text/css" href="dtui.css" />
+<link rel="xenforo_stylesheet" type="text/css" href="discussion_list.css" />
+
+<xen:title>{xen:phrase dtui_items}</xen:title>
+<xen:description>{xen:phrase dtui_item_list}</xen:description>
+
+<xen:if is="{$category}">
+	<xen:navigation>
+			<xen:breadcrumb href="{xen:link 'dtui-entry-point/categories'}">{xen:phrase dtui_categories}</xen:breadcrumb>
+			<xen:breadcrumb href="{xen:link 'dtui-entry-point/items', '', 'category_id={$category.category_id}'}">{$category.category_name}</xen:breadcrumb>
+	</xen:navigation>
+<xen:else />
+	<xen:navigation>
+			<xen:breadcrumb href="{xen:link 'dtui-entry-point/items'}">{xen:phrase dtui_items}</xen:breadcrumb>
+	</xen:navigation>
+</xen:if>
+
+<div class="section sectionMain DTUI_GenericList">	
+	<dl class="sectionHeaders">
+		<dt class="image">&nbsp;</dt>
+		<dd class="name">
+			<a href="{xen:link 'dtui-entry-point/items', '', '_params={$orderParams.item_name}'}"><span>{xen:phrase dtui_item_name}{xen:helper sortArrow, $order, $orderDirection, item_name}</span></a>
+		</dd>
+		<xen:if is="{$category}">
+		<xen:else />
+		<dd class="parent">
+			<a href="{xen:link 'dtui-entry-point/items', '', '_params={$orderParams.category_name}'}"><span>{xen:phrase dtui_category}{xen:helper sortArrow, $order, $orderDirection, category_name}</span></a>
+		</dd>
+		</xen:if>
+		<dd class="info">
+			Blah blah
+		</dd>
+	</dl>
+
+	<ol class="DTUI_GenericListItems">
+		<xen:if is="{$items}">
+			<xen:foreach loop="$items" value="$item">
+				<li id="item-{$item.item_id}" class="DTUI_GenericListItem">
+					<div class="listBlock image alt1">
+						<xen:if is="{$item.images.m}">
+							<img src="{$item.images.m}" />
+						<xen:else />
+							Oops!
+						</xen:if>
+					</div>
+				
+					<div class="listBlock name alt2">
+						<div class="titleText">
+							<h3 class="title">
+								{$item.item_name}
+							</h3>
+				
+							<div class="secondRow">
+								<span class="controls">
+									<a href="{xen:link 'dtui-entry-point/item-qrcode', {$item.item_id}}" class="OverlayTrigger">{xen:phrase dtui_qrcode}</a>
+								</span>
+								{$item.item_description}					
+							</div>
+						</div>
+					</div>
+					
+					<xen:if is="{$category}">
+					<xen:else />
+					<div class="listBlock parent alt1">
+						<a href="{xen:link 'dtui-entry-point/category', {$item.category_id}}">{$item.category_name}</a>
+					</div>
+					</xen:if>
+				
+					<div class="listBlock info {xen:if '{$category}', 'alt2', 'alt1'}">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non arcu et purus congue adipiscing vel vel turpis. Nam eu mi quis nisl elementum ultrices
+					</div>
+
+				</li>
+			</xen:foreach>
+		<xen:else />
+			<li class="primaryContent">
+				{xen:phrase dtui_no_item}
+			</li>
+		</xen:if>
+	</ol>
+
+	<div class="sectionFooter InlineMod SelectionCountContainer">
+		<span class="contentSummary">{xen:phrase dtui_showing_items_x_to_y_of_z, 'start=1', 'end={xen:number {xen:count $items}}', 'total={xen:number {xen:count $items}}'}</span>
+	</div>
+</div>

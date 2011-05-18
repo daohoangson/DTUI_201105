@@ -125,7 +125,7 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 			'tables' => $tables
 		);
 	
-		return $this->responseView('DTUI_ViewPublic_EntryPoint_Tables','dtui_table_list',$viewParams);
+		return $this->responseView('DTUI_ViewPublic_EntryPoint_Tables','dtui_entry_point_tables',$viewParams);
     }
     
     public function actionTable() {
@@ -141,6 +141,27 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 		);
 		
 		return $this->responseView('DTUI_ViewPublic_EntryPoint_Table', '', $viewParams);
+    }
+    
+	public function actionTableQrcode() {
+    	$response = $this->actionTable();
+    	
+    	if ($response instanceof XenForo_ControllerResponse_View) {
+    		$table =& $response->params['table'];
+    		
+    		$viewParams = array(
+    			'title' => $table['table_name'],
+    			'qrcode' => $table['qrcode'],
+    			'breadCrumbs' => array(
+    				array('href' => XenForo_Link::buildPublicLink('dtui-entry-point/tables'), 'value' => new XenForo_Phrase('dtui_tables')),
+    				array('href' => XenForo_Link::buildPublicLink('dtui-entry-point/table', $table['table_id']), 'value' => $table['table_name']),
+    			),
+    		);
+    		
+    		return $this->responseView('DTUI_ViewPublic_EntryPoint_QrCode', 'dtui_entry_point_qrcode', $viewParams);
+    	}
+    	
+    	return $response;
     }
     
     public function findTargetUserId()// get target id for a user 

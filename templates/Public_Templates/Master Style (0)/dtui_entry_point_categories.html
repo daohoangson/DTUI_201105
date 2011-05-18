@@ -1,0 +1,66 @@
+<link rel="xenforo_stylesheet" type="text/css" href="dtui.css" />
+<link rel="xenforo_stylesheet" type="text/css" href="discussion_list.css" />
+
+<xen:title>{xen:phrase dtui_categories}</xen:title>
+<xen:description>{xen:phrase dtui_category_list}</xen:description>
+
+<xen:navigation>
+		<xen:breadcrumb href="{xen:link 'dtui-entry-point/categories'}">{xen:phrase dtui_categories}</xen:breadcrumb>
+</xen:navigation>
+
+<div class="section sectionMain DTUI_GenericList">	
+	<dl class="sectionHeaders">
+		<dt class="image">&nbsp;</dt>
+		<dd class="name">
+			<a href="{xen:link 'dtui-entry-point/categories', '', '_params={$orderParams.category_name}'}"><span>{xen:phrase dtui_category_name}{xen:helper sortArrow, $order, $orderDirection, category_name}</span></a>
+		</dd>
+		<dd class="info">
+			Blah blah
+		</dd>
+	</dl>
+
+	<ol class="DTUI_GenericListItems">
+		<xen:if is="{$categories}">
+			<xen:foreach loop="$categories" value="$category">
+				<li id="category-{$category.category_id}" class="DTUI_GenericListItem">
+					<div class="listBlock image alt1">
+						<xen:if is="{$category.images.m}">
+							<img src="{$category.images.m}" />
+						<xen:else />
+							Oops!
+						</xen:if>
+					</div>
+				
+					<div class="listBlock name alt2">
+						<div class="titleText">
+							<h3 class="title">
+								<a href="{xen:link 'dtui-entry-point/category', {$category.category_id}}">{$category.category_name}</a>
+							</h3>
+				
+							<div class="secondRow">
+								<span class="controls">
+									<a href="{xen:link 'dtui-entry-point/items', '', 'category_id={$category.category_id}'}">{xen:phrase dtui_items}</a>
+									<a href="{xen:link 'dtui-entry-point/category-qrcode', {$category.category_id}}" class="OverlayTrigger">{xen:phrase dtui_qrcode}</a>
+								</span>
+								{$category.category_description}					
+							</div>
+						</div>
+					</div>
+				
+					<div class="listBlock info alt1">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non arcu et purus congue adipiscing vel vel turpis. Nam eu mi quis nisl elementum ultrices
+					</div>
+
+				</li>
+			</xen:foreach>
+		<xen:else />
+			<li class="primaryContent">
+				{xen:phrase dtui_no_category}
+			</li>
+		</xen:if>
+	</ol>
+
+	<div class="sectionFooter InlineMod SelectionCountContainer">
+		<span class="contentSummary">{xen:phrase dtui_showing_categories_x_to_y_of_z, 'start=1', 'end={xen:number {xen:count $categories}}', 'total={xen:number {xen:count $categories}}'}</span>
+	</div>
+</div>

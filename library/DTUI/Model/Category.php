@@ -12,11 +12,15 @@ class DTUI_Model_Category extends DTUI_Model_WithImage {
 		
 		$categorySimple = array();
 		foreach ($category as $key => $value) {
-			if (strpos($key, 'category_') === 0 AND !empty($value)) {
+			if (in_array($key, array(
+				'category_id',
+				'category_name',
+				'category_description',
+			))) {
 				$categorySimple[$key] = $value;
 			}
 		}
-		$category['qrcode'] = DTUI_Helper_QrCode::getUrl($categorySimple);
+		$category['qrcode'] = DTUI_Helper_QrCode::getUrl(array('category' => $categorySimple));
 	}
 	
 	public function prepareCategories(array &$categories) {
@@ -104,7 +108,8 @@ class DTUI_Model_Category extends DTUI_Model_WithImage {
 	
 	public function prepareCategoryOrderOptions(array &$fetchOptions, $defaultOrderSql = '') {
 		$choices = array(
-			
+			'category_id' => 'category.category_id',
+			'category_name' => 'category.category_name',
 		);
 		return $this->getOrderByClause($choices, $fetchOptions, $defaultOrderSql);
 	}

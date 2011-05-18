@@ -8,11 +8,14 @@ class DTUI_Model_Table extends XenForo_Model {
 		
 		$tableSimple = array();
 		foreach ($table as $key => $value) {
-			if (strpos($key, 'table_') === 0 AND !empty($value)) {
+			if (in_array($key, array(
+				'table_id',
+				'table_name',
+			))) {
 				$tableSimple[$key] = $value;
 			}
 		}
-		$table['qrcode'] = DTUI_Helper_QrCode::getUrl($tableSimple);
+		$table['qrcode'] = DTUI_Helper_QrCode::getUrl(array('table' => $tableSimple));
 	}
 	
 	public function prepareTables(array &$tables) {
