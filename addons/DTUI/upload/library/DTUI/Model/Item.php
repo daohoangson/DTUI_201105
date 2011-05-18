@@ -2,6 +2,16 @@
 class DTUI_Model_Item extends DTUI_Model_WithImage {
 	const FETCH_CATEGORY = 0x01;
 	
+	public function canAccess(array $user = null) {
+		$this->standardizeViewingUserReference($user);
+		
+		if (XenForo_Permission::hasPermission($user['permissions'], 'general', 'dtui_canAccess')) {
+			return true;
+		}
+
+		return false;
+	}
+	
 	protected function _getImageInternal(array $data, $sizeCode) {
 		return 'dtui/item/' . $data['item_id'] . $this->_getImageFileNameFromName($data['item_name']) . $sizeCode . '.jpg';		
 	}

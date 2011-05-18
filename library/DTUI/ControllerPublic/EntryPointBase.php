@@ -74,5 +74,15 @@ abstract class DTUI_ControllerPublic_EntryPointBase extends XenForo_ControllerPu
 		if (!$this->_request->isPost()) {
 			self::$_executed['csrf'] = true;
 		}
+		
+		return parent::_preDispatchFirst($action);
+	}
+	
+	protected function _preDispatch($action) {
+		if (!$this->_getItemModel()->canAccess()) {
+			throw new XenForo_Exception(new XenForo_Phrase('dtui_you_have_no_access_to_this_system'), true);
+		}
+		
+		return parent::_preDispatch($action);
 	}
 }

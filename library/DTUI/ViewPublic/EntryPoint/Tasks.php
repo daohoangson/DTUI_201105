@@ -13,7 +13,6 @@
 	public function renderJson() {
 		return array(
 			'tasks' => $this->_params['tasks'],
-			'direction' => $this->_params['direction'],
 		);
 	}
  }

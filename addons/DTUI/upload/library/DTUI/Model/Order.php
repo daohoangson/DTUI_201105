@@ -1,5 +1,45 @@
 <?php
 class DTUI_Model_Order extends XenForo_Model {
+	public function newOrder(array $table, array $items, array $itemIds, array $user = null) {
+		$this->standardizeViewingUserReference($user);
+		
+		XenForo_Db::beginTransaction();
+
+		try {
+			$orderDw = XenForo_DataWriter::create('DTUI_DataWriter_Order');
+			$orderDw->set('table_id', $table['table_id']);
+			$orderDw->save();
+			$order = $orderDw->getMergedData();
+	 
+			foreach ($itemIds as $itemId) {
+				$item =& $items[$itemId];
+				
+				$orderItemDw = XenForo_DataWriter::create('DTUI_DataWriter_OrderItem');
+				$orderItemDw->set('order_id', $order['order_id']);
+				$orderItemDw->set('item_id', $item['item_id']);
+				$orderItemDw->updateStatus($user);
+				$orderItemDw->save();
+			}
+		} catch (Exception $e) {
+			XenForo_Db::rollback();
+			throw $e;
+		}
+		
+		XenForo_Db::commit();
+		
+		return $order;
+	}
+	
+	public function canNewOrder(array $user = null) {
+		$this->standardizeViewingUserReference($user);
+		
+		if (XenForo_Permission::hasPermission($user['permissions'], 'general', 'dtui_canNewOrder')) {
+			return true;
+		}
+
+		return false;
+	}
+	
 	public function getList(array $conditions = array(), array $fetchOptions = array()) {
 		$data = $this->getAllOrder($conditions, $fetchOptions);
 		$list = array();

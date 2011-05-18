@@ -3,6 +3,7 @@ class DTUI_ControllerAdmin_Item extends XenForo_ControllerAdmin_Abstract {
 	public function actionIndex() {
 		$model = $this->_getItemModel();
 		$allItem = $model->getAllItem();
+		$model->prepareImagesMultiple($allItem);
 		
 		$viewParams = array(
 			'allItem' => $allItem
@@ -23,6 +24,7 @@ class DTUI_ControllerAdmin_Item extends XenForo_ControllerAdmin_Abstract {
 	public function actionEdit() {
 		$id = $this->_input->filterSingle('item_id', XenForo_Input::UINT);
 		$item = $this->_getItemOrError($id);
+		$this->_getItemModel()->prepareImages($item);
 		
 		$viewParams = array(
 			'item' => $item,
@@ -59,7 +61,7 @@ class DTUI_ControllerAdmin_Item extends XenForo_ControllerAdmin_Abstract {
 
 		return $this->responseRedirect(
 			XenForo_ControllerResponse_Redirect::SUCCESS,
-			XenForo_Link::buildAdminLink('dtui-items')
+			XenForo_Link::buildAdminLink('dtui-items') . $this->getLastHash($id)
 		);
 	}
 	

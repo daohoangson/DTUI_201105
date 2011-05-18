@@ -1,6 +1,12 @@
 <?php
 abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPublic_EntryPointBase {
 	public function actionNewOrder() {
+		$orderModel = $this->_getOrderModel();
+		
+		if (!$orderModel->canNewOrder()) {
+			return $this->responseNoPermission();
+		}
+		
 		if ($this->_request->isPost()) {
 			// this is a POST request
 			// start creating new order
@@ -8,7 +14,6 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 				'table_id' => XenForo_Input::UINT,
 				'item_ids' => array(XenForo_Input::UINT, 'array' => true)
 			));
-			// 
 			
 			$table = $this->_getTableOrError($input['table_id']);
 			$items = array();
@@ -16,21 +21,7 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 				$items[$itemId] = $this->_getItemOrError($itemId);
 			}
 			
-			$orderDw = XenForo_DataWriter::create('DTUI_DataWriter_Order');
-			$orderDw->set('table_id', $table['table_id']);
-			$orderDw->save();
-			$order = $orderDw->getMergedData();
- 
-			foreach ($input['item_ids'] as $itemId) {
-				$item =& $items[$itemId];
-				
-				$orderItemDw = XenForo_DataWriter::create('DTUI_DataWriter_OrderItem');
-				$orderItemDw->set('order_id', $order['order_id']);
-				$orderItemDw->set('trigger_user_id', XenForo_Visitor::getUserId());
-				$orderItemDw->set('target_user_id', $this->findTargetUserId());
-				$orderItemDw->set('item_id', $item['item_id']);
-				$orderItemDw->save();
-			}
+			$order = $orderModel->newOrder($table, $items, $input['item_ids']);
 			
 			$this->_request->setParam('data', $order['order_id']);
 			return $this->responseReroute('DTUI_ControllerPublic_EntryPoint', 'order');
@@ -50,19 +41,21 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 	}
 	
 	public function actionTasks(){ 
-		$conditions = array('userId' => XenForo_Visitor::getUserId());
+		$conditions = array('target_user_id' => XenForo_Visitor::getUserId());
 		$fetchOptions = array(
 			'join' => DTUI_Model_OrderItem::FETCH_ITEM + DTUI_Model_OrderItem::FETCH_ORDER,
 		);
+		
+		if (XenForo_Visitor::getInstance()->isSuperAdmin()) {
+			if ($this->_input->filterSingle('all', XenForo_Input::UINT)) {
+				unset($conditions['target_user_id']);
+			}
+		}
 		
 		$order_items = $this->_getOrderItemModel()->getAllOrderItem($conditions, $fetchOptions);
 		
 		$viewParams = array(
 			'tasks' => $order_items,
-			'direction' => array(
-				'from' => DTUI_DataWriter_OrderItem::STATUS_WAITING,
-				'to' => DTUI_DataWriter_OrderItem::STATUS_PREPARED,
-			),
 		);
 		
 		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Tasks','dtui_task_list',$viewParams);
@@ -78,9 +71,13 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 		
 		$orderItem = $this->_getOrderItemOrError($input['order_item_id']);
 		
+		if (!$this->_getOrderItemModel()->canUpdateTask($orderItem)) {
+			return $this->responseNoPermission();
+		}
+		
 		$dw = XenForo_DataWriter::create('DTUI_DataWriter_OrderItem');
 		$dw->setExistingData($orderItem, true);
-		$dw->set('status', $input['status']);
+		$dw->updateStatus(XenForo_Visitor::getInstance()->toArray());
 		$dw->save();
 		
 		$viewParams = array(
@@ -117,8 +114,17 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 	
 	public function actionTables() {
 		$tableModel = $this->_getTableModel();
+		$conditions = array(
+			'is_busy' => 0,
+		);
 		
-		$tables = $tableModel->getAllTable();
+		if (XenForo_Visitor::getInstance()->isSuperAdmin()) {
+			if ($this->_input->filterSingle('all', XenForo_Input::UINT)) {
+				unset($conditions['is_busy']);
+			}
+		}
+		
+		$tables = $tableModel->getAllTable($conditions);
 		$tableModel->prepareTables($tables);
 	
 		$viewParams = array(
@@ -165,7 +171,7 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
     }
     
     public function findTargetUserId()// get target id for a user 
-    {
+   {
     	/*
 		 * get all user online 
 		 */

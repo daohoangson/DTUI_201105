@@ -1,8 +1,21 @@
 <?php
 class DTUI_Model_OrderItem extends XenForo_Model {
-	
 	const FETCH_ITEM = 0x01;
 	const FETCH_ORDER = 0x02;
+	
+	public function canUpdateTask(array $orderItem, array $user = null) {
+		$this->standardizeViewingUserReference($user);
+		
+		if (!XenForo_Permission::hasPermission($user['permissions'], 'general', 'dtui_canUpdateTask')) {
+			return false;
+		}
+		
+		if ($orderItem['target_user_id'] != $user['user_id']) {
+			return false;
+		}
+
+		return true;
+	}
 	
 	public function getList(array $conditions = array(), array $fetchOptions = array()) {
 		$data = $this->getAllOrderItem($conditions, $fetchOptions);
@@ -58,7 +71,7 @@ class DTUI_Model_OrderItem extends XenForo_Model {
 		$sqlConditions = array();
 		$db = $this->_getDb();
 		
-		foreach (array('order_item_id', 'order_id', 'trigger_user_id', 'target_user_id', 'item_id', 'order_item_date') as $intField) {
+		foreach (array('order_item_id', 'order_id', 'trigger_user_id', 'target_user_id', 'item_id', 'order_item_date', 'status') as $intField) {
 			if (!isset($conditions[$intField])) continue;
 			
 			if (is_array($conditions[$intField])) {

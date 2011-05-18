@@ -3,6 +3,7 @@ class DTUI_ControllerAdmin_Category extends XenForo_ControllerAdmin_Abstract {
 	public function actionIndex() {
 		$model = $this->_getCategoryModel();
 		$allCategory = $model->getAllCategory();
+		$model->prepareImagesMultiple($allCategory);
 		
 		$viewParams = array(
 			'allCategory' => $allCategory
@@ -23,6 +24,7 @@ class DTUI_ControllerAdmin_Category extends XenForo_ControllerAdmin_Abstract {
 	public function actionEdit() {
 		$id = $this->_input->filterSingle('category_id', XenForo_Input::UINT);
 		$category = $this->_getCategoryOrError($id);
+		$this->_getCategoryModel()->prepareImages($category);
 		
 		$viewParams = array(
 			'category' => $category,
@@ -57,7 +59,7 @@ class DTUI_ControllerAdmin_Category extends XenForo_ControllerAdmin_Abstract {
 
 		return $this->responseRedirect(
 			XenForo_ControllerResponse_Redirect::SUCCESS,
-			XenForo_Link::buildAdminLink('dtui-categories')
+			XenForo_Link::buildAdminLink('dtui-categories') . $this->getLastHash($id)
 		);
 	}
 	

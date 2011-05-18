@@ -67,7 +67,32 @@ class DTUI_Installer {
 			'dropQuery' => false
 		)
 	);
-	protected static $_patches = array();
+	protected static $_patches = array(
+		array(
+			'showColumnsQuery' => 'SHOW COLUMNS FROM `xf_dtui_order_item` LIKE \'updated_waiting_user_id\'',
+			'alterTableAddColumnQuery' => 'ALTER TABLE `xf_dtui_order_item` ADD COLUMN `updated_waiting_user_id` INT(10) UNSIGNED DEFAULT 0',
+		),
+		array(
+			'showColumnsQuery' => 'SHOW COLUMNS FROM `xf_dtui_order_item` LIKE \'updated_waiting_date\'',
+			'alterTableAddColumnQuery' => 'ALTER TABLE `xf_dtui_order_item` ADD COLUMN `updated_waiting_date` INT(10) UNSIGNED DEFAULT 0',
+		),
+		array(
+			'showColumnsQuery' => 'SHOW COLUMNS FROM `xf_dtui_order_item` LIKE \'updated_prepared_user_id\'',
+			'alterTableAddColumnQuery' => 'ALTER TABLE `xf_dtui_order_item` ADD COLUMN `updated_prepared_user_id` INT(10) UNSIGNED DEFAULT 0',
+		),
+		array(
+			'showColumnsQuery' => 'SHOW COLUMNS FROM `xf_dtui_order_item` LIKE \'updated_prepared_date\'',
+			'alterTableAddColumnQuery' => 'ALTER TABLE `xf_dtui_order_item` ADD COLUMN `updated_prepared_date` INT(10) UNSIGNED DEFAULT 0',
+		),
+		array(
+			'showColumnsQuery' => 'SHOW COLUMNS FROM `xf_dtui_order_item` LIKE \'updated_served_user_id\'',
+			'alterTableAddColumnQuery' => 'ALTER TABLE `xf_dtui_order_item` ADD COLUMN `updated_served_user_id` INT(10) UNSIGNED DEFAULT 0',
+		),
+		array(
+			'showColumnsQuery' => 'SHOW COLUMNS FROM `xf_dtui_order_item` LIKE \'updated_served_date\'',
+			'alterTableAddColumnQuery' => 'ALTER TABLE `xf_dtui_order_item` ADD COLUMN `updated_served_date` INT(10) UNSIGNED DEFAULT 0',
+		),
+	);
 
 	public static function install() {
 		$db = XenForo_Application::get('db');

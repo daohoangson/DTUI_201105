@@ -78,7 +78,7 @@ class DTUI_Model_Table extends XenForo_Model {
 		$sqlConditions = array();
 		$db = $this->_getDb();
 		
-		foreach (array('table_id', 'last_order_id', 'table_order_count') as $intField) {
+		foreach (array('table_id', 'last_order_id', 'table_order_count', 'is_busy') as $intField) {
 			if (!isset($conditions[$intField])) continue;
 			
 			if (is_array($conditions[$intField])) {
