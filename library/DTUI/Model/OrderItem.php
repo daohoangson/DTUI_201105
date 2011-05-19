@@ -9,12 +9,31 @@ class DTUI_Model_OrderItem extends XenForo_Model {
 		if (!XenForo_Permission::hasPermission($user['permissions'], 'general', 'dtui_canUpdateTask')) {
 			return false;
 		}
-		
-		if ($orderItem['target_user_id'] != $user['user_id']) {
-			return false;
-		}
 
 		return true;
+	}
+	
+	public function canMarkCompleted(array $orderItem, array $user = null) {
+		$this->standardizeViewingUserReference($user);
+		
+		if ($this->canUpdateTask($user)) {
+			if ($orderItem['target_user_id'] == $user['user_id']) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public function canRevertCompleted(array $orderItem, array $user = null) {
+		$this->standardizeViewingUserReference($user);
+		
+		if ($this->canUpdateTask($user)) {
+			// the data writer will do further check
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public function getList(array $conditions = array(), array $fetchOptions = array()) {

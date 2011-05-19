@@ -30,7 +30,7 @@ class DTUI_DataWriter_OrderItem extends XenForo_DataWriter {
 		}
 		
 		if (empty($next)) {
-			throw new XenForo_Exception(new XenForo_Phrase('dtui_untable_to_update_order_item_status'), true);
+			throw new XenForo_Exception(new XenForo_Phrase('dtui_unable_to_update_order_item_status'), true);
 		}
 		
 		$this->set('status', $next, '', array(self::SET_STATUS_FROM_INSIDE => true));
@@ -43,6 +43,37 @@ class DTUI_DataWriter_OrderItem extends XenForo_DataWriter {
 			$this->set('updated_' . $oldStatus . '_user_id', $user['user_id'], '', array('ignoreInvalidFields' => true));
 			$this->set('updated_' . $oldStatus . '_date', XenForo_Application::$time, '', array('ignoreInvalidFields' => true));
 		}
+	}
+	
+	public function revertStatus(array $user) {
+		$oldStatus = $this->get('status');
+		$next = false;
+		
+		switch ($oldStatus) {
+			case self::STATUS_PREPARED:
+				$next = self::STATUS_WAITING;
+				break;
+			case self::STATUS_SERVED:
+				$next = self::STATUS_PREPARED;
+				break;
+			case self::STATUS_PAID:
+				throw new XenForo_Exception(new XenForo_Phrase('dtui_unable_to_update_order_item_status_of_paid'), true);
+				break;
+		}
+		
+		if (empty($next)) {
+			throw new XenForo_Exception(new XenForo_Phrase('dtui_unable_to_update_order_item_status'), true);
+		}
+		
+		$updatedUserId = $this->get('updated_' . $next . '_user_id');
+		if ($updatedUserId != $user['user_id']) {
+			throw new XenForo_Exception(new XenForo_Phrase('dtui_unable_to_update_order_item_status_of_other'), true);
+		}
+		
+		$this->set('status', $next, '', array(self::SET_STATUS_FROM_INSIDE => true));
+		$this->set('target_user_id', $user['user_id'], '', array(self::SET_STATUS_FROM_INSIDE => true));
+		$this->set('updated_' . $next . '_user_id', 0, '', array('ignoreInvalidFields' => true));
+		$this->set('updated_' . $next . '_date', 0, '', array('ignoreInvalidFields' => true));
 	}
 	
 	protected function _findTargetUserId($status, $triggerUserId) {
@@ -161,6 +192,10 @@ class DTUI_DataWriter_OrderItem extends XenForo_DataWriter {
 				$orderDw->set('is_paid', true);
 				$orderDw->save();
 			}
+		}
+		
+		if ($this->isInsert()) {
+			$this->_db->query('UPDATE `xf_dtui_item` SET item_order_count = item_order_count + 1 WHERE item_id = ?', $this->get('item_id'));
 		}
 		
 		return parent::_postSave();

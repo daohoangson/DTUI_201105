@@ -61,17 +61,28 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Tasks','dtui_task_list',$viewParams);
 	}
 	
-	public function actionUpdateTask() {
+	public function actionTask() {
+		$orderItemId = $this->_input->filterSingle('data', XenForo_Input::UINT);
+		
+		$orderItem = $this->_getOrderItemOrError($orderItemId);
+				
+		$viewParams = array(
+			'orderItem' => $orderItem,
+		);
+		
+		return $this->responseView('DTUI_ViewPublic_EntryPoint_Task', '', $viewParams);
+	}
+	
+	public function actionTaskMarkCompleted() {
 		$this->_assertPostOnly();
 		
 		$input = $this->_input->filter(array(
 			'order_item_id' => XenForo_Input::UINT,
-			'status' => XenForo_Input::STRING,
 		));
 		
 		$orderItem = $this->_getOrderItemOrError($input['order_item_id']);
 		
-		if (!$this->_getOrderItemModel()->canUpdateTask($orderItem)) {
+		if (!$this->_getOrderItemModel()->canMarkCompleted($orderItem)) {
 			return $this->responseNoPermission();
 		}
 		
@@ -80,11 +91,34 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 		$dw->updateStatus(XenForo_Visitor::getInstance()->toArray());
 		$dw->save();
 		
-		$viewParams = array(
-			'orderItem' => $dw->getMergedData(),
-		);
+		$orderItem = $dw->getMergedData();
 		
-		return $this->responseView('DTUI_ViewPublic_EntryPoint_UpdateTask', '', $viewParams);
+		$this->_request->setParam('data', $orderItem['order_item_id']);
+		return $this->responseReroute('DTUI_ControllerPublic_EntryPoint', 'task');
+	}
+	
+	public function actionTaskRevertCompleted() {
+		$this->_assertPostOnly();
+		
+		$input = $this->_input->filter(array(
+			'order_item_id' => XenForo_Input::UINT,
+		));
+		
+		$orderItem = $this->_getOrderItemOrError($input['order_item_id']);
+		
+		if (!$this->_getOrderItemModel()->canRevertCompleted($orderItem)) {
+			return $this->responseNoPermission();
+		}
+		
+		$dw = XenForo_DataWriter::create('DTUI_DataWriter_OrderItem');
+		$dw->setExistingData($orderItem, true);
+		$dw->revertStatus(XenForo_Visitor::getInstance()->toArray());
+		$dw->save();
+		
+		$orderItem = $dw->getMergedData();
+		
+		$this->_request->setParam('data', $orderItem['order_item_id']);
+		return $this->responseReroute('DTUI_ControllerPublic_EntryPoint', 'task');
 	}
 	
 	public function actionOrders(){
