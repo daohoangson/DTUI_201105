@@ -52,10 +52,16 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 			}
 		}
 		
-		$order_items = $this->_getOrderItemModel()->getAllOrderItem($conditions, $fetchOptions);
+		
+		$lastUpdated = $this->_input->filterSingle('last_updated', XenForo_Input::UINT);
+		if (!empty($lastUpdated)) {
+			$conditions['last_updated'] = array('>', $lastUpdated);
+		}
+		
+		$orderItems = $this->_getOrderItemModel()->getAllOrderItem($conditions, $fetchOptions);
 		
 		$viewParams = array(
-			'tasks' => $order_items,
+			'tasks' => $orderItems,
 		);
 		
 		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Tasks','dtui_task_list',$viewParams);

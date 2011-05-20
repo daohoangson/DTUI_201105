@@ -70,6 +70,10 @@ abstract class DTUI_ControllerPublic_EntryPointBase extends XenForo_ControllerPu
 		return $this->getModelFromCache('DTUI_Model_Item');
 	}
 	
+	protected function _getTaskModel() {
+		return $this->getModelFromCache('DTUI_Model_Task');
+	}
+	
 	protected function _preDispatchFirst($action) {
 		if (!$this->_request->isPost()) {
 			self::$_executed['csrf'] = true;

@@ -57,7 +57,15 @@ class DTUI_DataWriter_OrderItem extends XenForo_DataWriter {
 				$next = self::STATUS_PREPARED;
 				break;
 			case self::STATUS_PAID:
-				throw new XenForo_Exception(new XenForo_Phrase('dtui_unable_to_update_order_item_status_of_paid'), true);
+				$order = $this->getModelFromCache('DTUI_Model_Order')->getOrderById($this->get('order_id'));
+				if ($order['is_paid']) {
+					// the order is marked as paid
+					// it's too complicated to revert such a change
+					// so... we are preventing it here
+					throw new XenForo_Exception(new XenForo_Phrase('dtui_unable_to_update_order_item_status_of_paid'), true);
+				} else {
+					$next = self::STATUS_SERVED;
+				}
 				break;
 		}
 		
@@ -167,6 +175,8 @@ class DTUI_DataWriter_OrderItem extends XenForo_DataWriter {
 		if ($this->isInsert() AND $this->get('status') != self::STATUS_WAITING) {
 			throw new XenForo_Exception(new XenForo_Phrase('dtui_new_order_item_must_be_in_waiting_status'), true);
 		}
+		
+		$this->set('last_updated', XenForo_Application::$time);
 		
 		return parent::_preSave();
 	}

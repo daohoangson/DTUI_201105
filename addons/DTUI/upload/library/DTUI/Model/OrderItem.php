@@ -59,7 +59,7 @@ class DTUI_Model_OrderItem extends XenForo_Model {
 		$orderClause = $this->prepareOrderItemOrderOptions($fetchOptions);
 		$joinOptions = $this->prepareOrderItemFetchOptions($fetchOptions);
 		$limitOptions = $this->prepareLimitFetchOptions($fetchOptions);
-
+		
 		return $this->fetchAllKeyed($this->limitQueryResults("
 				SELECT order_item.*
 					$joinOptions[selectFields]
@@ -98,6 +98,13 @@ class DTUI_Model_OrderItem extends XenForo_Model {
 			} else {
 				$sqlConditions[] = "order_item.$intField = " . $db->quote($conditions[$intField]);
 			}
+		}
+		
+		if (!empty($conditions['last_updated'])) {
+			list($operator, $cutOff) = $conditions['last_updated'];
+
+			$this->assertValidCutOffOperator($operator);
+			$sqlConditions[] = "order_item.last_updated $operator " . $db->quote($cutOff);
 		}
 		
 		return $this->getConditionsForClause($sqlConditions);
