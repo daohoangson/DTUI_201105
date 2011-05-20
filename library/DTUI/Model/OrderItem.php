@@ -3,7 +3,7 @@ class DTUI_Model_OrderItem extends XenForo_Model {
 	const FETCH_ITEM = 0x01;
 	const FETCH_ORDER = 0x02;
 	
-	public function canUpdateTask(array $orderItem, array $user = null) {
+	public function canUpdateTask(array $user = null) {
 		$this->standardizeViewingUserReference($user);
 		
 		if (!XenForo_Permission::hasPermission($user['permissions'], 'general', 'dtui_canUpdateTask')) {

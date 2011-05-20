@@ -9,6 +9,14 @@ class DTUI_ControllerPublic_EntryPoint extends DTUI_ControllerPublic_EntryPointQ
     }
 
     public function actionUserInfo() {
-    	return $this->responseView('DTUI_ViewPublic_EntryPoint_UserInfo');
+    	$user = XenForo_Visitor::getInstance()->toArray();
+    	$user['DTUI_canNewOrder'] = $this->_getOrderModel()->canNewOrder($user);
+    	$user['DTUI_canUpdateTask'] = $this->_getOrderItemModel()->canUpdateTask($user);
+    	
+    	$viewParams = array(
+    		'user' => $user
+    	);
+    	
+    	return $this->responseView('DTUI_ViewPublic_EntryPoint_UserInfo', '', $viewParams);
     }
 }

@@ -67,64 +67,84 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Tasks','dtui_task_list',$viewParams);
 	}
 	
-	public function actionTask() {
-		$orderItemId = $this->_input->filterSingle('data', XenForo_Input::UINT);
-		
-		$orderItem = $this->_getOrderItemOrError($orderItemId);
-				
+	protected function _actionOrderItems(array $orderItems) {
 		$viewParams = array(
-			'orderItem' => $orderItem,
+			'orderItems' => $orderItems,
 		);
 		
-		return $this->responseView('DTUI_ViewPublic_EntryPoint_Task', '', $viewParams);
+		return $this->responseView('DTUI_ViewPublic_EntryPoint_OrderItems', '', $viewParams);
 	}
 	
 	public function actionTaskMarkCompleted() {
 		$this->_assertPostOnly();
 		
 		$input = $this->_input->filter(array(
-			'order_item_id' => XenForo_Input::UINT,
+			'order_item_ids' => array(XenForo_Input::UINT, 'array' => true)
 		));
+		$orderItems = array();
 		
-		$orderItem = $this->_getOrderItemOrError($input['order_item_id']);
+		XenForo_Db::beginTransaction();
 		
-		if (!$this->_getOrderItemModel()->canMarkCompleted($orderItem)) {
-			return $this->responseNoPermission();
+		try {
+			foreach ($input['order_item_ids'] as $orderItemId) {
+				$orderItem = $this->_getOrderItemOrError($orderItemId);
+				
+				if (!$this->_getOrderItemModel()->canMarkCompleted($orderItem)) {
+					return $this->responseNoPermission();
+				}
+				
+				$dw = XenForo_DataWriter::create('DTUI_DataWriter_OrderItem');
+				$dw->setExistingData($orderItem, true);
+				$dw->updateStatus(XenForo_Visitor::getInstance()->toArray());
+				$dw->save();
+				
+				$orderItem = $dw->getMergedData();
+				$orderItems[$orderItem['order_item_id']] = $orderItem;
+			}
+		} catch (Exception $e) {
+			XenForo_Db::rollback();
+			throw $e;
 		}
 		
-		$dw = XenForo_DataWriter::create('DTUI_DataWriter_OrderItem');
-		$dw->setExistingData($orderItem, true);
-		$dw->updateStatus(XenForo_Visitor::getInstance()->toArray());
-		$dw->save();
+		XenForo_Db::commit();
 		
-		$orderItem = $dw->getMergedData();
-		
-		$this->_request->setParam('data', $orderItem['order_item_id']);
-		return $this->responseReroute('DTUI_ControllerPublic_EntryPoint', 'task');
+		return $this->_actionOrderItems($orderItems);
 	}
 	
 	public function actionTaskRevertCompleted() {
 		$this->_assertPostOnly();
 		
 		$input = $this->_input->filter(array(
-			'order_item_id' => XenForo_Input::UINT,
+			'order_item_ids' => array(XenForo_Input::UINT, 'array' => true)
 		));
+		$orderItems = array();
 		
-		$orderItem = $this->_getOrderItemOrError($input['order_item_id']);
+		XenForo_Db::beginTransaction();
 		
-		if (!$this->_getOrderItemModel()->canRevertCompleted($orderItem)) {
-			return $this->responseNoPermission();
+		try {
+			foreach ($input['order_item_ids'] as $orderItemId) {
+				$orderItem = $this->_getOrderItemOrError($orderItemId);
+				
+				if (!$this->_getOrderItemModel()->canRevertCompleted($orderItem)) {
+					return $this->responseNoPermission();
+				}
+				
+				$dw = XenForo_DataWriter::create('DTUI_DataWriter_OrderItem');
+				$dw->setExistingData($orderItem, true);
+				$dw->revertStatus(XenForo_Visitor::getInstance()->toArray());
+				$dw->save();
+				
+				$orderItem = $dw->getMergedData();
+				$orderItems[$orderItem['order_item_id']] = $orderItem;
+			}
+		} catch (Exception $e) {
+			XenForo_Db::rollback();
+			throw $e;
 		}
 		
-		$dw = XenForo_DataWriter::create('DTUI_DataWriter_OrderItem');
-		$dw->setExistingData($orderItem, true);
-		$dw->revertStatus(XenForo_Visitor::getInstance()->toArray());
-		$dw->save();
+		XenForo_Db::commit();
 		
-		$orderItem = $dw->getMergedData();
-		
-		$this->_request->setParam('data', $orderItem['order_item_id']);
-		return $this->responseReroute('DTUI_ControllerPublic_EntryPoint', 'task');
+		return $this->_actionOrderItems($orderItems);
 	}
 	
 	public function actionOrders(){
