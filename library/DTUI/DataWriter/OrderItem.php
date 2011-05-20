@@ -249,6 +249,7 @@ class DTUI_DataWriter_OrderItem extends XenForo_DataWriter {
 				'updated_prepared_date' => array('type' => 'uint', 'default' => 0),
 				'updated_served_user_id' => array('type' => 'uint', 'default' => 0),
 				'updated_served_date' => array('type' => 'uint', 'default' => 0),
+				'last_updated' => array('type' => 'uint', 'required' => true),
 			)
 		);
 	}
