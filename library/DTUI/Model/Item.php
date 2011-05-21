@@ -130,10 +130,12 @@ class DTUI_Model_Item extends DTUI_Model_WithImage {
 		$choices = array(
 			'item_name' => 'item.item_name',
 			'item_order_count' => 'item.item_order_count',
+			'category_id' => 'category.category_id',
 			'category_name' => 'category.category_name',
 		);
 		
-		if (!empty($fetchOptions['order']) AND $fetchOptions['order'] == 'category_name') {
+		if (!empty($fetchOptions['order']) AND 
+			($fetchOptions['order'] == 'category_name' OR $fetchOptions['order'] == 'category_id')) {
 			if (empty($fetchOptions['join'])) $fetchOptions['join'] = 0;
 			$fetchOptions['join'] |= self::FETCH_CATEGORY;
 		}

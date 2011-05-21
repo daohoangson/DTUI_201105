@@ -7,13 +7,20 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 			return $this->responseNoPermission();
 		}
 		
+		$input = $this->_input->filter(array(
+			'table_id' => XenForo_Input::UINT,
+			'item_ids' => array(XenForo_Input::UINT, 'array' => true)
+		));
+		
 		if ($this->_request->isPost()) {
 			// this is a POST request
 			// start creating new order
-			$input = $this->_input->filter(array(
-				'table_id' => XenForo_Input::UINT,
-				'item_ids' => array(XenForo_Input::UINT, 'array' => true)
-			));
+			
+			foreach ($input['item_ids'] as $key => $itemId) {
+				if (empty($itemId)) {
+					unset($input['item_ids'][$key]);
+				}
+			}
 			
 			$table = $this->_getTableOrError($input['table_id']);
 			$items = array();
@@ -28,22 +35,29 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 		} else {
 			// this is a GET request
 			// display a form
-			$tables = $this ->_getTableModel()->getAllTable();
-			$items = $this->_getItemModel()->getAllItem();
+			$tables = $this ->_getTableModel()->getAllTable(array('is_busy' => 0));
+			$items = $this->_getItemModel()->getAllItem(array(), array(
+				'join' => DTUI_Model_Item::FETCH_CATEGORY,
+				'order' => 'category_id',
+				'direction' => 'asc',
+			));
 			
 			$viewParams = array(
-				'table' => $tables,
-				'items' => $items
+				'tables' => $tables,
+				'items' => $items,
+			
+				'input' => $input,
 			);
 			
-			return $this -> responseView('DTUI_ViewPublic_EntryPoint_NewOrder','dtui_entrypoint_new_order',$viewParams);
+			return $this -> responseView('DTUI_ViewPublic_EntryPoint_OrderNew','dtui_entry_point_new_order',$viewParams);
 		}
 	}
 	
 	public function actionTasks(){ 
 		$conditions = array('target_user_id' => XenForo_Visitor::getUserId());
 		$fetchOptions = array(
-			'join' => DTUI_Model_OrderItem::FETCH_ITEM + DTUI_Model_OrderItem::FETCH_ORDER,
+			'join' => DTUI_Model_OrderItem::FETCH_ITEM + DTUI_Model_OrderItem::FETCH_ORDER 
+				+ DTUI_Model_OrderItem::FETCH_TARGET_USER,
 		);
 		
 		if (XenForo_Visitor::getInstance()->isSuperAdmin()) {
@@ -59,12 +73,13 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 		}
 		
 		$orderItems = $this->_getOrderItemModel()->getAllOrderItem($conditions, $fetchOptions);
+		$this->_getItemModel()->prepareImagesMultiple($orderItems);
 		
 		$viewParams = array(
 			'tasks' => $orderItems,
 		);
 		
-		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Tasks','dtui_task_list',$viewParams);
+		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Tasks','dtui_entry_point_tasks',$viewParams);
 	}
 	
 	protected function _actionOrderItems(array $orderItems) {
@@ -154,7 +169,7 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 			'orders' => $orders
 		);
 		
-		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Orders','dtui_order_list',$viewParams);
+		return $this -> responseView('DTUI_ViewPublic_EntryPoint_Orders','dtui_entry_point_orders',$viewParams);
 	}
 	
 	public function actionOrder() {

@@ -3,6 +3,19 @@ class DTUI_Model_Order extends XenForo_Model {
 	public function newOrder(array $table, array $items, array $itemIds, array $user = null) {
 		$this->standardizeViewingUserReference($user);
 		
+		$itemCount = 0;
+		foreach ($itemIds as $itemId) {
+			$item =& $items[$itemId];
+			
+			if (!empty($item)) {
+				$itemCount++;
+			}
+		}
+		
+		if (empty($itemCount)) {
+			throw new XenForo_Exception(new XenForo_Phrase('dtui_can_not_create_order_with_no_item'), true);
+		}
+		
 		XenForo_Db::beginTransaction();
 
 		try {
@@ -119,8 +132,9 @@ class DTUI_Model_Order extends XenForo_Model {
 	
 	public function prepareOrderOrderOptions(array &$fetchOptions, $defaultOrderSql = '') {
 		$choices = array(
-			
+		
 		);
+		
 		return $this->getOrderByClause($choices, $fetchOptions, $defaultOrderSql);
 	}
 }
