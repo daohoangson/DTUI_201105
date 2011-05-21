@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="DTUI" title="DTUI 201105" version_string="1.4" version_id="12" url="" install_callback_class="DTUI_Installer" install_callback_method="install" uninstall_callback_class="DTUI_Installer" uninstall_callback_method="uninstall">
+<addon addon_id="DTUI" title="DTUI 201105" version_string="1.6" version_id="14" url="" install_callback_class="DTUI_Installer" install_callback_method="install" uninstall_callback_class="DTUI_Installer" uninstall_callback_method="uninstall">
   <admin_navigation>
     <navigation navigation_id="DTUI_categories" parent_navigation_id="dtui" display_order="20" link="dtui-categories" admin_permission_id="DTUI" debug_only="0" hide_no_children="0"/>
     <navigation navigation_id="DTUI_items" parent_navigation_id="dtui" display_order="30" link="dtui-items" admin_permission_id="DTUI" debug_only="0" hide_no_children="0"/>
@@ -370,7 +370,9 @@
     <phrase title="admin_navigation_DTUI_items" version_id="1" version_string="0.9"><![CDATA[Items]]></phrase>
     <phrase title="admin_navigation_DTUI_tables" version_id="1" version_string="0.9"><![CDATA[Tables]]></phrase>
     <phrase title="admin_permission_DTUI" version_id="1" version_string="0.9"><![CDATA[DTUI]]></phrase>
+    <phrase title="dtui_assigned_to_x" version_id="12" version_string="1.4"><![CDATA[Assigned to {name}]]></phrase>
     <phrase title="dtui_can_not_create_new_order_for_busy_table" version_id="8" version_string="1.1.2"><![CDATA[Can not create new order for busy table.]]></phrase>
+    <phrase title="dtui_can_not_create_order_with_no_item" version_id="12" version_string="1.4"><![CDATA[Can not create order with no item.]]></phrase>
     <phrase title="dtui_can_not_update_order_is_paid_outstanding_items" version_id="8" version_string="1.1.2"><![CDATA[Can not update order paid when there are outstanding items.]]></phrase>
     <phrase title="dtui_categories" version_id="4" version_string="0.9.2"><![CDATA[Categories]]></phrase>
     <phrase title="dtui_category" version_id="1" version_string="0.9"><![CDATA[Category]]></phrase>
@@ -407,10 +409,13 @@
     <phrase title="dtui_item_please_confirm" version_id="1" version_string="0.9"><![CDATA[Please confirm that you want to delete the following Item]]></phrase>
     <phrase title="dtui_item_save" version_id="1" version_string="0.9"><![CDATA[Save Item]]></phrase>
     <phrase title="dtui_last_order_id" version_id="1" version_string="0.9"><![CDATA[Last Order Id]]></phrase>
+    <phrase title="dtui_mark_completed" version_id="12" version_string="1.4"><![CDATA[Mark Completed]]></phrase>
+    <phrase title="dtui_new_order" version_id="12" version_string="1.4"><![CDATA[New Order]]></phrase>
     <phrase title="dtui_new_order_item_must_be_in_waiting_status" version_id="7" version_string="1.1"><![CDATA[New Order Item must be in `WAITING` status!]]></phrase>
     <phrase title="dtui_no_category" version_id="4" version_string="0.9.2"><![CDATA[Not have any Categories]]></phrase>
     <phrase title="dtui_no_item" version_id="4" version_string="0.9.2"><![CDATA[Not have any Items]]></phrase>
     <phrase title="dtui_no_target_user_found_to_assign_task" version_id="7" version_string="1.1"><![CDATA[No target user found to assign task!]]></phrase>
+    <phrase title="dtui_no_task" version_id="12" version_string="1.4"><![CDATA[Nope.]]></phrase>
     <phrase title="dtui_order" version_id="1" version_string="0.9"><![CDATA[Order]]></phrase>
     <phrase title="dtui_order_add" version_id="1" version_string="0.9"><![CDATA[Add New Order]]></phrase>
     <phrase title="dtui_order_confirm_deletion" version_id="1" version_string="0.9"><![CDATA[Confirm Deletion of Order]]></phrase>
@@ -429,9 +434,11 @@
     <phrase title="dtui_order_save" version_id="1" version_string="0.9"><![CDATA[Save Order]]></phrase>
     <phrase title="dtui_price" version_id="1" version_string="0.9"><![CDATA[Price]]></phrase>
     <phrase title="dtui_qrcode" version_id="6" version_string="1.0.1"><![CDATA[QR Code]]></phrase>
+    <phrase title="dtui_quantity" version_id="12" version_string="1.4"><![CDATA[Quantity]]></phrase>
     <phrase title="dtui_showing_categories_x_to_y_of_z" version_id="6" version_string="1.0.1"><![CDATA[Showing categories from {start} to {end} of {total}.]]></phrase>
     <phrase title="dtui_showing_items_x_to_y_of_z" version_id="6" version_string="1.0.1"><![CDATA[Showing items from {start} to {end} of {total}.]]></phrase>
     <phrase title="dtui_showing_tables_x_to_y_of_z" version_id="6" version_string="1.0.1"><![CDATA[Showing tables from {start} to {end} of {total}.]]></phrase>
+    <phrase title="dtui_showing_tasks_x_to_y_of_z" version_id="12" version_string="1.4"><![CDATA[Showing tasks from {start} to {end} of {total}.]]></phrase>
     <phrase title="dtui_table" version_id="1" version_string="0.9"><![CDATA[Table]]></phrase>
     <phrase title="dtui_tables" version_id="6" version_string="1.0.1"><![CDATA[Tables]]></phrase>
     <phrase title="dtui_table_add" version_id="1" version_string="0.9"><![CDATA[Add New Table]]></phrase>
@@ -446,6 +453,7 @@
     <phrase title="dtui_table_order_count" version_id="1" version_string="0.9"><![CDATA[Table Order Count]]></phrase>
     <phrase title="dtui_table_please_confirm" version_id="1" version_string="0.9"><![CDATA[Please confirm that you want to delete the following Table]]></phrase>
     <phrase title="dtui_table_save" version_id="1" version_string="0.9"><![CDATA[Save Table]]></phrase>
+    <phrase title="dtui_tasks" version_id="12" version_string="1.4"><![CDATA[Tasks]]></phrase>
     <phrase title="dtui_task_item_id" version_id="4" version_string="0.9.2"><![CDATA[Item Id]]></phrase>
     <phrase title="dtui_task_status" version_id="4" version_string="0.9.2"><![CDATA[Status]]></phrase>
     <phrase title="dtui_task_target_user_id" version_id="4" version_string="0.9.2"><![CDATA[Target User Id]]></phrase>
@@ -454,11 +462,10 @@
     <phrase title="dtui_unable_to_update_order_item_status" version_id="10" version_string="1.2.1"><![CDATA[Unable to update Order Item's status]]></phrase>
     <phrase title="dtui_unable_to_update_order_item_status_of_other" version_id="10" version_string="1.2.1"><![CDATA[You can not revert on behalf of other.]]></phrase>
     <phrase title="dtui_unable_to_update_order_item_status_of_paid" version_id="10" version_string="1.2.1"><![CDATA[`PAID` can not be reverted.]]></phrase>
+    <phrase title="dtui_view_order" version_id="12" version_string="1.4"><![CDATA[View Order]]></phrase>
     <phrase title="dtui_you_have_no_access_to_this_system" version_id="8" version_string="1.1.2"><![CDATA[YOU HAVE NO ACCESS TO THIS SYSTEM. SORRY...]]></phrase>
     <phrase title="is_paid" version_id="4" version_string="0.9.2"><![CDATA[is_paid]]></phrase>
     <phrase title="List_Order" version_id="4" version_string="0.9.2"><![CDATA[List Orders ]]></phrase>
-    <phrase title="List_Tasks" version_id="4" version_string="0.9.2"><![CDATA[List Tasks]]></phrase>
-    <phrase title="New_Order" version_id="5" version_string="0.9.3"><![CDATA[New Order]]></phrase>
     <phrase title="option_DTUI_targetPrepared" version_id="7" version_string="1.1"><![CDATA[Target for `PREPARED`]]></phrase>
     <phrase title="option_DTUI_targetPrepared_explain" version_id="7" version_string="1.1"><![CDATA[Select the target usergroups for `PREPARED` tasks.]]></phrase>
     <phrase title="option_DTUI_targetServed" version_id="7" version_string="1.1"><![CDATA[Target for `SERVED`]]></phrase>
@@ -484,7 +491,7 @@
   </route_prefixes>
   <style_properties/>
   <templates>
-    <template title="dtui.css" version_id="6" version_string="1.0.1"><![CDATA[.DTUI_GenericList {
+    <template title="dtui.css" version_id="12" version_string="1.4"><![CDATA[.DTUI_GenericList {
 	position: relative;
 	zoom: 1;
 }
@@ -506,9 +513,35 @@
 		vertical-align: middle;
 	}
 	
-		.DTUI_GenericList .image {
-			width: 48px;
+		.DTUI_GenericList .itemImage {
+			width: 52px;
 		}
+	
+		.DTUI_GenericList .itemImage .imageContainer {
+			display: block;
+			position: relative;
+		}
+		
+		.DTUI_GenericList .itemImage .image {
+			{xen:property discussionListAvatar}
+			
+			width: auto;
+			height: auto;
+		}
+		
+			.DTUI_GenericList .itemImage .image img {
+				width: {xen:property discussionListAvatar.width};
+				height: {xen:property discussionListAvatar.height};
+				display: block;
+			}
+			
+			.DTUI_GenericList .itemImage .miniAssignee {
+				{xen:property discussionListMiniMe}
+			}
+			
+				.DTUI_GenericList .itemImage .miniAssignee img {
+					{xen:property discussionListMiniMeImg}				
+				}
 
 		.DTUI_GenericList .name {
 			width: auto;
@@ -619,78 +652,6 @@
 		float: left;
 		display: block;
 	}]]></template>
-    <template title="dtui_entrypoint_new_order" version_id="5" version_string="0.9.3"><![CDATA[<xen:title>{xen:phrase New_Order}</xen:title>
-{xen:phrase dtui_enter_order }
-<form method ="post" action="{xen:link dtui-entry-point/new-order}">
-       <table width ="50%" align="left">
-           <tr>
-              <td width="20%"> {xen:phrase dtui_table} </td>
-              <td>
-                  <select name="table_id">
-                      <xen:foreach loop="$table" value="$tb">
-	              <option value="{$tb.table_id}">{$tb.table_name} </option>
-                      </xen:foreach>
-                   </select>
-               </td>
-            </tr>
-            <tr>
-            <td>  {xen:phrase dtui_item} </td>
-            <td>
-                <select name="item_ids[]">
-                      <xen:foreach loop="$items" value="$item">
-	              <option value="{$item.item_id}">{$item.item_name} </option>
-                      </xen:foreach>
-                </select>
-            </td>
-            </tr>
-            <tr>
-            <td>  {xen:phrase dtui_item} </td>
-            <td>
-                <select name="item_ids[]">
-                      <xen:foreach loop="$items" value="$item">
-	              <option value="{$item.item_id}">{$item.item_name} </option>
-                      </xen:foreach>
-                </select>
-            </td>
-            </tr>
-            <tr>
-            <td>  {xen:phrase dtui_item} </td>
-            <td>
-                <select name="item_ids[]">
-                      <xen:foreach loop="$items" value="$item">
-	              <option value="{$item.item_id}">{$item.item_name} </option>
-                      </xen:foreach>
-                </select>
-            </td>
-            </tr>
-            <tr>
-            <td>  {xen:phrase dtui_item} </td>
-            <td>
-                <select name="item_ids[]">
-                      <xen:foreach loop="$items" value="$item">
-	              <option value="{$item.item_id}">{$item.item_name} </option>
-                      </xen:foreach>
-                </select>
-            </td>
-            </tr>
-            <tr>
-            <td>  {xen:phrase dtui_item} </td>
-            <td>
-                <select name="item_ids[]">
-                      <xen:foreach loop="$items" value="$item">
-	              <option value="{$item.item_id}">{$item.item_name} </option>
-                      </xen:foreach>
-                </select>
-            </td>
-            </tr>
-            <tr>
-               <td colspan ="2" > 
-                   <input type="submit" name="cmd" value ="submit"/>
-               </td>
-            </tr>
-       </table>
-      <input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
-</form>]]></template>
     <template title="dtui_entry_point_categories" version_id="6" version_string="1.0.1"><![CDATA[<xen:require css="dtui.css" />
 <xen:require css="discussion_list.css" />
 
@@ -842,6 +803,80 @@
 		<span class="contentSummary">{xen:phrase dtui_showing_items_x_to_y_of_z, 'start=1', 'end={xen:number {xen:count $items}}', 'total={xen:number {xen:count $items}}'}</span>
 	</div>
 </div>]]></template>
+    <template title="dtui_entry_point_new_order" version_id="12" version_string="1.4"><![CDATA[<xen:require js="js/DTUI/order.js" />
+
+<xen:title>{xen:phrase dtui_new_order}</xen:title>
+<xen:description>{xen:phrase dtui_enter_order}</xen:description>
+
+<form method ="post" action="{xen:link dtui-entry-point/new-order}" class="xenForm formOverlay AutoValidator DTUI_NewOrderForm" data-successmessage="{xen:phrase redirect_changes_saved_successfully}">
+	<dl class="ctrlUnit">
+		<dt>{xen:phrase dtui_table}</dt>
+		<dd>
+			<select name="table_id" class="textCtrl">
+				<xen:foreach loop="$tables" value="$table">
+					<option value="{$table.table_id}" {xen:selected '{$table.table_id} == {$input.table_id}'}>{$table.table_name}</option>
+				</xen:foreach>
+			</select>
+		</dd>
+	</dl>
+	
+	<xen:if is="{$input.item_ids}">
+	<xen:foreach loop="$input.item_ids" key="$counter" value="$itemId">
+	<dl class="ctrlUnit">
+		<xen:include template="dtui_entry_point_new_order_one_item" />
+	</dl>
+	</xen:foreach>
+	</xen:if>
+	
+	<dl class="ctrlUnit DTUI_NewOrderItemListener">
+		<xen:include template="dtui_entry_point_new_order_one_item">
+			<xen:set var="$counter">{xen:if '{$input.item_ids}', {xen:count {$input.item_ids}}, 0}</xen:set>
+			<xen:set var="$orderItem"></xen:set>
+		</xen:include>
+	</dl>
+	
+	<dl class="ctrlUnit submitUnit">
+		<dt></dt>
+		<dd>
+			<input type="submit" value="{xen:phrase dtui_new_order}" class="button primary" />
+		</dd>
+	</dl>
+	
+	<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+</form>]]></template>
+    <template title="dtui_entry_point_new_order_one_item" version_id="12" version_string="1.4"><![CDATA[<dt>{xen:phrase dtui_item}</dt>
+<dd>
+	<select name="item_ids[{$counter}]" class="textCtrl">
+		<option value="0">&nbsp;</option>
+		<xen:foreach loop="$itemsGrouped" key="$categoryName" value="$categoryItems">
+			<optgroup label="{$categoryName}">
+				<xen:foreach loop="$categoryItems" value="$item">
+					<option value="{$item.item_id}" {xen:selected '{$item.item_id} == {$orderItem.item_id}'}>{$item.item_name}</option>
+				</xen:foreach>
+			</optgroup>
+		</xen:foreach>
+	</select>
+</dd>]]></template>
+    <template title="dtui_entry_point_orders" version_id="12" version_string="1.4"><![CDATA[<xen:title>{xen:phrase List_Order}</xen:title>
+<xen:require css="dtui_manhhx.css" />
+<div class="tablediv">
+	<div class="rowdiv">
+	<div class="celldiv1">{xen:phrase dtui_order_id}</div>
+	<div class="celldiv1">{xen:phrase dtui_table_id}</div>
+	<div class="celldiv1">{xen:phrase dtui_order_date}</div>
+	<div class="celldiv1">{xen:phrase dtui_order_is_paid}</div>
+	<div class="celldiv1">{xen:phrase dtui_order_paid_amount}</div>
+</div>
+<xen:foreach loop="$orders" value="$order">
+		  <div class="rowdiv">
+		  <div class="celldiv1">{$order.order_id}</div>
+		  <div class="celldiv1">{$order.table_id}</div>
+		  <div class="celldiv1">{$order.order_date}</div>
+		  <div class="celldiv1">{$order.is_paid}</div> 
+		  <div class="celldiv1"> &nbsp;{$order.paid_mount}</div>
+		  </div>
+</xen:foreach>
+</div>]]></template>
     <template title="dtui_entry_point_qrcode" version_id="6" version_string="1.0.1"><![CDATA[<xen:title>{$title}</xen:title>
 
 <xen:navigation>
@@ -853,7 +888,7 @@
 		<img src="{$qrcode}" />
 	</div>
 </div>]]></template>
-    <template title="dtui_entry_point_tables" version_id="6" version_string="1.0.1"><![CDATA[<xen:require css="dtui.css" />
+    <template title="dtui_entry_point_tables" version_id="12" version_string="1.4"><![CDATA[<xen:require css="dtui.css" />
 <xen:require css="discussion_list.css" />
 
 <xen:title>{xen:phrase dtui_tables}</xen:title>
@@ -894,6 +929,11 @@
 				
 							<div class="secondRow">
 								<span class="controls">
+									<xen:if is="{$table.is_busy}">
+									<a href="{xen:link 'dtui-entry-point/order', {$table.last_order_id}}" target="_blank">{xen:phrase dtui_view_order}</a>
+									<xen:else />
+									<a href="{xen:link 'dtui-entry-point/new-order', '', 'table_id={$table.table_id}'}" class="OverlayTrigger">{xen:phrase dtui_new_order}</a>
+									</xen:if>
 									<a href="{xen:link 'dtui-entry-point/table-qrcode', {$table.table_id}}" class="OverlayTrigger">{xen:phrase dtui_qrcode}</a>
 								</span>
 								{$table.table_description}					
@@ -918,10 +958,108 @@
 		<span class="contentSummary">{xen:phrase dtui_showing_tables_x_to_y_of_z, 'start=1', 'end={xen:number {xen:count $tables}}', 'total={xen:number {xen:count $tables}}'}</span>
 	</div>
 </div>]]></template>
-    <template title="dtui_links_template" version_id="6" version_string="1.0.1"><![CDATA[<ul class="secondaryContent blockLinksList">
-<li><a href="{xen:link 'dtui-entry-point/tables'}">{xen:phrase dtui_tables}</a></li>
-<li><a href="{xen:link 'dtui-entry-point/categories'}">{xen:phrase dtui_categories}</a></li>
-<li><a href="{xen:link 'dtui-entry-point/items'}">{xen:phrase dtui_items}</a></li>
+    <template title="dtui_entry_point_tasks" version_id="12" version_string="1.4"><![CDATA[<xen:require css="dtui.css" />
+<xen:require css="discussion_list.css" />
+<xen:require js="js/DTUI/tasks.js" />
+
+<xen:title>{xen:phrase dtui_tasks}</xen:title>
+
+<xen:navigation>
+		<xen:breadcrumb href="{xen:link 'dtui-entry-point/tasks'}">{xen:phrase dtui_tasks}</xen:breadcrumb>
+</xen:navigation>
+
+<form action="{xen:link 'dtui-entry-point/task-mark-completed'}" method="POST"
+	class="AutoValidator DTUI_TasksForm"
+	data-successmessage="{xen:phrase redirect_changes_saved_successfully}"
+	>
+<div class="section sectionMain DTUI_GenericList">	
+	<dl class="sectionHeaders">
+		<dt class="itemImage">&nbsp;</dt>
+		<dd class="name">
+			<a href="{xen:link 'dtui-entry-point/tasks', '', '_params={$orderParams.item_name}'}"><span>{xen:phrase dtui_item}{xen:helper sortArrow, $order, $orderDirection, item_name}</span></a>
+		</dd>
+		<dd class="parent">
+			<a href="{xen:link 'dtui-entry-point/tasks', '', '_params={$orderParams.order_id}'}"><span>{xen:phrase dtui_order}{xen:helper sortArrow, $order, $orderDirection, order_id}</span></a>
+		</dd>
+		<dd class="info">
+			Blah blah
+		</dd>
+	</dl>
+
+	<ol class="DTUI_GenericListItems">
+		<xen:if is="{$tasks}">
+			<xen:foreach loop="$tasks" value="$task">
+				<li id="task-{$task.order_item_id}" class="DTUI_GenericListItem">
+					<div class="listBlock itemImage alt1">
+						<xen:if is="{$task.images.m}">
+							<span class="imageContainer">
+								<span class="image">
+									<img src="{$task.images.m}" />
+								</span>
+								<xen:if is="{$task.target_user_id} > 0">
+									<xen:avatar user="$task" size="s" img="true" class="miniAssignee" />
+								</xen:if>
+							</span>
+						<xen:else />
+							Oops!
+						</xen:if>
+					</div>
+				
+					<div class="listBlock name alt2">
+						<div class="titleText">
+							<h3 class="title">
+								{$task.item_name}
+							</h3>
+				
+							<div class="secondRow">
+								<xen:if hascontent="true">
+									<span class="controls">
+										<xen:contentcheck>
+											<xen:if is="{$task.target_user_id} == {$visitor.user_id}">
+												<label for="task-mark-completed-{$task.order_item_id}">
+													<input type="checkbox" name="order_item_ids[]" value="{$task.order_item_id}" id="task-mark-completed-{$task.order_item_id}" />
+													{xen:phrase dtui_mark_completed}
+												</label>
+											</xen:if>
+										</xen:contentcheck>
+									</span>
+								</xen:if>
+								<xen:if is="{$task.target_user_id} > 0">
+									{xen:phrase dtui_assigned_to_x, 'name={$task.username}'}
+								</xen:if>
+							</div>
+						</div>
+					</div>
+
+					<div class="listBlock parent alt1">
+						{$task.order_id}
+					</div>
+			
+					<div class="listBlock info alt2">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non arcu et purus congue adipiscing vel vel turpis. Nam eu mi quis nisl elementum ultrices
+					</div>
+
+				</li>
+			</xen:foreach>
+		<xen:else />
+			<li class="primaryContent">
+				{xen:phrase dtui_no_task}
+			</li>
+		</xen:if>
+	</ol>
+
+	<div class="sectionFooter InlineMod SelectionCountContainer">
+		<span class="contentSummary">{xen:phrase dtui_showing_tasks_x_to_y_of_z, 'start=1', 'end={xen:number {xen:count $tasks}}', 'total={xen:number {xen:count $tasks}}'}</span>
+	</div>
+</div>
+<input type="submit" value="{xen:phrase go}" class="primary button" />
+<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+</form>]]></template>
+    <template title="dtui_links_template" version_id="12" version_string="1.4"><![CDATA[<ul class="secondaryContent blockLinksList">
+	<li><a href="{xen:link 'dtui-entry-point/tables'}">{xen:phrase dtui_tables}</a></li>
+	<li><a href="{xen:link 'dtui-entry-point/categories'}">{xen:phrase dtui_categories}</a></li>
+	<li><a href="{xen:link 'dtui-entry-point/items'}">{xen:phrase dtui_items}</a></li>
+	<li><a href="{xen:link 'dtui-entry-point/tasks'}">{xen:phrase dtui_tasks}</a></li>
 </ul>]]></template>
     <template title="dtui_manhhx.css" version_id="4" version_string="0.9.2"><![CDATA[.tablediv {
 		display: table;
@@ -951,49 +1089,5 @@
 		display:  table-row;
 		width:auto;
 	}]]></template>
-    <template title="dtui_order_list" version_id="4" version_string="0.9.2"><![CDATA[<xen:title>{xen:phrase List_Order}</xen:title>
-<xen:require css="dtui_manhhx.css" />
-<div class="tablediv">
-	<div class="rowdiv">
-	<div class="celldiv1">{xen:phrase dtui_order_id}</div>
-	<div class="celldiv1">{xen:phrase dtui_table_id}</div>
-	<div class="celldiv1">{xen:phrase dtui_order_date}</div>
-	<div class="celldiv1">{xen:phrase dtui_order_is_paid}</div>
-	<div class="celldiv1">{xen:phrase dtui_order_paid_amount}</div>
-</div>
-<xen:foreach loop="$orders" value="$order">
-		  <div class="rowdiv">
-		  <div class="celldiv1">{$order.order_id}</div>
-		  <div class="celldiv1">{$order.table_id}</div>
-		  <div class="celldiv1">{$order.order_date}</div>
-		  <div class="celldiv1">{$order.is_paid}</div> 
-		  <div class="celldiv1"> &nbsp;{$order.paid_mount}</div>
-		  </div>
-</xen:foreach>
-</div>]]></template>
-    <template title="dtui_task_list" version_id="4" version_string="0.9.2"><![CDATA[<xen:title>{xen:phrase List_Tasks}</xen:title>
-<xen:require css="dtui_manhhx.css" />
-<div class="tablediv">
-	<div class="rowdiv">
-        <div class="celldiv2">{xen:phrase dtui_order_item_id}</div>
-	<div class="celldiv2">{xen:phrase dtui_order_id}</div>
-	<div class="celldiv2">{xen:phrase dtui_task_trigger_user_id}</div>
-	<div class="celldiv2">{xen:phrase dtui_task_target_user_id}</div>
-	<div class="celldiv2">{xen:phrase dtui_task_item_id}</div>
-	<div class="celldiv2">{xen:phrase dtui_order_item_date}</div>
-        <div class="celldiv2">{xen:phrase dtui_task_status}</div>
-</div>
-<xen:foreach loop="$tasks" value="$task">
-		  <div class="rowdiv">
-                  <div class="celldiv2">{$task.order_item_id}</div>
-		  <div class="celldiv2">{$task.order_id}</div>
-		  <div class="celldiv2">{$task.trigger_user_id}</div>
-		  <div class="celldiv2">{$task.target_user_id}</div>
-		  <div class="celldiv2">{$task.item_id}</div> 
-		  <div class="celldiv2">{$task.order_item_date}</div>
-                  <div class="celldiv2">{$task.status}</div> 
-		  </div>
-</xen:foreach>
-</div>]]></template>
   </templates>
 </addon>

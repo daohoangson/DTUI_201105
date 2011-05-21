@@ -2,8 +2,10 @@
 class DTUI_Model_OrderItem extends XenForo_Model {
 	const FETCH_ITEM = 0x01;
 	const FETCH_ORDER = 0x02;
+	const FETCH_TRIGGER_USER = 0x04;
+	const FETCH_TARGET_USER = 8;
 	
-	public function canUpdateTask(array $orderItem, array $user = null) {
+	public function canUpdateTask(array $user = null) {
 		$this->standardizeViewingUserReference($user);
 		
 		if (!XenForo_Permission::hasPermission($user['permissions'], 'general', 'dtui_canUpdateTask')) {
@@ -123,6 +125,14 @@ class DTUI_Model_OrderItem extends XenForo_Model {
 			if ($fetchOptions['join'] & self::FETCH_ORDER) {
 				$selectFields .= ' ,`order`.* ';
 				$joinTables .= ' INNER JOIN `xf_dtui_order` AS `order` ON (`order`.order_id = order_item.order_id) ';
+			}
+			
+			if ($fetchOptions['join'] & self::FETCH_TRIGGER_USER) {
+				$selectFields .= ' ,`user`.* ';
+				$joinTables .= ' INNER JOIN `xf_user` AS `user` ON (`user`.user_id = order_item.trigger_user_id) ';
+			} elseif ($fetchOptions['join'] & self::FETCH_TARGET_USER) {
+				$selectFields .= ' ,`user`.* ';
+				$joinTables .= ' INNER JOIN `xf_user` AS `user` ON (`user`.user_id = order_item.target_user_id) ';
 			}
 		}
 

@@ -176,6 +176,8 @@ class DTUI_DataWriter_OrderItem extends XenForo_DataWriter {
 			throw new XenForo_Exception(new XenForo_Phrase('dtui_new_order_item_must_be_in_waiting_status'), true);
 		}
 		
+		$this->set('last_updated', XenForo_Application::$time);
+		
 		return parent::_preSave();
 	}
 	
@@ -247,6 +249,7 @@ class DTUI_DataWriter_OrderItem extends XenForo_DataWriter {
 				'updated_prepared_date' => array('type' => 'uint', 'default' => 0),
 				'updated_served_user_id' => array('type' => 'uint', 'default' => 0),
 				'updated_served_date' => array('type' => 'uint', 'default' => 0),
+				'last_updated' => array('type' => 'uint', 'required' => true),
 			)
 		);
 	}

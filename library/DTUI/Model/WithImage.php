@@ -41,8 +41,10 @@ abstract class DTUI_Model_WithImage extends XenForo_Model {
 	
 	public function getImageSizes() {
 		return array(
-			'l' => 96,
+			'xh' => 96,
+			'h' => 72,
 			'm' => 48,
+			'l' => 36,
 			's' => 24,
 			'u' => 0,
 		); 
