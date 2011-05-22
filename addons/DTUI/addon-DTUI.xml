@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="DTUI" title="DTUI 201105" version_string="1.6" version_id="14" url="" install_callback_class="DTUI_Installer" install_callback_method="install" uninstall_callback_class="DTUI_Installer" uninstall_callback_method="uninstall">
+<addon addon_id="DTUI" title="DTUI 201105" version_string="2.1" version_id="16" url="" install_callback_class="DTUI_Installer" install_callback_method="install" uninstall_callback_class="DTUI_Installer" uninstall_callback_method="uninstall">
   <admin_navigation>
     <navigation navigation_id="DTUI_categories" parent_navigation_id="dtui" display_order="20" link="dtui-categories" admin_permission_id="DTUI" debug_only="0" hide_no_children="0"/>
     <navigation navigation_id="DTUI_items" parent_navigation_id="dtui" display_order="30" link="dtui-items" admin_permission_id="DTUI" debug_only="0" hide_no_children="0"/>
@@ -652,7 +652,7 @@
 		float: left;
 		display: block;
 	}]]></template>
-    <template title="dtui_entry_point_categories" version_id="6" version_string="1.0.1"><![CDATA[<xen:require css="dtui.css" />
+    <template title="dtui_entry_point_categories" version_id="14" version_string="1.6"><![CDATA[<xen:require css="dtui.css" />
 <xen:require css="discussion_list.css" />
 
 <xen:title>{xen:phrase dtui_categories}</xen:title>
@@ -664,7 +664,7 @@
 
 <div class="section sectionMain DTUI_GenericList">	
 	<dl class="sectionHeaders">
-		<dt class="image">&nbsp;</dt>
+		<dt class="itemImage">&nbsp;</dt>
 		<dd class="name">
 			<a href="{xen:link 'dtui-entry-point/categories', '', '_params={$orderParams.category_name}'}"><span>{xen:phrase dtui_category_name}{xen:helper sortArrow, $order, $orderDirection, category_name}</span></a>
 		</dd>
@@ -677,9 +677,9 @@
 		<xen:if is="{$categories}">
 			<xen:foreach loop="$categories" value="$category">
 				<li id="category-{$category.category_id}" class="DTUI_GenericListItem">
-					<div class="listBlock image alt1">
+					<div class="listBlock itemImage alt1">
 						<xen:if is="{$category.images.m}">
-							<img src="{$category.images.m}" />
+							<span class="imageContainer"><span class="image"><img src="{$category.images.m}" /></span></span>
 						<xen:else />
 							Oops!
 						</xen:if>
@@ -718,7 +718,7 @@
 		<span class="contentSummary">{xen:phrase dtui_showing_categories_x_to_y_of_z, 'start=1', 'end={xen:number {xen:count $categories}}', 'total={xen:number {xen:count $categories}}'}</span>
 	</div>
 </div>]]></template>
-    <template title="dtui_entry_point_items" version_id="6" version_string="1.0.1"><![CDATA[<xen:require css="dtui.css" />
+    <template title="dtui_entry_point_items" version_id="14" version_string="1.6"><![CDATA[<xen:require css="dtui.css" />
 <xen:require css="discussion_list.css" />
 
 <xen:title>{xen:phrase dtui_items}</xen:title>
@@ -737,7 +737,7 @@
 
 <div class="section sectionMain DTUI_GenericList">	
 	<dl class="sectionHeaders">
-		<dt class="image">&nbsp;</dt>
+		<dt class="itemImage">&nbsp;</dt>
 		<dd class="name">
 			<a href="{xen:link 'dtui-entry-point/items', '', '_params={$orderParams.item_name}'}"><span>{xen:phrase dtui_item_name}{xen:helper sortArrow, $order, $orderDirection, item_name}</span></a>
 		</dd>
@@ -756,9 +756,9 @@
 		<xen:if is="{$items}">
 			<xen:foreach loop="$items" value="$item">
 				<li id="item-{$item.item_id}" class="DTUI_GenericListItem">
-					<div class="listBlock image alt1">
+					<div class="listBlock itemImage alt1">
 						<xen:if is="{$item.images.m}">
-							<img src="{$item.images.m}" />
+							<span class="imageContainer"><span class="image"><img src="{$item.images.m}" /></span></span>
 						<xen:else />
 							Oops!
 						</xen:if>
@@ -888,7 +888,7 @@
 		<img src="{$qrcode}" />
 	</div>
 </div>]]></template>
-    <template title="dtui_entry_point_tables" version_id="12" version_string="1.4"><![CDATA[<xen:require css="dtui.css" />
+    <template title="dtui_entry_point_tables" version_id="14" version_string="1.6"><![CDATA[<xen:require css="dtui.css" />
 <xen:require css="discussion_list.css" />
 
 <xen:title>{xen:phrase dtui_tables}</xen:title>
@@ -900,7 +900,7 @@
 
 <div class="section sectionMain DTUI_GenericList">	
 	<dl class="sectionHeaders">
-		<dt class="image">&nbsp;</dt>
+		<dt class="itemImage">&nbsp;</dt>
 		<dd class="name">
 			<a href="{xen:link 'dtui-entry-point/tables', '', '_params={$orderParams.table_name}'}"><span>{xen:phrase dtui_table_name}{xen:helper sortArrow, $order, $orderDirection, table_name}</span></a>
 		</dd>
@@ -913,9 +913,9 @@
 		<xen:if is="{$tables}">
 			<xen:foreach loop="$tables" value="$table">
 				<li id="table-{$table.table_id}" class="DTUI_GenericListItem">
-					<div class="listBlock image alt1">
+					<div class="listBlock itemImage alt1">
 						<xen:if is="{$table.images.m}">
-							<img src="{$table.images.m}" />
+							<span class="imageContainer"><span class="image"><img src="{$table.images.m}" /></span></span>
 						<xen:else />
 							Oops!
 						</xen:if>
