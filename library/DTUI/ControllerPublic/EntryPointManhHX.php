@@ -57,6 +57,7 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 		$conditions = array('target_user_id' => XenForo_Visitor::getUserId());
 		$fetchOptions = array(
 			'join' => DTUI_Model_OrderItem::FETCH_ITEM + DTUI_Model_OrderItem::FETCH_ORDER 
+				+ DTUI_Model_OrderItem::FETCH_TABLE
 				+ DTUI_Model_OrderItem::FETCH_TARGET_USER,
 		);
 		
