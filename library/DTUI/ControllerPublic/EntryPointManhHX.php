@@ -53,6 +53,41 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 		}
 	}
 	
+	public function actionUpdateOrder() {
+		$this->_assertPostOnly();
+		
+		$orderModel = $this->_getOrderModel();
+		
+		if (!$orderModel->canNewOrder()) {
+			return $this->responseNoPermission();
+		}
+		
+		$input = $this->_input->filter(array(
+			'order_id' => XenForo_Input::UINT,
+			'table_id' => XenForo_Input::UINT,
+			'item_ids' => array(XenForo_Input::UINT, 'array' => true)
+		));
+		
+		$order = $this->_getOrderOrError($input['order_id']);
+		
+		foreach ($input['item_ids'] as $key => $itemId) {
+			if (empty($itemId)) {
+				unset($input['item_ids'][$key]);
+			}
+		}
+		
+		$table = $this->_getTableOrError($input['table_id']);
+		$items = array();
+		foreach ($input['item_ids'] as $itemId) {
+			$items[$itemId] = $this->_getItemOrError($itemId);
+		}
+		
+		$order = $orderModel->updateOrder($order, $items, $input['item_ids']);
+		
+		$this->_request->setParam('data', $order['order_id']);
+		return $this->responseReroute('DTUI_ControllerPublic_EntryPoint', 'order');
+	}
+	
 	public function actionTasks(){ 
 		$conditions = array('target_user_id' => XenForo_Visitor::getUserId());
 		$fetchOptions = array(

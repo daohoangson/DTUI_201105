@@ -3,6 +3,28 @@ class DTUI_Model_Order extends XenForo_Model {
 	public function newOrder(array $table, array $items, array $itemIds, array $user = null) {
 		$this->standardizeViewingUserReference($user);
 		
+		XenForo_Db::beginTransaction();
+
+		try {
+			$orderDw = XenForo_DataWriter::create('DTUI_DataWriter_Order');
+			$orderDw->set('table_id', $table['table_id']);
+			$orderDw->save();
+			$order = $orderDw->getMergedData();
+	 
+			$order = $this->updateOrder($order, $items, $itemIds, $user);
+		} catch (Exception $e) {
+			XenForo_Db::rollback();
+			throw $e;
+		}
+		
+		XenForo_Db::commit();
+		
+		return $order;
+	}
+	
+	public function updateOrder(array $order, array $items, array $itemIds, array $user = null) {
+		$this->standardizeViewingUserReference($user);
+		
 		$itemCount = 0;
 		foreach ($itemIds as $itemId) {
 			$item =& $items[$itemId];
@@ -17,13 +39,8 @@ class DTUI_Model_Order extends XenForo_Model {
 		}
 		
 		XenForo_Db::beginTransaction();
-
+		
 		try {
-			$orderDw = XenForo_DataWriter::create('DTUI_DataWriter_Order');
-			$orderDw->set('table_id', $table['table_id']);
-			$orderDw->save();
-			$order = $orderDw->getMergedData();
-	 
 			foreach ($itemIds as $itemId) {
 				$item =& $items[$itemId];
 				
