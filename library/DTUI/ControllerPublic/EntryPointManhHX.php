@@ -194,10 +194,8 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 			'is_busy' => 0,
 		);
 		
-		if (XenForo_Visitor::getInstance()->isSuperAdmin()) {
-			if ($this->_input->filterSingle('all', XenForo_Input::UINT)) {
-				unset($conditions['is_busy']);
-			}
+		if ($this->_input->filterSingle('all', XenForo_Input::UINT)) {
+			unset($conditions['is_busy']);
 		}
 		
 		$tables = $tableModel->getAllTable($conditions);
