@@ -178,7 +178,8 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 		
 		$order = $this->_getOrderOrError($orderId);
 		
-		$orderItems = $this->_getOrderItemModel()->getAllOrderItem(array('order_id' => $order['order_id']));
+		$orderItems = $this->_getOrderItemModel()->getAllOrderItem(array('order_id' => $order['order_id']), array('join' => DTUI_Model_OrderItem::FETCH_ITEM));
+		$this->_getItemModel()->prepareImagesMultiple($orderItems);
 		
 		$viewParams = array(
 			'order' => $order,
