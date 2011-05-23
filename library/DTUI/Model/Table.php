@@ -11,6 +11,8 @@ class DTUI_Model_Table extends XenForo_Model {
 			if (in_array($key, array(
 				'table_id',
 				'table_name',
+				'is_busy',
+				'last_order_id',
 			))) {
 				$tableSimple[$key] = $value;
 			}
