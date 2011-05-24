@@ -99,6 +99,7 @@ abstract class DTUI_ControllerPublic_EntryPointManhHX extends DTUI_ControllerPub
 		if (XenForo_Visitor::getInstance()->isSuperAdmin()) {
 			if ($this->_input->filterSingle('all', XenForo_Input::UINT)) {
 				unset($conditions['target_user_id']);
+				$conditions['status'] = array(DTUI_DataWriter_OrderItem::STATUS_WAITING, DTUI_DataWriter_OrderItem::STATUS_PREPARED, DTUI_DataWriter_OrderItem::STATUS_SERVED);
 			}
 		}
 		
